@@ -1,0 +1,51 @@
+{
+  "rules": {
+    "routes": {
+      ".read": true,
+      ".write": false
+    },
+    "pings": {
+      "$routeId": {
+        ".read": true,
+        ".write": true,
+        ".indexOn": ["timestamp"],
+        "$pingId": {
+          ".validate": "newData.hasChildren(['routeId','stopId','stopName','stopSequence','lat','lng','userName','deviceId','type','timestamp','isActive'])",
+          "routeId": { ".validate": "newData.isString() && newData.val().length > 0" },
+          "stopId": { ".validate": "newData.isString()" },
+          "stopName": { ".validate": "newData.isString()" },
+          "stopSequence": { ".validate": "newData.isNumber()" },
+          "lat": { ".validate": "newData.isNumber()" },
+          "lng": { ".validate": "newData.isNumber()" },
+          "userName": { ".validate": "newData.isString() && newData.val().length <= 30" },
+          "deviceId": { ".validate": "newData.isString()" },
+          "type": {
+            ".validate": "newData.val() === 'BUS_AT_STOP' || newData.val() === 'ON_THE_BUS' || newData.val() === 'BUS_LEFT_STOP' || newData.val() === 'BUS_DELAYED' || newData.val() === 'BUS_CANCELLED' || newData.val() === 'EXTRA_BUS'"
+          },
+          "timestamp": {
+            ".validate": "newData.isNumber() && newData.val() > (now - 300000) && newData.val() <= now"
+          },
+          "isActive": { ".validate": "newData.isBoolean()" },
+          "confirmationCount": { ".validate": "newData.isNumber() && newData.val() >= 0" },
+          "denialCount": { ".validate": "newData.isNumber() && newData.val() >= 0" },
+          "$other": { ".validate": false }
+        }
+      }
+    },
+    "live_locations": {
+      "$routeId": {
+        ".read": true,
+        ".write": true,
+        "timestamp": { ".validate": "newData.isNumber()" },
+        "lat": { ".validate": "newData.isNumber()" },
+        "lng": { ".validate": "newData.isNumber()" }
+      }
+    },
+    "alerts": {
+      "$routeId": {
+        ".read": true,
+        ".write": false
+      }
+    }
+  }
+}

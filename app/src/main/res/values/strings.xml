@@ -1,0 +1,52 @@
+<?xml version="1.0" encoding="utf-8"?>
+<resources>
+    <string name="app_name">Grama-Yatri</string>
+    <string name="app_description">Community-powered rural bus tracking</string>
+
+    <!-- Onboarding -->
+    <string name="onboarding_welcome_title">Know when your bus is coming</string>
+    <string name="onboarding_welcome_subtitle">Community-powered bus tracking for rural India</string>
+    <string name="onboarding_name_hint">Your name (optional)</string>
+    <string name="onboarding_stop_title">Your primary stop</string>
+    <string name="onboarding_cta">Start Tracking</string>
+
+    <!-- Home -->
+    <string name="home_no_live_data">No live data yet</string>
+    <string name="home_no_live_subtitle">Be the first to ping the bus location!</string>
+    <string name="home_offline_label">OFFLINE</string>
+    <string name="home_passed">Passed</string>
+    <string name="home_arriving">Arriving</string>
+    <string name="home_here_now">Here now</string>
+    <string name="home_no_data">No data</string>
+    <string name="home_bus_here">🚌 Bus is here!</string>
+
+    <!-- Ping -->
+    <string name="ping_title">Report Bus Location</string>
+    <string name="ping_step_where">1. Where is the bus?</string>
+    <string name="ping_step_what">2. What happened?</string>
+    <string name="ping_submit">Submit Ping</string>
+    <string name="ping_success">Ping submitted! Thank you 🙏</string>
+    <string name="ping_confirm">✓ Confirm</string>
+    <string name="ping_deny">✗ Wrong</string>
+
+    <!-- Alerts -->
+    <string name="alerts_title">Alerts</string>
+    <string name="alerts_empty_title">No active alerts</string>
+    <string name="alerts_empty_subtitle">All buses running normally</string>
+
+    <!-- Settings -->
+    <string name="settings_title">Settings</string>
+    <string name="settings_name_label">Your name</string>
+    <string name="settings_preferred_route">Preferred Route</string>
+    <string name="settings_notifications">Push Notifications</string>
+    <string name="settings_notifications_subtitle">Get alerts for cancellations &amp; delays</string>
+    <string name="settings_save">Save Changes</string>
+    <string name="settings_saved">✓ Saved!</string>
+
+    <!-- Errors -->
+    <string name="error_no_internet">No internet connection</string>
+    <string name="error_load_routes">Couldn\'t load routes</string>
+    <string name="error_retry">Retry</string>
+    <string name="error_rate_limited">Wait %1$d seconds before next ping</string>
+    <string name="default_web_client_id">115897994143-13r9vbou8bvvrue3rie9jh3ogn9su0ct.apps.googleusercontent.com</string>
+</resources>
