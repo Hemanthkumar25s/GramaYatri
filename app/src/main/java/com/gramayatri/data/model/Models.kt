@@ -3,32 +3,6 @@ package com.gramayatri.data.model
 import android.annotation.SuppressLint
 import kotlinx.serialization.Serializable
 
-// ─── Route & Stop Models ───────────────────────────────────────────────────
-
-@SuppressLint("UnsafeOptInUsageError")
-@Serializable
-data class Route(
-    val id: String = "",
-    val name: String = "",
-    val number: String = "",
-    val origin: String = "",
-    val destination: String = "",
-    val stops: List<Stop> = emptyList(),
-    val isActive: Boolean = true
-)
-
-@Serializable
-data class Stop(
-    val id: String = "",
-    val name: String = "",
-    val sequence: Int = 0,
-    val distanceFromOriginKm: Double = 0.0,
-    val lat: Double = 0.0,
-    val lng: Double = 0.0,
-    // Average travel time in minutes FROM previous stop to this stop
-    val avgTravelTimeFromPrevMinutes: Int = 0
-)
-
 // ─── Ping Model ────────────────────────────────────────────────────────────
 
 @Serializable
@@ -47,17 +21,6 @@ data class BusPing(
     val isActive: Boolean = true,
     val confirmationCount: Int = 0,
     val denialCount: Int = 0
-)
-
-@Serializable
-data class LiveBusLocation(
-    val routeId: String = "",
-    val lat: Double = 0.0,
-    val lng: Double = 0.0,
-    val speed: Float = 0f,
-    val bearing: Float = 0f,
-    val timestamp: Long = 0L,
-    val reporterName: String = ""
 )
 
 enum class PingType(val label: String, val emoji: String) {
@@ -140,13 +103,4 @@ data class AlertsUiState(
     val isLoading: Boolean = true,
     val alerts: List<BusAlert> = emptyList(),
     val error: String? = null
-)
-
-data class UserPreferences(
-    val userName: String = "",
-    val preferredStopId: String = "",
-    val preferredRouteId: String = "",
-    val deviceId: String = "",
-    val hasCompletedOnboarding: Boolean = false,
-    val notificationsEnabled: Boolean = true
 )
