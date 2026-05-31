@@ -64,10 +64,6 @@
 | **Networking** | Ktor Client |
 | **Serialization** | Kotlinx Serialization |
 
-## 📱 Screenshots
-
-*(Coming soon — add your app screenshots here)*
-
 ## 🚀 Getting Started
 
 ### Prerequisites
