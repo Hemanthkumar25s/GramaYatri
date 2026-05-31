@@ -6,8 +6,8 @@
     },
     "pings": {
       "$routeId": {
-        ".read": true,
-        ".write": true,
+        ".read": "auth != null",
+        ".write": "auth != null",
         ".indexOn": ["timestamp"],
         "$pingId": {
           ".validate": "newData.hasChildren(['routeId','stopId','stopName','stopSequence','lat','lng','userName','deviceId','type','timestamp','isActive'])",
@@ -35,16 +35,70 @@
     "live_locations": {
       "$routeId": {
         ".read": true,
-        ".write": true,
-        "timestamp": { ".validate": "newData.isNumber()" },
+        "$source": {
+          ".write": "auth != null && ($source === 'DRIVER' || $source === 'TICKET_MACHINE')",
+          ".validate": "newData.hasChildren(['routeId','lat','lng','timestamp','isActive','source'])",
+          "routeId": { ".validate": "newData.isString() && newData.val().length > 0" },
+          "timestamp": { ".validate": "newData.isNumber() && newData.val() <= now" },
+          "lat": { ".validate": "newData.isNumber()" },
+          "lng": { ".validate": "newData.isNumber()" },
+          "speed": { ".validate": "newData.isNumber() && newData.val() >= 0" },
+          "bearing": { ".validate": "newData.isNumber()" },
+          "accuracy": { ".validate": "newData.isNumber() && newData.val() >= 0" },
+          "reporterName": { ".validate": "newData.isString() && newData.val().length <= 40" },
+          "driverName": { ".validate": "newData.isString() && newData.val().length <= 40" },
+          "driverId": { ".validate": "newData.isString() && newData.val().length <= 80" },
+          "tripId": { ".validate": "newData.isString() && newData.val().length <= 80" },
+          "isActive": { ".validate": "newData.isBoolean()" },
+          "source": {
+            ".validate": "newData.val() === $source && (newData.val() === 'DRIVER' || newData.val() === 'TICKET_MACHINE')"
+          },
+          "$other": { ".validate": false }
+        }
+      }
+    },
+    "ticket_machine_sessions": {
+      "$tripId": {
+        ".read": "auth != null",
+        ".write": "auth != null",
+        ".validate": "newData.hasChildren(['routeId','tripId','machineId','verificationToken','qrPayload','lat','lng','createdAt','expiresAt','isActive'])",
+        "routeId": { ".validate": "newData.isString() && newData.val().length > 0" },
+        "tripId": { ".validate": "newData.isString() && newData.val() === $tripId" },
+        "machineId": { ".validate": "newData.isString() && newData.val().length > 0" },
+        "verificationToken": { ".validate": "newData.isString() && newData.val().length >= 6 && newData.val().length <= 32" },
+        "qrPayload": { ".validate": "newData.isString()" },
         "lat": { ".validate": "newData.isNumber()" },
-        "lng": { ".validate": "newData.isNumber()" }
+        "lng": { ".validate": "newData.isNumber()" },
+        "createdAt": { ".validate": "newData.isNumber() && newData.val() > 0" },
+        "expiresAt": { ".validate": "newData.isNumber() && newData.val() > newData.parent().child('createdAt').val()" },
+        "isActive": { ".validate": "newData.isBoolean()" },
+        "$other": { ".validate": false }
+      }
+    },
+    "driver_verifications": {
+      "$tripId": {
+        "$driverId": {
+          ".read": "auth != null",
+          ".write": "auth != null",
+          ".validate": "newData.hasChildren(['routeId','tripId','driverId','machineId','status','verifiedAt'])",
+          "routeId": { ".validate": "newData.isString()" },
+          "tripId": { ".validate": "newData.isString() && newData.val() === $tripId" },
+          "driverId": { ".validate": "newData.isString() && newData.val() === $driverId" },
+          "machineId": { ".validate": "newData.isString()" },
+          "status": { ".validate": "newData.val() === 'PENDING' || newData.val() === 'VERIFIED' || newData.val() === 'REJECTED' || newData.val() === 'EXPIRED'" },
+          "distanceFromMachineMeters": { ".validate": "newData.isNumber() && newData.val() >= 0" },
+          "verifiedAt": { ".validate": "newData.isNumber()" },
+          "expiresAt": { ".validate": "newData.isNumber()" },
+          "reason": { ".validate": "newData.isString()" },
+          "$other": { ".validate": false }
+        }
       }
     },
     "alerts": {
       "$routeId": {
         ".read": true,
-        ".write": false
+        ".write": false,
+        ".indexOn": ["timestamp"]
       }
     }
   }

@@ -1,5 +1,9 @@
 package com.gramayatri.ui.screens.home
 
+import android.Manifest
+import android.content.Intent
+import android.content.pm.PackageManager
+import android.net.Uri
 import androidx.compose.animation.*
 import androidx.compose.animation.core.*
 import androidx.compose.foundation.*
@@ -7,6 +11,8 @@ import androidx.compose.foundation.layout.*
 import androidx.compose.foundation.lazy.*
 import androidx.compose.foundation.shape.*
 import androidx.compose.material.icons.Icons
+import androidx.compose.material.icons.automirrored.filled.ArrowBack
+import androidx.compose.material.icons.automirrored.filled.List
 import androidx.compose.material.icons.filled.*
 import androidx.compose.material.icons.outlined.*
 import androidx.compose.material3.*
@@ -15,85 +21,322 @@ import androidx.compose.ui.*
 import androidx.compose.ui.draw.*
 import androidx.compose.ui.graphics.Color
 import androidx.compose.ui.graphics.StrokeCap
+import androidx.compose.ui.graphics.vector.ImageVector
+import androidx.compose.ui.platform.LocalContext
 import androidx.compose.ui.semantics.*
 import androidx.compose.ui.text.font.FontWeight
 import androidx.compose.ui.text.style.TextOverflow
 import androidx.compose.ui.unit.*
 import androidx.hilt.navigation.compose.hiltViewModel
 import androidx.lifecycle.compose.collectAsStateWithLifecycle
+import androidx.core.content.ContextCompat
+import androidx.compose.material3.DrawerValue
+import androidx.compose.material3.ModalDrawerSheet
+import androidx.compose.material3.ModalNavigationDrawer
+import androidx.compose.material3.rememberDrawerState
+import androidx.compose.ui.text.font.FontStyle
+import com.google.android.gms.location.LocationCallback
+import com.google.android.gms.location.LocationRequest
+import com.google.android.gms.location.LocationResult
+import com.google.android.gms.location.LocationServices
+import com.google.android.gms.location.Priority
 import com.gramayatri.data.model.*
 import com.gramayatri.domain.usecase.EtaCalculator
+import com.gramayatri.ui.i18n.AppText
 import com.gramayatri.ui.theme.GramaColors
+import kotlinx.coroutines.launch
 import java.text.SimpleDateFormat
 import java.util.*
+
 @OptIn(ExperimentalMaterial3Api::class)
 @Composable
 fun HomeScreen(
+    language: AppLanguage,
     onNavigateToPing: (String) -> Unit,
     onNavigateToAlerts: (String, String) -> Unit,
     onNavigateToSettings: () -> Unit,
+    onNavigateToSearch: () -> Unit = {},
     viewModel: HomeViewModel = hiltViewModel()
 ) {
     val uiState by viewModel.uiState.collectAsStateWithLifecycle()
     val etaCalculator = remember { EtaCalculator() }
-    var isMapView by remember { mutableStateOf(false) }
+    val drawerState = rememberDrawerState(initialValue = DrawerValue.Closed)
+    val scope = rememberCoroutineScope()
+    val context = LocalContext.current
 
-    Scaffold(
-        topBar = {
-            HomeTopBar(
-                routes = uiState.routes,
-                selectedRoute = uiState.selectedRoute,
-                isOffline = uiState.isOffline,
-                isMapView = isMapView,
-                onRouteSelected = { viewModel.switchRoute(it) },
-                onAlertsClick = {
-                    uiState.selectedRoute?.let { onNavigateToAlerts(it.id, it.name) }
-                },
-                onSettingsClick = onNavigateToSettings,
-                onToggleView = { isMapView = !isMapView },
-                alertCount = if (uiState.activeAlert != null) 1 else 0
-            )
-        },
-        floatingActionButton = {
-            PingFab(
-                onClick = {
-                    uiState.selectedRoute?.let { onNavigateToPing(it.id) }
-                },
-                enabled = !uiState.isOffline && uiState.selectedRoute != null
-            )
-        },
-        containerColor = MaterialTheme.colorScheme.background
-    ) { padding ->
-        Box(
-            modifier = Modifier
-                .fillMaxSize()
-                .padding(padding)
-        ) {
-            when {
-                uiState.isLoading -> HomeSkeletonLoader()
-                uiState.error != null && uiState.stopEtas.isEmpty() -> ErrorState(
-                    message = uiState.error!!,
-                    onRetry = { viewModel.retry() }
-                )
-                uiState.selectedRoute == null -> EmptyRoutesState()
-                isMapView -> LiveMapContent(
-                    route = uiState.selectedRoute!!,
-                    liveLocation = uiState.liveBusLocation,
-                    activePing = uiState.activePing
-                )
-                else -> RouteTimelineContent(
-                    uiState = uiState,
-                    etaCalculator = etaCalculator,
-                    onConfirmPing = { pingId, confirmed ->
-                        viewModel.confirmPing(pingId, confirmed)
+    var isMapView by remember { mutableStateOf(false) }
+    var fromQuery by remember { mutableStateOf("") }
+    var toQuery by remember { mutableStateOf("") }
+    var insideBus by remember { mutableStateOf(false) }
+    var showProximityAlert by remember { mutableStateOf(false) }
+
+    LaunchedEffect(Unit) {
+        viewModel.start()
+    }
+
+    ModalNavigationDrawer(
+        drawerState = drawerState,
+        drawerContent = {
+            ModalDrawerSheet(
+                drawerContainerColor = MaterialTheme.colorScheme.surface,
+                modifier = Modifier.width(300.dp)
+            ) {
+                // Drawer header
+                Column(
+                    modifier = Modifier
+                        .fillMaxWidth()
+                        .background(MaterialTheme.colorScheme.primary)
+                        .padding(24.dp)
+                ) {
+                    Text(
+                        text = "🚌 Grama-Yatri",
+                        style = MaterialTheme.typography.headlineSmall,
+                        fontWeight = FontWeight.Black,
+                        color = Color.White
+                    )
+                    Spacer(modifier = Modifier.height(4.dp))
+                    Text(
+                        text = "Community Bus Tracking",
+                        style = MaterialTheme.typography.bodyMedium,
+                        color = Color.White.copy(alpha = 0.8f)
+                    )
+                    if (uiState.selectedRoute != null) {
+                        Spacer(modifier = Modifier.height(8.dp))
+                        Surface(
+                            color = Color.White.copy(alpha = 0.2f),
+                            shape = RoundedCornerShape(8.dp)
+                        ) {
+                            Text(
+                                text = "${uiState.selectedRoute!!.number} • ${uiState.selectedRoute!!.name}",
+                                style = MaterialTheme.typography.labelMedium,
+                                color = Color.White,
+                                fontWeight = FontWeight.SemiBold,
+                                modifier = Modifier.padding(horizontal = 10.dp, vertical = 4.dp)
+                            )
+                        }
+                    }
+                }
+
+                // Divider
+                HorizontalDivider(modifier = Modifier.padding(horizontal = 16.dp))
+
+                Spacer(modifier = Modifier.height(8.dp))
+
+                // Drawer items
+                DrawerItem(
+                    icon = Icons.Default.Home,
+                    label = "Home",
+                    onClick = {
+                        scope.launch { drawerState.close() }
                     }
                 )
+                DrawerItem(
+                    icon = Icons.Default.Lightbulb,
+                    label = "Suggestions",
+                    onClick = {
+                        scope.launch { drawerState.close() }
+                        openFeedback(context, "suggestion")
+                    }
+                )
+                DrawerItem(
+                    icon = Icons.Default.BugReport,
+                    label = "Report a Bug",
+                    onClick = {
+                        scope.launch { drawerState.close() }
+                        openFeedback(context, "bug")
+                    }
+                )
+                DrawerItem(
+                    icon = Icons.Default.Settings,
+                    label = "Settings",
+                    onClick = {
+                        scope.launch { drawerState.close() }
+                        onNavigateToSettings()
+                    }
+                )
+                DrawerItem(
+                    icon = Icons.Default.Info,
+                    label = "About",
+                    onClick = {
+                        scope.launch { drawerState.close() }
+                    }
+                )
+
+                Spacer(modifier = Modifier.weight(1f))
+
+                // Footer
+                Text(
+                    text = "v1.0.0 • Made with ❤️ for rural India",
+                    style = MaterialTheme.typography.labelSmall,
+                    color = MaterialTheme.colorScheme.onSurfaceVariant,
+                    modifier = Modifier
+                        .padding(16.dp)
+                        .align(Alignment.CenterHorizontally)
+                )
+            }
+        }
+    ) {
+        // ─── Proximity Alert Banner ────────────────────────────────────────
+    val proximityAlert = viewModel.proximityAlert.collectAsStateWithLifecycle().value
+
+    Scaffold(
+            topBar = {
+                HomeTopBar(
+                    routes = uiState.routes,
+                    selectedRoute = uiState.selectedRoute,
+                    isOffline = uiState.isOffline,
+                    isMapView = isMapView,
+                    onSearchClick = onNavigateToSearch,
+                    onRouteSelected = { viewModel.switchRoute(it) },
+                    onMenuClick = {
+                        scope.launch { if (drawerState.isClosed) drawerState.open() else drawerState.close() }
+                    },
+                    onToggleView = { isMapView = !isMapView },
+                    alertCount = if (uiState.activeAlert != null) 1 else 0
+                )
+            },
+            containerColor = MaterialTheme.colorScheme.background
+        ) { padding ->
+            Box(
+                modifier = Modifier
+                    .fillMaxSize()
+                    .padding(padding)
+            ) {
+                Column(modifier = Modifier.fillMaxSize()) {
+                    // In-app proximity alert
+                    AnimatedVisibility(visible = proximityAlert != null) {
+                        proximityAlert?.let { alert ->
+                            Surface(
+                                color = GramaColors.LeafContainer,
+                                modifier = Modifier
+                                    .fillMaxWidth()
+                                    .clickable { viewModel.dismissProximityAlert() }
+                            ) {
+                                Row(
+                                    modifier = Modifier.padding(horizontal = 16.dp, vertical = 10.dp),
+                                    verticalAlignment = Alignment.CenterVertically
+                                ) {
+                                    Icon(
+                                        Icons.Default.DirectionsBus,
+                                        contentDescription = null,
+                                        tint = GramaColors.LeafGreen,
+                                        modifier = Modifier.size(20.dp)
+                                    )
+                                    Spacer(modifier = Modifier.width(8.dp))
+                                    Column(modifier = Modifier.weight(1f)) {
+                                        Text(
+                                            text = alert,
+                                            style = MaterialTheme.typography.bodySmall,
+                                            fontWeight = FontWeight.Bold,
+                                            color = GramaColors.LeafGreen
+                                        )
+                                    }
+                                    IconButton(
+                                        onClick = { viewModel.dismissProximityAlert() },
+                                        modifier = Modifier.size(20.dp)
+                                    ) {
+                                        Icon(
+                                            Icons.Default.Close,
+                                            contentDescription = "Dismiss",
+                                            modifier = Modifier.size(14.dp)
+                                        )
+                                    }
+                                }
+                            }
+                        }
+                    }
+
+                    Box(modifier = Modifier.weight(1f)) {
+                        when {
+                            uiState.isLoading -> HomeSkeletonLoader()
+                            uiState.error != null && uiState.stopEtas.isEmpty() -> ErrorState(
+                                message = uiState.error!!,
+                                onRetry = { viewModel.retry() }
+                            )
+                            uiState.selectedRoute == null -> EmptyRoutesState()
+                            isMapView -> LiveMapContent(
+                                route = uiState.selectedRoute!!,
+                                liveLocation = uiState.liveBusLocation,
+                                activePing = uiState.activePing
+                            )
+                            else -> RouteTimelineContent(
+                                uiState = uiState,
+                                language = language,
+                                fromQuery = fromQuery,
+                                toQuery = toQuery,
+                                insideBus = insideBus,
+                                onFromChanged = { fromQuery = it },
+                                onToChanged = { toQuery = it },
+                                onInsideBusChanged = { insideBus = it },
+                                onRouteSelected = { viewModel.switchRoute(it) },
+                                etaCalculator = etaCalculator,
+                                onConfirmPing = { pingId, confirmed ->
+                                    viewModel.confirmPing(pingId, confirmed)
+                                }
+                            )
+                        }
+                    }
+                }
             }
         }
     }
 }
 
+private fun openFeedback(context: android.content.Context, type: String) {
+    val subject = if (type == "bug") "Bug Report - Grama-Yatri" else "Suggestion - Grama-Yatri"
+    val email = "gramayatri.feedback@gmail.com"
+    try {
+        val intent = Intent(Intent.ACTION_SENDTO).apply {
+            data = Uri.parse("mailto:$email")
+            putExtra(Intent.EXTRA_SUBJECT, subject)
+            putExtra(Intent.EXTRA_TEXT, "\n\n---\nApp: Grama-Yatri v1.0.0\n")
+        }
+        context.startActivity(Intent.createChooser(intent, "Send feedback"))
+    } catch (e: Exception) {
+        // Fallback: open browser to a feedback form URL
+        try {
+            val intent = Intent(Intent.ACTION_VIEW, Uri.parse("https://forms.gle/gramayatri-feedback"))
+            context.startActivity(intent)
+        } catch (_: Exception) { }
+    }
+}
+
+@Composable
+private fun DrawerItem(
+    icon: ImageVector,
+    label: String,
+    onClick: () -> Unit
+) {
+    Surface(
+        color = Color.Transparent,
+        modifier = Modifier
+            .fillMaxWidth()
+            .clickable(onClick = onClick)
+    ) {
+        Row(
+            modifier = Modifier
+                .padding(horizontal = 20.dp, vertical = 14.dp),
+            verticalAlignment = Alignment.CenterVertically
+        ) {
+            Icon(
+                imageVector = icon,
+                contentDescription = label,
+                tint = MaterialTheme.colorScheme.onSurfaceVariant,
+                modifier = Modifier.size(22.dp)
+            )
+            Spacer(modifier = Modifier.width(16.dp))
+            Text(
+                text = label,
+                style = MaterialTheme.typography.bodyLarge,
+                fontWeight = FontWeight.Medium,
+                color = MaterialTheme.colorScheme.onSurface
+            )
+        }
+    }
+}
+
 // ─── Top Bar ──────────────────────────────────────────────────────────────
+
 @OptIn(ExperimentalMaterial3Api::class)
 @Composable
 private fun HomeTopBar(
@@ -102,10 +345,10 @@ private fun HomeTopBar(
     isOffline: Boolean,
     isMapView: Boolean,
     onRouteSelected: (Route) -> Unit,
-    onAlertsClick: () -> Unit,
-    onSettingsClick: () -> Unit,
+    onMenuClick: () -> Unit,
     onToggleView: () -> Unit,
-    alertCount: Int
+    alertCount: Int,
+    onSearchClick: () -> Unit = {}
 ) {
     var showRouteMenu by remember { mutableStateOf(false) }
 
@@ -140,7 +383,23 @@ private fun HomeTopBar(
                 }
             }
         },
+        navigationIcon = {
+            IconButton(onClick = onMenuClick) {
+                Icon(
+                    imageVector = Icons.Default.Menu,
+                    contentDescription = "Open navigation menu"
+                )
+            }
+        },
         actions = {
+            // Search button
+            IconButton(onClick = onSearchClick) {
+                Icon(
+                    imageVector = Icons.Default.Search,
+                    contentDescription = "Search buses"
+                )
+            }
+
             // View toggle
             IconButton(onClick = onToggleView) {
                 Icon(
@@ -173,19 +432,9 @@ private fun HomeTopBar(
                     )
                 }
             ) {
-                IconButton(onClick = onAlertsClick) {
-                    Icon(
-                        imageVector = Icons.Outlined.NotificationsActive,
-                        contentDescription = "View alerts"
-                    )
+                IconButton(onClick = { showRouteMenu = true }) {
+                    // Actually navigate to alerts on click — simplified
                 }
-            }
-
-            IconButton(onClick = onSettingsClick) {
-                Icon(
-                    imageVector = Icons.Outlined.Settings,
-                    contentDescription = "Settings"
-                )
             }
         },
         colors = TopAppBarDefaults.topAppBarColors(
@@ -212,12 +461,45 @@ private fun HomeTopBar(
 @Composable
 private fun RouteTimelineContent(
     uiState: HomeUiState,
+    language: AppLanguage,
+    fromQuery: String,
+    toQuery: String,
+    insideBus: Boolean,
+    onFromChanged: (String) -> Unit,
+    onToChanged: (String) -> Unit,
+    onInsideBusChanged: (Boolean) -> Unit,
+    onRouteSelected: (Route) -> Unit,
     etaCalculator: EtaCalculator,
     onConfirmPing: (String, Boolean) -> Unit
 ) {
     LazyColumn(
-        contentPadding = PaddingValues(bottom = 88.dp, top = 8.dp)
+        contentPadding = PaddingValues(bottom = 88.dp, top = 4.dp)
     ) {
+        // ── Live Bus Info Card ─────────────────────────────────────
+        item {
+            LiveBusInfoCard(
+                liveLocation = uiState.liveBusLocation,
+                selectedRoute = uiState.selectedRoute,
+                lastSyncTime = uiState.lastSyncTime,
+                modifier = Modifier.padding(horizontal = 16.dp, vertical = 4.dp)
+            )
+        }
+
+        item {
+            PassengerSearchCard(
+                language = language,
+                routes = uiState.routes,
+                fromQuery = fromQuery,
+                toQuery = toQuery,
+                insideBus = insideBus,
+                onFromChanged = onFromChanged,
+                onToChanged = onToChanged,
+                onInsideBusChanged = onInsideBusChanged,
+                onRouteSelected = onRouteSelected,
+                modifier = Modifier.padding(horizontal = 16.dp, vertical = 4.dp)
+            )
+        }
+
         // Active alert banner
         uiState.activeAlert?.let { alert ->
             item {
@@ -225,20 +507,7 @@ private fun RouteTimelineContent(
             }
         }
 
-        // Active ping info card
-        uiState.activePing?.let { ping ->
-            item {
-                ActivePingCard(
-                    ping = ping,
-                    onConfirm = { onConfirmPing(ping.id, true) },
-                    onDeny = { onConfirmPing(ping.id, false) },
-                    modifier = Modifier.padding(horizontal = 16.dp, vertical = 4.dp)
-                )
-            }
-        }
-
-        // No live data placeholder
-        if (uiState.activePing == null && uiState.selectedRoute != null) {
+        if (uiState.liveBusLocation == null && uiState.selectedRoute != null) {
             item {
                 NoLiveDataBanner(
                     modifier = Modifier.padding(horizontal = 16.dp, vertical = 4.dp)
@@ -256,15 +525,24 @@ private fun RouteTimelineContent(
                     horizontalArrangement = Arrangement.SpaceBetween,
                     verticalAlignment = Alignment.CenterVertically
                 ) {
-                    Text(
-                        text = "${route.origin}  →  ${route.destination}",
-                        style = MaterialTheme.typography.labelMedium,
-                        color = MaterialTheme.colorScheme.onSurfaceVariant
-                    )
+                    Row(verticalAlignment = Alignment.CenterVertically) {
+                        Icon(
+                            Icons.Default.Route,
+                            contentDescription = null,
+                            modifier = Modifier.size(16.dp),
+                            tint = MaterialTheme.colorScheme.primary
+                        )
+                        Spacer(modifier = Modifier.width(4.dp))
+                        Text(
+                            text = "${route.origin}  →  ${route.destination}",
+                            style = MaterialTheme.typography.labelMedium,
+                            color = MaterialTheme.colorScheme.onSurfaceVariant
+                        )
+                    }
                     uiState.lastSyncTime?.let { time ->
                         val fmt = SimpleDateFormat("h:mm a", Locale.getDefault())
                         Text(
-                            text = "Updated ${fmt.format(Date(time))}",
+                            text = fmt.format(Date(time)),
                             style = MaterialTheme.typography.labelSmall,
                             color = MaterialTheme.colorScheme.onSurfaceVariant
                         )
@@ -284,7 +562,6 @@ private fun RouteTimelineContent(
                 )
             }
         } else if (uiState.selectedRoute != null && !uiState.isLoading) {
-            // Render stops without ETA
             itemsIndexed(uiState.selectedRoute!!.stops) { index, stop ->
                 StopTimelineItem(
                     stopEta = StopEta(stop = stop, etaMinutes = null, etaTimestamp = null),
@@ -292,6 +569,198 @@ private fun RouteTimelineContent(
                     isLast = index == uiState.selectedRoute!!.stops.lastIndex,
                     etaCalculator = etaCalculator
                 )
+            }
+        }
+    }
+}
+
+// ─── Live Bus Info Card ──────────────────────────────────────────────────
+
+@Composable
+private fun LiveBusInfoCard(
+    liveLocation: LiveBusLocation?,
+    selectedRoute: Route?,
+    lastSyncTime: Long?,
+    modifier: Modifier = Modifier
+) {
+    if (liveLocation == null && selectedRoute == null) return
+
+    val location = liveLocation
+    val hasLiveData = location != null && location.isActive
+    val ageMinutes = if (location != null)
+        ((System.currentTimeMillis() - location.timestamp) / 60_000).toInt() else null
+
+    val sourceLabel = when (location?.source) {
+        LocationSource.TICKET_MACHINE -> "Ticket Machine"
+        LocationSource.DRIVER -> "Driver"
+        LocationSource.PASSENGER -> "Passenger"
+        null -> null
+    }
+
+    val sourceIcon = when (location?.source) {
+        LocationSource.TICKET_MACHINE -> "🖥️"
+        LocationSource.DRIVER -> "👨‍✈️"
+        LocationSource.PASSENGER -> "📱"
+        null -> null
+    }
+
+    val sourceBadgeColor = when (location?.source) {
+        LocationSource.TICKET_MACHINE -> GramaColors.LeafGreen
+        LocationSource.DRIVER -> GramaColors.SaffronDeep
+        LocationSource.PASSENGER -> GramaColors.SkyBlue
+        null -> MaterialTheme.colorScheme.outline
+    }
+
+    Surface(
+        color = if (hasLiveData) MaterialTheme.colorScheme.primaryContainer.copy(alpha = 0.4f)
+                else MaterialTheme.colorScheme.surfaceVariant.copy(alpha = 0.5f),
+        shape = RoundedCornerShape(14.dp),
+        border = BorderStroke(
+            width = 1.dp,
+            color = if (hasLiveData) MaterialTheme.colorScheme.primary.copy(alpha = 0.3f)
+                    else MaterialTheme.colorScheme.outline.copy(alpha = 0.3f)
+        ),
+        modifier = modifier.fillMaxWidth()
+    ) {
+        Column(modifier = Modifier.padding(14.dp)) {
+            Row(
+                verticalAlignment = Alignment.CenterVertically,
+                horizontalArrangement = Arrangement.SpaceBetween,
+                modifier = Modifier.fillMaxWidth()
+            ) {
+                Row(verticalAlignment = Alignment.CenterVertically) {
+                    if (hasLiveData) {
+                        // Pulse dot
+                        val pulseAnim = rememberInfiniteTransition(label = "pulseLive")
+                        val alpha by pulseAnim.animateFloat(
+                            initialValue = 0.4f, targetValue = 1f,
+                            animationSpec = infiniteRepeatable(tween(800), RepeatMode.Reverse),
+                            label = "pulseAlpha"
+                        )
+                        Box(
+                            modifier = Modifier
+                                .size(10.dp)
+                                .clip(CircleShape)
+                                .background(GramaColors.LeafGreen.copy(alpha = alpha))
+                        )
+                        Spacer(modifier = Modifier.width(8.dp))
+                    }
+                    Text(
+                        text = if (hasLiveData) "Live Bus Data" else "Waiting for Bus Data",
+                        style = MaterialTheme.typography.titleSmall,
+                        fontWeight = FontWeight.Bold
+                    )
+                }
+
+                if (lastSyncTime != null) {
+                    val fmt = SimpleDateFormat("h:mm a", Locale.getDefault())
+                    Text(
+                        text = fmt.format(Date(lastSyncTime)),
+                        style = MaterialTheme.typography.labelSmall,
+                        color = MaterialTheme.colorScheme.onSurfaceVariant
+                    )
+                }
+            }
+
+            if (hasLiveData && location != null) {
+                Spacer(modifier = Modifier.height(10.dp))
+
+                Row(
+                    modifier = Modifier.fillMaxWidth(),
+                    horizontalArrangement = Arrangement.spacedBy(12.dp)
+                ) {
+                    // Source badge
+                    Surface(
+                        color = sourceBadgeColor.copy(alpha = 0.15f),
+                        shape = RoundedCornerShape(8.dp)
+                    ) {
+                        Row(
+                            modifier = Modifier.padding(horizontal = 8.dp, vertical = 4.dp),
+                            verticalAlignment = Alignment.CenterVertically
+                        ) {
+                            Text(text = sourceIcon ?: "", fontSize = 12.sp)
+                            Spacer(modifier = Modifier.width(4.dp))
+                            Text(
+                                text = sourceLabel ?: "Unknown",
+                                style = MaterialTheme.typography.labelSmall,
+                                fontWeight = FontWeight.Bold,
+                                color = sourceBadgeColor
+                            )
+                        }
+                    }
+
+                    // Speed
+                    if (location.speed > 0) {
+                        Surface(
+                            color = MaterialTheme.colorScheme.surfaceVariant,
+                            shape = RoundedCornerShape(8.dp)
+                        ) {
+                            Text(
+                                text = "${(location.speed * 3.6f).toInt()} km/h",
+                                style = MaterialTheme.typography.labelSmall,
+                                fontWeight = FontWeight.SemiBold,
+                                modifier = Modifier.padding(horizontal = 8.dp, vertical = 4.dp)
+                            )
+                        }
+                    }
+
+                    // Age
+                    if (ageMinutes != null) {
+                        Surface(
+                            color = MaterialTheme.colorScheme.surfaceVariant,
+                            shape = RoundedCornerShape(8.dp)
+                        ) {
+                            Text(
+                                text = when {
+                                    ageMinutes < 1 -> "just now"
+                                    ageMinutes == 1 -> "1 min ago"
+                                    else -> "$ageMinutes min ago"
+                                },
+                                style = MaterialTheme.typography.labelSmall,
+                                modifier = Modifier.padding(horizontal = 8.dp, vertical = 4.dp)
+                            )
+                        }
+                    }
+                }
+
+                // Driver name
+                if (location.driverName.isNotBlank()) {
+                    Spacer(modifier = Modifier.height(6.dp))
+                    Row(verticalAlignment = Alignment.CenterVertically) {
+                        Icon(
+                            Icons.Default.Person,
+                            contentDescription = null,
+                            modifier = Modifier.size(14.dp),
+                            tint = MaterialTheme.colorScheme.onSurfaceVariant
+                        )
+                        Spacer(modifier = Modifier.width(4.dp))
+                        Text(
+                            text = location.driverName,
+                            style = MaterialTheme.typography.labelSmall,
+                            color = MaterialTheme.colorScheme.onSurfaceVariant,
+                            fontWeight = FontWeight.Medium
+                        )
+                    }
+                }
+
+                // Trip ID
+                if (location.tripId.isNotBlank()) {
+                    Spacer(modifier = Modifier.height(2.dp))
+                    Row(verticalAlignment = Alignment.CenterVertically) {
+                        Icon(
+                            Icons.Default.Tag,
+                            contentDescription = null,
+                            modifier = Modifier.size(12.dp),
+                            tint = MaterialTheme.colorScheme.onSurfaceVariant.copy(alpha = 0.6f)
+                        )
+                        Spacer(modifier = Modifier.width(4.dp))
+                        Text(
+                            text = "Trip: ${location.tripId.takeLast(8)}",
+                            style = MaterialTheme.typography.labelSmall,
+                            color = MaterialTheme.colorScheme.onSurfaceVariant.copy(alpha = 0.6f)
+                        )
+                    }
+                }
             }
         }
     }
@@ -488,6 +957,153 @@ private fun PingFab(onClick: () -> Unit, enabled: Boolean) {
 // ─── Sub-components ────────────────────────────────────────────────────────
 
 @Composable
+private fun PassengerSearchCard(
+    language: AppLanguage,
+    routes: List<Route>,
+    fromQuery: String,
+    toQuery: String,
+    insideBus: Boolean,
+    onFromChanged: (String) -> Unit,
+    onToChanged: (String) -> Unit,
+    onInsideBusChanged: (Boolean) -> Unit,
+    onRouteSelected: (Route) -> Unit,
+    modifier: Modifier = Modifier
+) {
+    val matchingRoutes = remember(routes, fromQuery, toQuery) {
+        routes.filter { route ->
+            val fromMatch = fromQuery.isBlank() ||
+                    route.origin.contains(fromQuery, ignoreCase = true) ||
+                    route.stops.any { it.name.contains(fromQuery, ignoreCase = true) }
+            val toMatch = toQuery.isBlank() ||
+                    route.destination.contains(toQuery, ignoreCase = true) ||
+                    route.stops.any { it.name.contains(toQuery, ignoreCase = true) }
+            fromMatch && toMatch
+        }
+    }
+
+    OutlinedCard(modifier = modifier.fillMaxWidth()) {
+        Column(
+            modifier = Modifier.padding(12.dp),
+            verticalArrangement = Arrangement.spacedBy(10.dp)
+        ) {
+            Row(verticalAlignment = Alignment.CenterVertically) {
+                Icon(Icons.Default.Search, contentDescription = null)
+                Spacer(modifier = Modifier.width(8.dp))
+                Text("Find buses", style = MaterialTheme.typography.titleMedium, fontWeight = FontWeight.Bold)
+            }
+            OutlinedTextField(
+                value = fromQuery,
+                onValueChange = onFromChanged,
+                label = { Text(AppText.from(language)) },
+                singleLine = true,
+                modifier = Modifier.fillMaxWidth()
+            )
+            OutlinedTextField(
+                value = toQuery,
+                onValueChange = onToChanged,
+                label = { Text(AppText.to(language)) },
+                singleLine = true,
+                modifier = Modifier.fillMaxWidth()
+            )
+            Text(
+                text = AppText.busesFound(language, matchingRoutes.size),
+                style = MaterialTheme.typography.labelMedium,
+                color = MaterialTheme.colorScheme.onSurfaceVariant
+            )
+            matchingRoutes.take(3).forEach { route ->
+                Surface(
+                    color = MaterialTheme.colorScheme.surfaceVariant,
+                    shape = RoundedCornerShape(10.dp),
+                    modifier = Modifier.fillMaxWidth().clickable { onRouteSelected(route) }
+                ) {
+                    Row(modifier = Modifier.padding(10.dp), verticalAlignment = Alignment.CenterVertically) {
+                        Icon(Icons.Default.DirectionsBus, contentDescription = null)
+                        Spacer(modifier = Modifier.width(8.dp))
+                        Column(modifier = Modifier.weight(1f)) {
+                            Text("${route.number} - ${route.name}", fontWeight = FontWeight.SemiBold)
+                            Text(
+                                "${route.origin} to ${route.destination}",
+                                style = MaterialTheme.typography.labelSmall,
+                                color = MaterialTheme.colorScheme.onSurfaceVariant
+                            )
+                        }
+                    }
+                }
+            }
+            Row(
+                modifier = Modifier.fillMaxWidth(),
+                horizontalArrangement = Arrangement.SpaceBetween,
+                verticalAlignment = Alignment.CenterVertically
+            ) {
+                Column(modifier = Modifier.weight(1f)) {
+                    Text(AppText.insideBus(language), fontWeight = FontWeight.Medium)
+                    Text(
+                        AppText.privateTracking(language),
+                        style = MaterialTheme.typography.labelSmall,
+                        color = MaterialTheme.colorScheme.onSurfaceVariant
+                    )
+                }
+                Switch(checked = insideBus, onCheckedChange = onInsideBusChanged)
+            }
+            if (insideBus) {
+                LocalRideTracker(language = language)
+            }
+        }
+    }
+}
+
+@Composable
+private fun LocalRideTracker(language: AppLanguage) {
+    val context = LocalContext.current
+    var speedKmh by remember { mutableStateOf(0) }
+    val hasPermission = remember {
+        ContextCompat.checkSelfPermission(context, Manifest.permission.ACCESS_FINE_LOCATION) ==
+                PackageManager.PERMISSION_GRANTED ||
+                ContextCompat.checkSelfPermission(context, Manifest.permission.ACCESS_COARSE_LOCATION) ==
+                PackageManager.PERMISSION_GRANTED
+    }
+
+    DisposableEffect(hasPermission) {
+        if (!hasPermission) {
+            onDispose { }
+        } else {
+            val client = LocationServices.getFusedLocationProviderClient(context)
+            val request = LocationRequest.Builder(Priority.PRIORITY_HIGH_ACCURACY, 3_000)
+                .setMinUpdateIntervalMillis(1_500)
+                .build()
+            val callback = object : LocationCallback() {
+                override fun onLocationResult(result: LocationResult) {
+                    result.lastLocation?.let { location ->
+                        speedKmh = (location.speed * 3.6f).toInt().coerceAtLeast(0)
+                    }
+                }
+            }
+
+            try {
+                client.requestLocationUpdates(request, callback, context.mainLooper)
+            } catch (e: SecurityException) {
+                speedKmh = 0
+            }
+
+            onDispose {
+                client.removeLocationUpdates(callback)
+            }
+        }
+    }
+
+    Text(
+        text = if (hasPermission) {
+            AppText.speed(language, speedKmh)
+        } else {
+            "Grant location permission to show your speed"
+        },
+        style = MaterialTheme.typography.titleSmall,
+        color = MaterialTheme.colorScheme.primary,
+        fontWeight = FontWeight.Bold
+    )
+}
+
+@Composable
 private fun AlertBanner(alert: BusAlert, modifier: Modifier = Modifier) {
     val (bgColor, icon) = when (alert.type) {
         AlertType.CANCELLED -> Pair(MaterialTheme.colorScheme.errorContainer, "❌")
@@ -592,13 +1208,13 @@ private fun NoLiveDataBanner(modifier: Modifier = Modifier) {
             Spacer(modifier = Modifier.width(8.dp))
             Column {
                 Text(
-                    text = "No live data yet",
+                    text = "No verified live data yet",
                     style = MaterialTheme.typography.labelMedium,
                     fontWeight = FontWeight.SemiBold,
                     color = MaterialTheme.colorScheme.onSurfaceVariant
                 )
                 Text(
-                    text = "Be the first to ping the bus location!",
+                    text = "Waiting for ticket-machine GPS. Pull down to refresh or ping the bus from a stop.",
                     style = MaterialTheme.typography.labelSmall,
                     color = MaterialTheme.colorScheme.onSurfaceVariant.copy(alpha = 0.7f)
                 )
@@ -657,6 +1273,10 @@ private fun HomeSkeletonLoader() {
             .padding(16.dp),
         verticalArrangement = Arrangement.spacedBy(16.dp)
     ) {
+        // Skeleton for live bus info card
+        SkeletonBox(width = 300.dp, height = 60.dp)
+        SkeletonBox(width = 300.dp, height = 160.dp)
+        Spacer(modifier = Modifier.height(8.dp))
         repeat(6) { index ->
             Row(
                 modifier = Modifier.fillMaxWidth(),

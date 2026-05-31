@@ -5,6 +5,8 @@ import androidx.lifecycle.viewModelScope
 import com.google.firebase.auth.FirebaseAuth
 import com.google.firebase.auth.FirebaseUser
 import com.google.firebase.auth.GoogleAuthProvider
+import com.gramayatri.data.model.UserRole
+import com.gramayatri.data.repository.LocalCacheRepository
 import dagger.hilt.android.lifecycle.HiltViewModel
 import kotlinx.coroutines.flow.*
 import kotlinx.coroutines.launch
@@ -21,7 +23,8 @@ data class AuthUiState(
 
 @HiltViewModel
 class AuthViewModel @Inject constructor(
-    private val firebaseAuth: FirebaseAuth
+    private val firebaseAuth: FirebaseAuth,
+    private val localCacheRepository: LocalCacheRepository
 ) : ViewModel() {
 
     private val _uiState = MutableStateFlow(AuthUiState())
@@ -42,12 +45,13 @@ class AuthViewModel @Inject constructor(
     }
 
     // Sign in with Google ID token
-    fun signInWithGoogle(idToken: String) {
+    fun signInWithGoogle(idToken: String, role: UserRole = UserRole.PASSENGER) {
         viewModelScope.launch {
             _uiState.update { it.copy(isLoading = true, error = null) }
             try {
                 val credential = GoogleAuthProvider.getCredential(idToken, null)
                 val result = firebaseAuth.signInWithCredential(credential).await()
+                localCacheRepository.updateRole(role)
                 _uiState.update {
                     it.copy(
                         isLoading = false,
@@ -65,11 +69,12 @@ class AuthViewModel @Inject constructor(
     }
 
     // Continue as guest (anonymous auth)
-    fun continueAsGuest() {
+    fun continueAsGuest(role: UserRole = UserRole.PASSENGER) {
         viewModelScope.launch {
             _uiState.update { it.copy(isLoading = true, error = null) }
             try {
                 val result = firebaseAuth.signInAnonymously().await()
+                localCacheRepository.updateRole(role)
                 _uiState.update {
                     it.copy(
                         isLoading = false,

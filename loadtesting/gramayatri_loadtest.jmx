@@ -1,0 +1,343 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!--
+  GramaYatri — JMeter Load Test Plan
+  =================================================
+  Simulates 10,000 concurrent users (mix of passengers, drivers, ticket machines)
+  against the Firebase Realtime Database REST API.
+
+  HOW TO USE:
+   1. Open in Apache JMeter 5.x
+   2. Edit the "User Defined Variables" to set FIREBASE_HOST
+   3. Adjust thread counts in Thread Groups as needed
+   4. Run: jmeter -n -t gramayatri_loadtest.jmx -l results.jtl
+
+  METRICS CAPTURED:
+   - Response times (avg, p50, p90, p95, p99)
+   - Throughput (requests/sec)
+   - Error rate
+   - Each endpoint's individual performance
+-->
+<jmeterTestPlan version="1.2" properties="5.0">
+  <hashTree>
+    <TestPlan guiclass="TestPlanGui" testclass="TestPlan" testname="GramaYatri Load Test - 10,000 Concurrent Users">
+      <boolProp name="TestPlan.functional_mode">false</boolProp>
+      <boolProp name="TestPlan.serialize_threadgroups">false</boolProp>
+      <elementProp name="TestPlan.user_defined_variables" elementType="Arguments">
+        <collectionProp name="Arguments.arguments">
+          <elementProp name="FIREBASE_HOST" elementType="Argument">
+            <stringProp name="Argument.name">FIREBASE_HOST</stringProp>
+            <stringProp name="Argument.value">https://gramayatri-xxxxx.firebaseio.com</stringProp>
+            <stringProp name="Argument.desc">Your Firebase project hostname</stringProp>
+          </elementProp>
+          <elementProp name="THINK_TIME_MS" elementType="Argument">
+            <stringProp name="Argument.name">THINK_TIME_MS</stringProp>
+            <stringProp name="Argument.value">3000</stringProp>
+            <stringProp name="Argument.desc">Think time between requests (ms)</stringProp>
+          </elementProp>
+        </collectionProp>
+      </elementProp>
+    </TestPlan>
+    <hashTree>
+
+      <!-- ═══════════════════════════════════════════════════════════════ -->
+      <!-- GLOBAL SETTINGS                                               -->
+      <!-- ═══════════════════════════════════════════════════════════════ -->
+
+      <!-- Default HTTP Request Config -->
+      <ConfigTestElement guiclass="HTTPSamplerGui" testclass="ConfigTestElement" testname="HTTP Request Defaults">
+        <elementProp name="HTTPSampler.domain" elementType="Argument">
+          <stringProp name="Argument.value">${FIREBASE_HOST}</stringProp>
+        </elementProp>
+        <elementProp name="HTTPSampler.protocol" elementType="Argument">
+          <stringProp name="Argument.value">https</stringProp>
+        </elementProp>
+        <boolProp name="HTTPSampler.auto_redirects">true</boolProp>
+        <boolProp name="HTTPSampler.follow_redirects">true</boolProp>
+        <boolProp name="HTTPSampler.use_keepalive">true</boolProp>
+      </ConfigTestElement>
+      <hashTree/>
+
+      <!-- HTTP Header Manager -->
+      <HeaderManager guiclass="HeaderPanel" testclass="HeaderManager" testname="HTTP Headers">
+        <collectionProp name="HeaderManager.headers">
+          <elementProp name="" elementType="Header">
+            <stringProp name="Header.name">Content-Type</stringProp>
+            <stringProp name="Header.value">application/json</stringProp>
+          </elementProp>
+          <elementProp name="" elementType="Header">
+            <stringProp name="Header.name">Accept</stringProp>
+            <stringProp name="Header.value">application/json</stringProp>
+          </elementProp>
+        </collectionProp>
+      </HeaderManager>
+      <hashTree/>
+
+      <!-- CSV Data Set Config for route IDs -->
+      <CSVDataSet guiclass="TestBeanGUI" testclass="CSVDataSet" testname="Routes CSV Data">
+        <stringProp name="filename">routes.csv</stringProp>
+        <stringProp name="variableNames">ROUTE_ID</stringProp>
+        <stringProp name="delimiter">,</stringProp>
+        <boolProp name="quotedData">false</boolProp>
+        <boolProp name="recycle">true</boolProp>
+        <boolProp name="stopThread">false</boolProp>
+        <stringProp name="shareMode">all</stringProp>
+      </CSVDataSet>
+      <hashTree/>
+
+      <!-- ═══════════════════════════════════════════════════════════════ -->
+      <!-- LISTENERS / RESULTS COLLECTORS                                -->
+      <!-- ═══════════════════════════════════════════════════════════════ -->
+
+      <!-- Aggregate Report -->
+      <ResultCollector guiclass="StatGraphVisualizer" testclass="ResultCollector" testname="Aggregate Report">
+        <boolProp name="ResultCollector.success_only_logged">false</boolProp>
+      </ResultCollector>
+      <hashTree/>
+
+      <!-- Summary Report -->
+      <ResultCollector guiclass="SummaryReport" testclass="ResultCollector" testname="Summary Report">
+        <boolProp name="ResultCollector.success_only_logged">false</boolProp>
+      </ResultCollector>
+      <hashTree/>
+
+      <!-- Response Time Graph -->
+      <ResultCollector guiclass="GraphVisualizer" testclass="ResultCollector" testname="Response Time Graph">
+        <boolProp name="ResultCollector.success_only_logged">false</boolProp>
+      </ResultCollector>
+      <hashTree/>
+
+      <!-- ═══════════════════════════════════════════════════════════════ -->
+      <!-- 1. PASSENGERS (50% = 5,000 concurrent users)                  -->
+      <!-- ═══════════════════════════════════════════════════════════════ -->
+      <ThreadGroup guiclass="ThreadGroupGui" testclass="ThreadGroup" testname="Passengers - 5,000 users">
+        <intProp name="ThreadGroup.num_threads">5000</intProp>
+        <intProp name="ThreadGroup.ramp_time">60</intProp>
+        <boolProp name="ThreadGroup.same_user_on_next_iteration">true</boolProp>
+        <elementProp name="ThreadGroup.main_controller" elementType="LoopController">
+          <boolProp name="LoopController.continue_forever">true</boolProp>
+          <stringProp name="LoopController.loops">-1</stringProp>
+        </elementProp>
+      </ThreadGroup>
+      <hashTree>
+
+        <!-- Think Time -->
+        <ConstantTimer guiclass="ConstantTimerGui" testclass="ConstantTimer" testname="Think Time (3-15s)">
+          <stringProp name="ConstantTimer.delay">${THINK_TIME_MS}</stringProp>
+        </ConstantTimer>
+        <hashTree/>
+
+        <!-- 1a. View Routes (weight: 4) -->
+        <HTTPSamplerProxy guiclass="HttpTestSampleGui" testclass="HTTPSamplerProxy" testname="GET /routes.json">
+          <stringProp name="HTTPSampler.path">/routes.json</stringProp>
+          <stringProp name="HTTPSampler.method">GET</stringProp>
+        </HTTPSamplerProxy>
+        <hashTree/>
+
+        <!-- 1b. View Live Locations (weight: 3) -->
+        <HTTPSamplerProxy guiclass="HttpTestSampleGui" testclass="HTTPSamplerProxy" testname="GET /live_locations/{routeId}">
+          <stringProp name="HTTPSampler.path">/live_locations/${__RandomFromMultipleRoutes(KSRTC-1|KSRTC-50|KSRTC-100|BMTC-1|BMTC-30)}.json</stringProp>
+          <stringProp name="HTTPSampler.method">GET</stringProp>
+        </HTTPSamplerProxy>
+        <hashTree/>
+
+        <!-- 1c. View Recent Pings (weight: 2) -->
+        <HTTPSamplerProxy guiclass="HttpTestSampleGui" testclass="HTTPSamplerProxy" testname="GET /pings/{routeId}?orderBy=&quot;timestamp&quot;&limitToLast=5">
+          <stringProp name="HTTPSampler.path">/pings/${__RandomFromMultipleRoutes(KSRTC-10|KSRTC-20|KSRTC-30|BMTC-5)}.json?orderBy=%22timestamp%22&amp;limitToLast=5</stringProp>
+          <stringProp name="HTTPSampler.method">GET</stringProp>
+        </HTTPSamplerProxy>
+        <hashTree/>
+
+        <!-- 1d. Submit Ping (weight: 1) -->
+        <HTTPSamplerProxy guiclass="HttpTestSampleGui" testclass="HTTPSamplerProxy" testname="PUT /pings/{routeId} (submit)">
+          <stringProp name="HTTPSampler.method">PUT</stringProp>
+          <stringProp name="HTTPSampler.path">/pings/${__RandomFromMultipleRoutes(KSRTC-1|KSRTC-50|KSRTC-100)}/${__UUID}.json</stringProp>
+          <stringProp name="HTTPSampler.postBodyRaw">true</stringProp>
+          <elementProp name="HTTPsampler.Arguments" elementType="Arguments">
+            <collectionProp name="Arguments.arguments">
+              <elementProp name="" elementType="HTTPArgument">
+                <stringProp name="Argument.value">{
+                  "routeId": "KSRTC-${__Random(1,200)}",
+                  "stopId": "stop-${__Random(1,50)}",
+                  "stopName": "Majestic Bus Stand",
+                  "stopSequence": ${__Random(1,30)},
+                  "lat": ${__doubleFromString(12.${__Random(85,99)})},
+                  "lng": ${__doubleFromString(77.${__Random(50,69)})},
+                  "userName": "Passenger${__ThreadNum}",
+                  "deviceId": "${__UUID}",
+                  "type": "BUS_AT_STOP",
+                  "timestamp": ${__time(,)},
+                  "isActive": true,
+                  "confirmationCount": 0,
+                  "denialCount": 0
+                }</stringProp>
+                <stringProp name="Argument.metaDataEncoding">json</stringProp>
+              </elementProp>
+            </collectionProp>
+          </elementProp>
+        </HTTPSamplerProxy>
+        <hashTree/>
+
+        <!-- 1e. View Alerts (weight: 1) -->
+        <HTTPSamplerProxy guiclass="HttpTestSampleGui" testclass="HTTPSamplerProxy" testname="GET /alerts/{routeId}">
+          <stringProp name="HTTPSampler.path">/alerts/${__RandomFromMultipleRoutes(KSRTC-1|KSRTC-50|KSRTC-100)}.json?orderBy=%22timestamp%22&amp;limitToLast=3</stringProp>
+          <stringProp name="HTTPSampler.method">GET</stringProp>
+        </HTTPSamplerProxy>
+        <hashTree/>
+
+      </hashTree>
+
+      <!-- ═══════════════════════════════════════════════════════════════ -->
+      <!-- 2. DRIVERS (30% = 3,000 concurrent users)                     -->
+      <!-- ═══════════════════════════════════════════════════════════════ -->
+      <ThreadGroup guiclass="ThreadGroupGui" testclass="ThreadGroup" testname="Drivers - 3,000 users">
+        <intProp name="ThreadGroup.num_threads">3000</intProp>
+        <intProp name="ThreadGroup.ramp_time">60</intProp>
+        <boolProp name="ThreadGroup.same_user_on_next_iteration">true</boolProp>
+        <elementProp name="ThreadGroup.main_controller" elementType="LoopController">
+          <boolProp name="LoopController.continue_forever">true</boolProp>
+          <stringProp name="LoopController.loops">-1</stringProp>
+        </elementProp>
+      </ThreadGroup>
+      <hashTree>
+
+        <!-- 2a. Update Live Location (weight: 3) -->
+        <HTTPSamplerProxy guiclass="HttpTestSampleGui" testclass="HTTPSamplerProxy" testname="PUT /live_locations/{routeId}/DRIVER">
+          <stringProp name="HTTPSampler.method">PUT</stringProp>
+          <stringProp name="HTTPSampler.path">/live_locations/${__RandomFromMultipleRoutes(KSRTC-1|KSRTC-50|KSRTC-100)}/DRIVER.json</stringProp>
+          <stringProp name="HTTPSampler.postBodyRaw">true</stringProp>
+          <elementProp name="HTTPsampler.Arguments" elementType="Arguments">
+            <collectionProp name="Arguments.arguments">
+              <elementProp name="" elementType="HTTPArgument">
+                <stringProp name="Argument.value">{
+                  "routeId": "KSRTC-${__Random(1,200)}",
+                  "lat": ${__doubleFromString(12.${__Random(85,99)})},
+                  "lng": ${__doubleFromString(77.${__Random(50,69)})},
+                  "speed": ${__Random(0,40)},
+                  "bearing": ${__Random(0,360)},
+                  "accuracy": ${__Random(5,50)},
+                  "timestamp": ${__time(,)},
+                  "reporterName": "Driver${__ThreadNum}",
+                  "driverName": "Driver${__ThreadNum}",
+                  "driverId": "${__UUID}",
+                  "isActive": true,
+                  "tripId": "trip-KSRTC-${__Random(1,200)}-${__Random(1000,9999)}",
+                  "source": "DRIVER"
+                }</stringProp>
+                <stringProp name="Argument.metaDataEncoding">json</stringProp>
+              </elementProp>
+            </collectionProp>
+          </elementProp>
+        </HTTPSamplerProxy>
+        <hashTree/>
+
+        <!-- 2b. Verify Session (weight: 1) -->
+        <HTTPSamplerProxy guiclass="HttpTestSampleGui" testclass="HTTPSamplerProxy" testname="GET /ticket_machine_sessions/{tripId}">
+          <stringProp name="HTTPSampler.path">/ticket_machine_sessions/trip-KSRTC-${__Random(1,200)}-${__Random(1000,9999)}.json</stringProp>
+          <stringProp name="HTTPSampler.method">GET</stringProp>
+        </HTTPSamplerProxy>
+        <hashTree/>
+
+      </hashTree>
+
+      <!-- ═══════════════════════════════════════════════════════════════ -->
+      <!-- 3. TICKET MACHINES (20% = 2,000 concurrent users)              -->
+      <!-- ═══════════════════════════════════════════════════════════════ -->
+      <ThreadGroup guiclass="ThreadGroupGui" testclass="ThreadGroup" testname="TicketMachines - 2,000 users">
+        <intProp name="ThreadGroup.num_threads">2000</intProp>
+        <intProp name="ThreadGroup.ramp_time">60</intProp>
+        <boolProp name="ThreadGroup.same_user_on_next_iteration">true</boolProp>
+        <elementProp name="ThreadGroup.main_controller" elementType="LoopController">
+          <boolProp name="LoopController.continue_forever">true</boolProp>
+          <stringProp name="LoopController.loops">-1</stringProp>
+        </elementProp>
+      </ThreadGroup>
+      <hashTree>
+
+        <!-- 3a. Update Live Location (weight: 2) -->
+        <HTTPSamplerProxy guiclass="HttpTestSampleGui" testclass="HTTPSamplerProxy" testname="PUT /live_locations/{routeId}/TICKET_MACHINE">
+          <stringProp name="HTTPSampler.method">PUT</stringProp>
+          <stringProp name="HTTPSampler.path">/live_locations/${__RandomFromMultipleRoutes(KSRTC-1|KSRTC-50|KSRTC-100)}/TICKET_MACHINE.json</stringProp>
+          <stringProp name="HTTPSampler.postBodyRaw">true</stringProp>
+          <elementProp name="HTTPsampler.Arguments" elementType="Arguments">
+            <collectionProp name="Arguments.arguments">
+              <elementProp name="" elementType="HTTPArgument">
+                <stringProp name="Argument.value">{
+                  "routeId": "KSRTC-${__Random(1,200)}",
+                  "lat": ${__doubleFromString(12.${__Random(85,99)})},
+                  "lng": ${__doubleFromString(77.${__Random(50,69)})},
+                  "speed": ${__Random(0,40)},
+                  "bearing": ${__Random(0,360)},
+                  "accuracy": ${__Random(5,50)},
+                  "timestamp": ${__time(,)},
+                  "reporterName": "TM${__ThreadNum}",
+                  "driverName": "Driver${__ThreadNum}",
+                  "driverId": "${__UUID}",
+                  "isActive": true,
+                  "tripId": "trip-KSRTC-${__Random(1,200)}-${__Random(1000,9999)}",
+                  "source": "TICKET_MACHINE"
+                }</stringProp>
+                <stringProp name="Argument.metaDataEncoding">json</stringProp>
+              </elementProp>
+            </collectionProp>
+          </elementProp>
+        </HTTPSamplerProxy>
+        <hashTree/>
+
+        <!-- 3b. Publish Session (weight: 1) -->
+        <HTTPSamplerProxy guiclass="HttpTestSampleGui" testclass="HTTPSamplerProxy" testname="PUT /ticket_machine_sessions/{tripId}">
+          <stringProp name="HTTPSampler.method">PUT</stringProp>
+          <stringProp name="HTTPSampler.path">/ticket_machine_sessions/trip-KSRTC-${__Random(1,200)}-${__Random(1000,9999)}.json</stringProp>
+          <stringProp name="HTTPSampler.postBodyRaw">true</stringProp>
+          <elementProp name="HTTPsampler.Arguments" elementType="Arguments">
+            <collectionProp name="Arguments.arguments">
+              <elementProp name="" elementType="HTTPArgument">
+                <stringProp name="Argument.value">{
+                  "routeId": "KSRTC-${__Random(1,200)}",
+                  "tripId": "trip-KSRTC-${__Random(1,200)}-${__Random(1000,9999)}",
+                  "machineId": "TM-${__Random(100,999)}",
+                  "verificationToken": "${__UUID}",
+                  "qrPayload": "{\"trip\":\"trip-KSRTC\",\"token\":\"tok${__Random(1000,9999)}\"}",
+                  "lat": ${__doubleFromString(12.${__Random(85,99)})},
+                  "lng": ${__doubleFromString(77.${__Random(50,69)})},
+                  "createdAt": ${__time(,)},
+                  "expiresAt": ${__javaScript(${__time(,)}+28800000)},
+                  "isActive": true
+                }</stringProp>
+                <stringProp name="Argument.metaDataEncoding">json</stringProp>
+              </elementProp>
+            </collectionProp>
+          </elementProp>
+        </HTTPSamplerProxy>
+        <hashTree/>
+
+      </hashTree>
+
+      <!-- ═══════════════════════════════════════════════════════════════ -->
+      <!-- PERFORMANCE TARGET ASSERTIONS                                 -->
+      <!-- ═══════════════════════════════════════════════════════════════ -->
+
+      <!-- Assert that Firebase reads complete < 500ms (p95) -->
+      <ResponseAssertion guiclass="AssertionGui" testclass="ResponseAssertion" testname="Firebase Read < 500ms">
+        <collectionProp name="Asserion.test_strings">
+          <stringProp name="49586">true</stringProp>
+        </collectionProp>
+        <stringProp name="ResponseAssertion.test_field">response_time_ms</stringProp>
+        <intProp name="Assertion.custom_assertion_value">500</intProp>
+        <intProp name="Assertion.test_type">8</intProp>
+      </ResponseAssertion>
+      <hashTree/>
+
+      <!-- Assert HTTP 200 on all responses -->
+      <ResponseAssertion guiclass="AssertionGui" testclass="ResponseAssertion" testname="HTTP 200 Check">
+        <collectionProp name="Asserion.test_strings">
+          <stringProp name="49586">200</stringProp>
+        </collectionProp>
+        <stringProp name="ResponseAssertion.test_field">response_code</stringProp>
+        <boolProp name="ResponseAssertion.assume_success">false</boolProp>
+        <intProp name="Assertion.test_type">2</intProp>
+      </ResponseAssertion>
+      <hashTree/>
+
+    </hashTree>
+  </hashTree>
+</jmeterTestPlan>

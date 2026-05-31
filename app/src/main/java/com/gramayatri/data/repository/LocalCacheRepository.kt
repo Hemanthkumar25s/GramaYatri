@@ -5,8 +5,10 @@ import androidx.datastore.core.DataStore
 import androidx.datastore.preferences.core.*
 import androidx.datastore.preferences.preferencesDataStore
 import com.gramayatri.data.model.BusPing
+import com.gramayatri.data.model.AppLanguage
 import com.gramayatri.data.model.Route
 import com.gramayatri.data.model.UserPreferences
+import com.gramayatri.data.model.UserRole
 import com.gramayatri.utils.DeviceUtils
 import dagger.hilt.android.qualifiers.ApplicationContext
 import kotlinx.coroutines.flow.*
@@ -35,6 +37,10 @@ class LocalCacheRepository @Inject constructor(
         val DEVICE_ID = stringPreferencesKey("device_id")
         val HAS_ONBOARDED = booleanPreferencesKey("has_onboarded")
         val NOTIFICATIONS_ENABLED = booleanPreferencesKey("notifications_enabled")
+        val USER_ROLE = stringPreferencesKey("user_role")
+        val APP_LANGUAGE = stringPreferencesKey("app_language")
+        val HAS_SELECTED_LANGUAGE = booleanPreferencesKey("has_selected_language")
+        val HAS_SEEN_INTRO = booleanPreferencesKey("has_seen_intro")
     }
 
     private object CacheKeys {
@@ -55,7 +61,11 @@ class LocalCacheRepository @Inject constructor(
                 preferredRouteId = prefs[PrefKeys.PREFERRED_ROUTE_ID] ?: "",
                 deviceId = prefs[PrefKeys.DEVICE_ID] ?: DeviceUtils.generateDeviceId(),
                 hasCompletedOnboarding = prefs[PrefKeys.HAS_ONBOARDED] ?: false,
-                notificationsEnabled = prefs[PrefKeys.NOTIFICATIONS_ENABLED] ?: true
+                notificationsEnabled = prefs[PrefKeys.NOTIFICATIONS_ENABLED] ?: true,
+                role = parseRole(prefs[PrefKeys.USER_ROLE]),
+                language = parseLanguage(prefs[PrefKeys.APP_LANGUAGE]),
+                hasSelectedLanguage = prefs[PrefKeys.HAS_SELECTED_LANGUAGE] ?: false,
+                hasSeenIntro = prefs[PrefKeys.HAS_SEEN_INTRO] ?: false
             )
         }
 
@@ -67,6 +77,10 @@ class LocalCacheRepository @Inject constructor(
             stored[PrefKeys.DEVICE_ID] = prefs.deviceId
             stored[PrefKeys.HAS_ONBOARDED] = prefs.hasCompletedOnboarding
             stored[PrefKeys.NOTIFICATIONS_ENABLED] = prefs.notificationsEnabled
+            stored[PrefKeys.USER_ROLE] = prefs.role.name
+            stored[PrefKeys.APP_LANGUAGE] = prefs.language.name
+            stored[PrefKeys.HAS_SELECTED_LANGUAGE] = prefs.hasSelectedLanguage
+            stored[PrefKeys.HAS_SEEN_INTRO] = prefs.hasSeenIntro
         }
     }
 
@@ -76,6 +90,26 @@ class LocalCacheRepository @Inject constructor(
             prefs[PrefKeys.PREFERRED_STOP_ID] = stopId
             prefs[PrefKeys.PREFERRED_ROUTE_ID] = routeId
             prefs[PrefKeys.HAS_ONBOARDED] = true
+            prefs[PrefKeys.USER_ROLE] = UserRole.PASSENGER.name
+        }
+    }
+
+    suspend fun updateRole(role: UserRole) {
+        context.userPrefsDataStore.edit { prefs ->
+            prefs[PrefKeys.USER_ROLE] = role.name
+        }
+    }
+
+    suspend fun updateLanguage(language: AppLanguage) {
+        context.userPrefsDataStore.edit { prefs ->
+            prefs[PrefKeys.APP_LANGUAGE] = language.name
+            prefs[PrefKeys.HAS_SELECTED_LANGUAGE] = true
+        }
+    }
+
+    suspend fun markIntroSeen() {
+        context.userPrefsDataStore.edit { prefs ->
+            prefs[PrefKeys.HAS_SEEN_INTRO] = true
         }
     }
 
@@ -140,5 +174,17 @@ class LocalCacheRepository @Inject constructor(
             if (System.currentTimeMillis() - ping.timestamp > com.gramayatri.utils.Constants.PING_EXPIRY_MS) null
             else ping
         } catch (e: Exception) { null }
+    }
+
+    private fun parseRole(value: String?): UserRole {
+        return runCatching {
+            UserRole.valueOf(value ?: UserRole.PASSENGER.name)
+        }.getOrDefault(UserRole.PASSENGER)
+    }
+
+    private fun parseLanguage(value: String?): AppLanguage {
+        return runCatching {
+            AppLanguage.valueOf(value ?: AppLanguage.ENGLISH.name)
+        }.getOrDefault(AppLanguage.ENGLISH)
     }
 }

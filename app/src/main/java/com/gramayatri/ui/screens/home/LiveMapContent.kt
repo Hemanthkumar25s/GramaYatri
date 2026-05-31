@@ -73,16 +73,22 @@ fun LiveMapContent(
                 marker.position = GeoPoint(stop.lat, stop.lng)
             }
 
-            // Update Bus Location (Hybrid logic)
+            // Update Bus Location using verified sources only.
             val busPoint = when {
                 liveLocation != null -> GeoPoint(liveLocation.lat, liveLocation.lng)
-                activePing != null && activePing.lat != 0.0 -> GeoPoint(activePing.lat, activePing.lng)
                 else -> null
             }
 
             if (busPoint != null) {
                 busMarker.position = busPoint
-                busMarker.snippet = liveLocation?.reporterName?.let { "Reported by $it" } ?: "Estimated location"
+                busMarker.snippet = liveLocation?.let {
+                    val source = when (it.source) {
+                        LocationSource.DRIVER -> "Verified driver GPS"
+                        LocationSource.TICKET_MACHINE -> "Verified ticket machine GPS"
+                        LocationSource.PASSENGER -> "Passenger live GPS"
+                    }
+                    "$source - ${it.reporterName.ifBlank { "Active bus" }}"
+                } ?: "Estimated location"
                 if (!view.overlays.contains(busMarker)) {
                     view.overlays.add(busMarker)
                 }

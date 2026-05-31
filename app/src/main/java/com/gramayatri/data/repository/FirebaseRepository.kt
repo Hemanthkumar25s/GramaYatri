@@ -9,6 +9,10 @@ import kotlinx.coroutines.tasks.await
 import kotlinx.coroutines.withTimeout
 import javax.inject.Inject
 import javax.inject.Singleton
+import kotlin.math.atan2
+import kotlin.math.cos
+import kotlin.math.sin
+import kotlin.math.sqrt
 
 @Singleton
 class FirebaseRepository @Inject constructor(
@@ -21,6 +25,8 @@ class FirebaseRepository @Inject constructor(
     private val pingsRef get() = database.getReference("pings")
     private val alertsRef get() = database.getReference("alerts")
     private val liveLocationsRef get() = database.getReference("live_locations")
+    private val ticketMachineSessionsRef get() = database.getReference("ticket_machine_sessions")
+    private val driverVerificationsRef get() = database.getReference("driver_verifications")
 
     // ─── Routes ───────────────────────────────────────────────────────────
 
@@ -65,23 +71,13 @@ class FirebaseRepository @Inject constructor(
                     return
                 }
 
-                // Only return if it's fresh (last 2 minutes)
-                val timestamp = snapshot.child("timestamp").getValue(Long::class.java) ?: 0L
-                if (System.currentTimeMillis() - timestamp > 120_000) {
-                    trySend(null)
-                    return
+                val locations = if (snapshot.child("lat").exists()) {
+                    listOfNotNull(parseLiveLocation(routeId, snapshot))
+                } else {
+                    snapshot.children.mapNotNull { child -> parseLiveLocation(routeId, child) }
                 }
 
-                val location = LiveBusLocation(
-                    routeId = routeId,
-                    lat = snapshot.child("lat").getValue(Double::class.java) ?: 0.0,
-                    lng = snapshot.child("lng").getValue(Double::class.java) ?: 0.0,
-                    speed = snapshot.child("speed").getValue(Float::class.java) ?: 0f,
-                    bearing = snapshot.child("bearing").getValue(Float::class.java) ?: 0f,
-                    timestamp = timestamp,
-                    reporterName = snapshot.child("reporterName").getValue(String::class.java) ?: ""
-                )
-                trySend(location)
+                trySend(selectBestLiveLocation(locations))
             }
 
             override fun onCancelled(error: DatabaseError) {
@@ -95,9 +91,79 @@ class FirebaseRepository @Inject constructor(
 
     suspend fun updateLiveLocation(location: LiveBusLocation) {
         try {
-            liveLocationsRef.child(location.routeId).setValue(location.toMap()).await()
+            liveLocationsRef
+                .child(location.routeId)
+                .child(location.source.name)
+                .setValue(location.toMap())
+                .await()
         } catch (e: Exception) {
             // Non-critical
+        }
+    }
+
+    suspend fun deactivateLiveLocation(routeId: String, source: LocationSource) {
+        try {
+            liveLocationsRef.child(routeId).child(source.name).updateChildren(
+                mapOf(
+                    "isActive" to false,
+                    "timestamp" to System.currentTimeMillis()
+                )
+            ).await()
+        } catch (e: Exception) {
+            // Non-critical
+        }
+    }
+
+    suspend fun publishTicketMachineSession(session: TicketMachineSession) {
+        try {
+            ticketMachineSessionsRef.child(session.tripId).setValue(session.toMap()).await()
+        } catch (e: Exception) {
+            // Non-critical; GPS broadcast can continue and retry on next update.
+        }
+    }
+
+    suspend fun verifyDriverBackup(
+        routeId: String,
+        tripId: String,
+        driverId: String,
+        token: String,
+        driverLat: Double,
+        driverLng: Double
+    ): DriverVerification {
+        return try {
+            val snapshot = ticketMachineSessionsRef.child(tripId).get().await()
+            val session = parseTicketMachineSession(snapshot)
+                ?: return rejectedVerification(routeId, tripId, driverId, "No active ticket-machine trip")
+
+            val now = System.currentTimeMillis()
+            val distanceMeters = distanceMeters(driverLat, driverLng, session.lat, session.lng)
+            val status = when {
+                !session.isActive || session.expiresAt < now -> VerificationStatus.EXPIRED
+                session.routeId != routeId -> VerificationStatus.REJECTED
+                session.verificationToken != token -> VerificationStatus.REJECTED
+                distanceMeters > DRIVER_MACHINE_MAX_DISTANCE_METERS -> VerificationStatus.REJECTED
+                else -> VerificationStatus.VERIFIED
+            }
+
+            val verification = DriverVerification(
+                routeId = routeId,
+                tripId = tripId,
+                driverId = driverId,
+                machineId = session.machineId,
+                status = status,
+                distanceFromMachineMeters = distanceMeters,
+                verifiedAt = now,
+                expiresAt = now + DRIVER_VERIFICATION_TTL_MS,
+                reason = when (status) {
+                    VerificationStatus.VERIFIED -> "Driver is verified near ticket machine"
+                    VerificationStatus.EXPIRED -> "Ticket-machine token expired"
+                    else -> "Driver token, route, or distance check failed"
+                }
+            )
+            driverVerificationsRef.child(tripId).child(driverId).setValue(verification.toMap()).await()
+            verification
+        } catch (e: Exception) {
+            rejectedVerification(routeId, tripId, driverId, e.message ?: "Verification failed")
         }
     }
 
@@ -307,6 +373,108 @@ class FirebaseRepository @Inject constructor(
             )
         } catch (e: Exception) { null }
     }
+
+    private fun parseTicketMachineSession(snapshot: DataSnapshot): TicketMachineSession? {
+        return try {
+            if (!snapshot.exists()) return null
+            TicketMachineSession(
+                routeId = snapshot.child("routeId").getValue(String::class.java) ?: "",
+                tripId = snapshot.child("tripId").getValue(String::class.java) ?: "",
+                machineId = snapshot.child("machineId").getValue(String::class.java) ?: "",
+                verificationToken = snapshot.child("verificationToken").getValue(String::class.java) ?: "",
+                qrPayload = snapshot.child("qrPayload").getValue(String::class.java) ?: "",
+                lat = snapshot.child("lat").asDouble(),
+                lng = snapshot.child("lng").asDouble(),
+                createdAt = snapshot.child("createdAt").getValue(Long::class.java) ?: 0L,
+                expiresAt = snapshot.child("expiresAt").getValue(Long::class.java) ?: 0L,
+                isActive = snapshot.child("isActive").getValue(Boolean::class.java) ?: true
+            )
+        } catch (e: Exception) {
+            null
+        }
+    }
+
+    private fun parseLiveLocation(routeId: String, snapshot: DataSnapshot): LiveBusLocation? {
+        val timestamp = snapshot.child("timestamp").getValue(Long::class.java) ?: return null
+        if (System.currentTimeMillis() - timestamp > 120_000) return null
+
+        val location = LiveBusLocation(
+            routeId = routeId,
+            lat = snapshot.child("lat").asDouble(),
+            lng = snapshot.child("lng").asDouble(),
+            speed = snapshot.child("speed").asFloat(),
+            bearing = snapshot.child("bearing").asFloat(),
+            accuracy = snapshot.child("accuracy").asFloat(),
+            timestamp = timestamp,
+            reporterName = snapshot.child("reporterName").getValue(String::class.java) ?: "",
+            driverName = snapshot.child("driverName").getValue(String::class.java) ?: "",
+            driverId = snapshot.child("driverId").getValue(String::class.java) ?: "",
+            isActive = snapshot.child("isActive").getValue(Boolean::class.java) ?: true,
+            tripId = snapshot.child("tripId").getValue(String::class.java) ?: "",
+            source = parseLocationSource(snapshot.child("source").getValue(String::class.java))
+        )
+
+        return location.takeIf { it.isActive }
+    }
+
+    private fun selectBestLiveLocation(locations: List<LiveBusLocation>): LiveBusLocation? {
+        return locations
+            .filter { it.source == LocationSource.TICKET_MACHINE }
+            .maxByOrNull { it.timestamp }
+            ?: locations
+                .filter { it.source == LocationSource.DRIVER }
+                .maxByOrNull { it.timestamp }
+    }
+
+    private fun DataSnapshot.asDouble(): Double {
+        return (value as? Number)?.toDouble()
+            ?: getValue(Double::class.java)
+            ?: 0.0
+    }
+
+    private fun DataSnapshot.asFloat(): Float {
+        return (value as? Number)?.toFloat()
+            ?: getValue(Float::class.java)
+            ?: 0f
+    }
+
+    private fun parseLocationSource(value: String?): LocationSource {
+        return runCatching {
+            LocationSource.valueOf(value ?: LocationSource.PASSENGER.name)
+        }.getOrDefault(LocationSource.PASSENGER)
+    }
+
+    private fun rejectedVerification(
+        routeId: String,
+        tripId: String,
+        driverId: String,
+        reason: String
+    ): DriverVerification {
+        return DriverVerification(
+            routeId = routeId,
+            tripId = tripId,
+            driverId = driverId,
+            status = VerificationStatus.REJECTED,
+            reason = reason,
+            verifiedAt = System.currentTimeMillis()
+        )
+    }
+
+    private fun distanceMeters(startLat: Double, startLng: Double, endLat: Double, endLng: Double): Double {
+        val earthRadiusMeters = 6_371_000.0
+        val dLat = Math.toRadians(endLat - startLat)
+        val dLng = Math.toRadians(endLng - startLng)
+        val lat1 = Math.toRadians(startLat)
+        val lat2 = Math.toRadians(endLat)
+        val a = sin(dLat / 2) * sin(dLat / 2) +
+                cos(lat1) * cos(lat2) * sin(dLng / 2) * sin(dLng / 2)
+        return earthRadiusMeters * 2 * atan2(sqrt(a), sqrt(1 - a))
+    }
+
+    companion object {
+        private const val DRIVER_MACHINE_MAX_DISTANCE_METERS = 200.0
+        private const val DRIVER_VERIFICATION_TTL_MS = 10 * 60 * 1000L
+    }
 }
 
 // Extension: BusPing → Firebase map
@@ -332,8 +500,14 @@ fun LiveBusLocation.toMap(): Map<String, Any> = mapOf(
     "lng" to lng,
     "speed" to speed,
     "bearing" to bearing,
+    "accuracy" to accuracy,
     "timestamp" to timestamp,
-    "reporterName" to reporterName
+    "reporterName" to reporterName,
+    "driverName" to driverName,
+    "driverId" to driverId,
+    "isActive" to isActive,
+    "tripId" to tripId,
+    "source" to source.name
 )
 
 fun BusAlert.toMap(): Map<String, Any> = mapOf(
@@ -343,4 +517,29 @@ fun BusAlert.toMap(): Map<String, Any> = mapOf(
     "message" to message,
     "timestamp" to timestamp,
     "isActive" to isActive
+)
+
+fun TicketMachineSession.toMap(): Map<String, Any> = mapOf(
+    "routeId" to routeId,
+    "tripId" to tripId,
+    "machineId" to machineId,
+    "verificationToken" to verificationToken,
+    "qrPayload" to qrPayload,
+    "lat" to lat,
+    "lng" to lng,
+    "createdAt" to createdAt,
+    "expiresAt" to expiresAt,
+    "isActive" to isActive
+)
+
+fun DriverVerification.toMap(): Map<String, Any> = mapOf(
+    "routeId" to routeId,
+    "tripId" to tripId,
+    "driverId" to driverId,
+    "machineId" to machineId,
+    "status" to status.name,
+    "distanceFromMachineMeters" to distanceFromMachineMeters,
+    "verifiedAt" to verifiedAt,
+    "expiresAt" to expiresAt,
+    "reason" to reason
 )

@@ -8,8 +8,16 @@
 /.idea/navEditor.xml
 /.idea/assetWizardSettings.xml
 .DS_Store
-/build
+**/build
 /captures
 .externalNativeBuild
 .cxx
 local.properties
+
+# Firebase configuration (contains API keys — never commit)
+**/google-services.json
+**/GoogleService-Info.plist
+
+# Release signing (never commit keystore or passwords)
+**/release.jks
+keystore.properties

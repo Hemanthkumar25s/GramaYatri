@@ -19,7 +19,10 @@ import com.gramayatri.R
 import kotlinx.coroutines.delay
 
 @Composable
-fun SplashScreen(onReady: () -> Unit) {
+fun SplashScreen(
+    isReady: Boolean,
+    onReady: () -> Unit
+) {
     val scale = remember { Animatable(0f) }
 
     LaunchedEffect(Unit) {
@@ -31,7 +34,18 @@ fun SplashScreen(onReady: () -> Unit) {
             )
         )
         scale.animateTo(1f)
-        delay(800)
+        delay(250)
+    }
+
+    LaunchedEffect(isReady) {
+        if (isReady) {
+            delay(250)
+            onReady()
+        }
+    }
+
+    LaunchedEffect(Unit) {
+        delay(1_500)
         onReady()
     }
 

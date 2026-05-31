@@ -1,6 +1,7 @@
 package com.gramayatri.utils
 
-import java.util.UUID
+import java.text.SimpleDateFormat
+import java.util.*
 
 object Constants {
     // Ping expires after 4 hours
@@ -38,5 +39,16 @@ object TimeUtils {
             diffMin < 1440 -> "${diffMin / 60}h ago"
             else -> "${diffMin / 1440}d ago"
         }
+    }
+
+    /**
+     * Generates a date-based trip ID so that a fresh QR code is produced
+     * for each route on every new day.
+     *
+     * Format: "{routeId}-2026-05-28"
+     */
+    fun generateDateBasedTripId(routeId: String): String {
+        val sdf = SimpleDateFormat("yyyy-MM-dd", Locale.getDefault())
+        return "${routeId}-${sdf.format(Date())}"
     }
 }

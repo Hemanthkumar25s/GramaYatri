@@ -1,5 +1,6 @@
 package com.gramayatri.ui.screens.home
 
+import androidx.lifecycle.SavedStateHandle
 import androidx.lifecycle.ViewModel
 import androidx.lifecycle.viewModelScope
 import com.gramayatri.data.model.*
@@ -11,27 +12,103 @@ import dagger.hilt.android.lifecycle.HiltViewModel
 import kotlinx.coroutines.*
 import kotlinx.coroutines.flow.*
 import javax.inject.Inject
+import kotlin.math.*
 
 @HiltViewModel
 class HomeViewModel @Inject constructor(
     private val firebaseRepository: FirebaseRepository,
     private val localCacheRepository: LocalCacheRepository,
     private val etaCalculator: EtaCalculator,
-    private val networkMonitor: NetworkMonitor
+    private val networkMonitor: NetworkMonitor,
+    private val savedStateHandle: SavedStateHandle
 ) : ViewModel() {
 
     private val _uiState = MutableStateFlow(HomeUiState())
     val uiState: StateFlow<HomeUiState> = _uiState.asStateFlow()
+
+    private val _proximityAlert = MutableStateFlow<String?>(null)
+    val proximityAlert: StateFlow<String?> = _proximityAlert.asStateFlow()
 
     // Track current ping + route observation jobs so we can restart them
     private var pingObserveJob: Job? = null
     private var alertObserveJob: Job? = null
     private var etaRefreshJob: Job? = null
     private var liveLocationObserveJob: Job? = null
+    private var proximityObserveJob: Job? = null
+    private var hasStarted = false
 
-    init {
+    fun dismissProximityAlert() {
+        _proximityAlert.value = null
+    }
+
+    fun start() {
+        if (hasStarted) return
+        hasStarted = true
         observeNetwork()
-        loadRoutes()
+        viewModelScope.launch {
+            delay(300)
+            loadRoutes()
+            observeProximityForPreferredStop()
+        }
+        observeSelectedRouteFromSearch()
+    }
+
+    private fun observeSelectedRouteFromSearch() {
+        viewModelScope.launch {
+            savedStateHandle.getStateFlow<String?>("selectedRouteId", null)
+                .collect { routeId ->
+                    if (!routeId.isNullOrBlank()) {
+                        _uiState.value.routes.find { it.id == routeId }?.let { route ->
+                            switchRoute(route)
+                        }
+                        // Clear to prevent re-processing on config change
+                        savedStateHandle["selectedRouteId"] = null
+                    }
+                }
+        }
+    }
+
+    private fun observeProximityForPreferredStop() {
+        proximityObserveJob = viewModelScope.launch {
+            val prefs = localCacheRepository.userPreferencesFlow.first()
+            if (prefs.preferredRouteId.isBlank() || prefs.preferredStopId.isBlank()) return@launch
+
+            // Get stop coordinates
+            val routesResult = firebaseRepository.observeRoutes().first { it !is NetworkResult.Loading }
+            val routes = when (routesResult) {
+                is NetworkResult.Success -> routesResult.data
+                else -> emptyList()
+            }
+            val route = routes.find { it.id == prefs.preferredRouteId } ?: return@launch
+            val stop = route.stops.find { it.id == prefs.preferredStopId } ?: return@launch
+
+            // Real-time proximity check using live location updates
+            firebaseRepository.observeLiveLocation(prefs.preferredRouteId)
+                .collect { location ->
+                    if (location != null && location.isActive) {
+                        val distance = calculateDistance(
+                            location.lat, location.lng,
+                            stop.lat, stop.lng
+                        )
+                        if (distance <= 3.0) {  // within 3 km
+                            _proximityAlert.value = "🚌 Bus is ${String.format("%.1f", distance)} km from ${stop.name}!"
+                        } else {
+                            _proximityAlert.value = null
+                        }
+                    }
+                }
+        }
+    }
+
+    private fun calculateDistance(lat1: Double, lon1: Double, lat2: Double, lon2: Double): Double {
+        val r = 6371 // Earth radius in km
+        val dLat = Math.toRadians(lat2 - lat1)
+        val dLon = Math.toRadians(lon2 - lon1)
+        val a = sin(dLat / 2).pow(2) +
+                cos(Math.toRadians(lat1)) * cos(Math.toRadians(lat2)) *
+                sin(dLon / 2).pow(2)
+        val c = 2 * atan2(sqrt(a), sqrt(1 - a))
+        return r * c
     }
 
     private fun observeNetwork() {
@@ -95,7 +172,6 @@ class HomeViewModel @Inject constructor(
         liveLocationObserveJob?.cancel()
 
         // Start new observers for selected route
-        observePing(route)
         observeAlerts(route.id)
         observeLiveLocation(route.id)
         startEtaRefreshTimer()
@@ -106,6 +182,12 @@ class HomeViewModel @Inject constructor(
             firebaseRepository.observeLiveLocation(routeId)
                 .collect { location ->
                     _uiState.update { it.copy(liveBusLocation = location) }
+                    val route = _uiState.value.selectedRoute
+                    if (route != null && location != null) {
+                        recalculateEtas(route, location)
+                    } else if (route != null) {
+                        clearEtas(route)
+                    }
                 }
         }
     }
@@ -115,7 +197,6 @@ class HomeViewModel @Inject constructor(
             firebaseRepository.observeActivePing(route.id)
                 .collect { ping ->
                     _uiState.update { it.copy(activePing = ping) }
-                    recalculateEtas(route, ping)
                 }
         }
     }
@@ -139,15 +220,27 @@ class HomeViewModel @Inject constructor(
                 delay(30_000)
                 val state = _uiState.value
                 state.selectedRoute?.let { route ->
-                    recalculateEtas(route, state.activePing)
+                    state.liveBusLocation?.let { liveLocation ->
+                        recalculateEtas(route, liveLocation)
+                    } ?: clearEtas(route)
                 }
             }
         }
     }
 
-    private fun recalculateEtas(route: Route, ping: BusPing?) {
-        val etas = etaCalculator.calculateEtas(route, ping)
+    private fun recalculateEtas(route: Route, liveLocation: LiveBusLocation) {
+        val etas = etaCalculator.calculateEtas(route, liveLocation)
         _uiState.update { it.copy(stopEtas = etas) }
+    }
+
+    private fun clearEtas(route: Route) {
+        _uiState.update {
+            it.copy(
+                stopEtas = route.stops.map { stop ->
+                    StopEta(stop = stop, etaMinutes = null, etaTimestamp = null)
+                }
+            )
+        }
     }
 
     fun confirmPing(pingId: String, confirmed: Boolean) {

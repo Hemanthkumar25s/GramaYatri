@@ -3,7 +3,13 @@ package com.gramayatri.domain.usecase
 import com.gramayatri.data.model.*
 import javax.inject.Inject
 import javax.inject.Singleton
+import kotlin.math.PI
 import kotlin.math.abs
+import kotlin.math.atan2
+import kotlin.math.cos
+import kotlin.math.pow
+import kotlin.math.sin
+import kotlin.math.sqrt
 
 /**
  * ETA Engine
@@ -86,6 +92,78 @@ class EtaCalculator @Inject constructor() {
         }
     }
 
+    fun calculateEtas(
+        route: Route,
+        liveLocation: LiveBusLocation?,
+        currentTime: Long = System.currentTimeMillis()
+    ): List<StopEta> {
+        if (liveLocation == null || !liveLocation.isActive || route.stops.isEmpty()) {
+            return route.stops.map { stop ->
+                StopEta(stop = stop, etaMinutes = null, etaTimestamp = null)
+            }
+        }
+
+        val orderedStops = route.stops.sortedBy { it.sequence }
+        val routeDistances = calculateRouteDistances(orderedStops)
+        val progress = locateRouteProgress(orderedStops, liveLocation.lat, liveLocation.lng, routeDistances)
+            ?: return route.stops.map { stop ->
+                StopEta(stop = stop, etaMinutes = null, etaTimestamp = null)
+            }
+
+        val locationAgeMinutes = ((currentTime - liveLocation.timestamp).coerceAtLeast(0) / 60_000).toInt()
+        val confidence = calculateLiveLocationConfidence(liveLocation, locationAgeMinutes, progress.distanceToRouteMeters)
+        val currentRadiusMeters = liveLocation.accuracy.coerceAtLeast(100f).toDouble()
+
+        return orderedStops.map { stop ->
+            val stopDistanceKm = stopDistance(stop, routeDistances)
+            val stopDistanceFromBusMeters = distanceMeters(liveLocation.lat, liveLocation.lng, stop.lat, stop.lng)
+            when {
+                stopDistanceKm < progress.distanceFromOriginKm - 0.15 -> {
+                    StopEta(
+                        stop = stop,
+                        etaMinutes = null,
+                        etaTimestamp = null,
+                        isBusPassed = true,
+                        confidence = confidence
+                    )
+                }
+                stopDistanceFromBusMeters <= currentRadiusMeters -> {
+                    StopEta(
+                        stop = stop,
+                        etaMinutes = 0,
+                        etaTimestamp = liveLocation.timestamp,
+                        isCurrentLocation = true,
+                        confidence = confidence
+                    )
+                }
+                stopDistanceKm >= progress.distanceFromOriginKm -> {
+                    val travelMinutes = calculateRemainingTravelMinutes(
+                        orderedStops,
+                        progress.distanceFromOriginKm,
+                        stopDistanceKm,
+                        routeDistances
+                    )
+                    val adjustedMinutes = (travelMinutes - locationAgeMinutes).coerceAtLeast(0)
+                    StopEta(
+                        stop = stop,
+                        etaMinutes = adjustedMinutes,
+                        etaTimestamp = liveLocation.timestamp + (travelMinutes * 60_000L),
+                        confidence = confidence
+                    )
+                }
+                else -> {
+                    StopEta(
+                        stop = stop,
+                        etaMinutes = null,
+                        etaTimestamp = null,
+                        isBusPassed = true,
+                        confidence = confidence
+                    )
+                }
+            }
+        }
+    }
+
     /**
      * Sum average travel times between consecutive stops from [fromSequence] to [toSequence].
      * Uses the avgTravelTimeFromPrevMinutes field on each stop.
@@ -114,6 +192,137 @@ class EtaCalculator @Inject constructor() {
             else -> EtaConfidence.NONE
         }
     }
+
+    private fun calculateLiveLocationConfidence(
+        location: LiveBusLocation,
+        ageMinutes: Int,
+        distanceToRouteMeters: Double
+    ): EtaConfidence {
+        val trustedSource = location.source == LocationSource.DRIVER ||
+                location.source == LocationSource.TICKET_MACHINE
+        return when {
+            ageMinutes > 2 -> EtaConfidence.NONE
+            trustedSource && location.accuracy <= 75f && distanceToRouteMeters <= 250.0 -> EtaConfidence.HIGH
+            trustedSource && distanceToRouteMeters <= 500.0 -> EtaConfidence.MEDIUM
+            distanceToRouteMeters <= 500.0 -> EtaConfidence.MEDIUM
+            else -> EtaConfidence.LOW
+        }
+    }
+
+    private fun calculateRouteDistances(stops: List<Stop>): Map<String, Double> {
+        if (stops.isEmpty()) return emptyMap()
+
+        var runningDistanceKm = 0.0
+        val distances = mutableMapOf(stops.first().id to 0.0)
+        stops.zipWithNext { from, to ->
+            runningDistanceKm += distanceMeters(from.lat, from.lng, to.lat, to.lng) / 1000.0
+            distances[to.id] = runningDistanceKm
+        }
+        return distances
+    }
+
+    private fun locateRouteProgress(
+        stops: List<Stop>,
+        lat: Double,
+        lng: Double,
+        routeDistances: Map<String, Double>
+    ): RouteProgress? {
+        if (stops.size == 1) {
+            return RouteProgress(0.0, distanceMeters(lat, lng, stops.first().lat, stops.first().lng))
+        }
+
+        var bestProgress: RouteProgress? = null
+        stops.zipWithNext { from, to ->
+            val segmentLengthMeters = distanceMeters(from.lat, from.lng, to.lat, to.lng)
+            if (segmentLengthMeters <= 0.0) return@zipWithNext
+
+            val projected = projectPointToSegmentMeters(lat, lng, from.lat, from.lng, to.lat, to.lng)
+            val segmentStartKm = stopDistance(from, routeDistances)
+            val distanceFromOriginKm = segmentStartKm + (segmentLengthMeters * projected.fraction / 1000.0)
+            val progress = RouteProgress(distanceFromOriginKm, projected.distanceMeters)
+            if (bestProgress == null || progress.distanceToRouteMeters < bestProgress!!.distanceToRouteMeters) {
+                bestProgress = progress
+            }
+        }
+        return bestProgress
+    }
+
+    private fun calculateRemainingTravelMinutes(
+        stops: List<Stop>,
+        currentDistanceKm: Double,
+        targetDistanceKm: Double,
+        routeDistances: Map<String, Double>
+    ): Int {
+        if (targetDistanceKm <= currentDistanceKm) return 0
+
+        val minutes = stops.drop(1).sumOf { stop ->
+            val previousStop = stops[stops.indexOf(stop) - 1]
+            val segmentStartKm = stopDistance(previousStop, routeDistances)
+            val segmentEndKm = stopDistance(stop, routeDistances)
+            val overlapStart = maxOf(currentDistanceKm, segmentStartKm)
+            val overlapEnd = minOf(targetDistanceKm, segmentEndKm)
+            if (overlapEnd <= overlapStart || segmentEndKm <= segmentStartKm) {
+                0.0
+            } else {
+                val segmentFraction = (overlapEnd - overlapStart) / (segmentEndKm - segmentStartKm)
+                stop.avgTravelTimeFromPrevMinutes * segmentFraction
+            }
+        }
+        return minutes.toInt().coerceAtLeast(1)
+    }
+
+    private fun stopDistance(stop: Stop, routeDistances: Map<String, Double>): Double {
+        return stop.distanceFromOriginKm.takeIf { it > 0.0 } ?: routeDistances[stop.id] ?: 0.0
+    }
+
+    private fun projectPointToSegmentMeters(
+        pointLat: Double,
+        pointLng: Double,
+        startLat: Double,
+        startLng: Double,
+        endLat: Double,
+        endLng: Double
+    ): SegmentProjection {
+        val originLatRadians = startLat * PI / 180.0
+        val px = metersX(pointLng - startLng, originLatRadians)
+        val py = metersY(pointLat - startLat)
+        val ex = metersX(endLng - startLng, originLatRadians)
+        val ey = metersY(endLat - startLat)
+        val lengthSquared = ex.pow(2) + ey.pow(2)
+        val fraction = if (lengthSquared == 0.0) 0.0 else ((px * ex + py * ey) / lengthSquared).coerceIn(0.0, 1.0)
+        val projectedX = ex * fraction
+        val projectedY = ey * fraction
+        val distance = sqrt((px - projectedX).pow(2) + (py - projectedY).pow(2))
+        return SegmentProjection(fraction, distance)
+    }
+
+    private fun metersX(deltaLongitude: Double, latitudeRadians: Double): Double {
+        return deltaLongitude * 111_320.0 * cos(latitudeRadians)
+    }
+
+    private fun metersY(deltaLatitude: Double): Double {
+        return deltaLatitude * 110_540.0
+    }
+
+    private fun distanceMeters(startLat: Double, startLng: Double, endLat: Double, endLng: Double): Double {
+        val earthRadiusMeters = 6_371_000.0
+        val dLat = (endLat - startLat) * PI / 180.0
+        val dLng = (endLng - startLng) * PI / 180.0
+        val lat1 = startLat * PI / 180.0
+        val lat2 = endLat * PI / 180.0
+        val a = sin(dLat / 2).pow(2) + cos(lat1) * cos(lat2) * sin(dLng / 2).pow(2)
+        return earthRadiusMeters * 2 * atan2(sqrt(a), sqrt(1 - a))
+    }
+
+    private data class RouteProgress(
+        val distanceFromOriginKm: Double,
+        val distanceToRouteMeters: Double
+    )
+
+    private data class SegmentProjection(
+        val fraction: Double,
+        val distanceMeters: Double
+    )
 
     /**
      * Format ETA for display.

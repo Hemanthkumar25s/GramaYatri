@@ -6,8 +6,6 @@ import android.app.NotificationManager
 import android.os.Build
 import androidx.hilt.work.HiltWorkerFactory
 import androidx.work.Configuration
-import com.google.firebase.database.FirebaseDatabase
-import com.gramayatri.data.worker.ProximityWorker
 import dagger.hilt.android.HiltAndroidApp
 import javax.inject.Inject
 
@@ -24,16 +22,7 @@ class GramaYatriApplication : Application(), Configuration.Provider {
 
     override fun onCreate() {
         super.onCreate()
-        
-        // Initialize Firebase Persistence early to avoid "must be called before usage" error
-        try {
-            FirebaseDatabase.getInstance().setPersistenceEnabled(true)
-        } catch (e: Exception) {
-            // Persistence already enabled or instance already in use
-        }
-
         createNotificationChannels()
-        ProximityWorker.schedule(this)
     }
 
     private fun createNotificationChannels() {

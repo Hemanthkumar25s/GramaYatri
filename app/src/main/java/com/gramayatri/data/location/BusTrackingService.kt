@@ -9,6 +9,8 @@ import android.os.Looper
 import androidx.core.app.NotificationCompat
 import com.google.android.gms.location.*
 import com.gramayatri.data.model.LiveBusLocation
+import com.gramayatri.data.model.LocationSource
+import com.gramayatri.data.model.TicketMachineSession
 import com.gramayatri.data.repository.FirebaseRepository
 import dagger.hilt.android.AndroidEntryPoint
 import kotlinx.coroutines.*
@@ -26,6 +28,11 @@ class BusTrackingService : Service() {
     private val serviceScope = CoroutineScope(SupervisorJob() + Dispatchers.IO)
     private var routeId: String? = null
     private var userName: String? = null
+    private var driverName: String? = null
+    private var driverId: String? = null
+    private var tripId: String? = null
+    private var verificationToken: String? = null
+    private var source: LocationSource = LocationSource.PASSENGER
 
     companion object {
         const val CHANNEL_ID = "bus_tracking_channel"
@@ -34,6 +41,12 @@ class BusTrackingService : Service() {
         const val ACTION_STOP = "ACTION_STOP"
         const val EXTRA_ROUTE_ID = "EXTRA_ROUTE_ID"
         const val EXTRA_USER_NAME = "EXTRA_USER_NAME"
+        const val EXTRA_DRIVER_NAME = "EXTRA_DRIVER_NAME"
+        const val EXTRA_DRIVER_ID = "EXTRA_DRIVER_ID"
+        const val EXTRA_TRIP_ID = "EXTRA_TRIP_ID"
+        const val EXTRA_SOURCE = "EXTRA_SOURCE"
+        const val EXTRA_VERIFICATION_TOKEN = "EXTRA_VERIFICATION_TOKEN"
+        private const val TICKET_MACHINE_TOKEN_TTL_MS = 10 * 60 * 1000L
     }
 
     override fun onCreate() {
@@ -55,11 +68,16 @@ class BusTrackingService : Service() {
             ACTION_START -> {
                 routeId = intent.getStringExtra(EXTRA_ROUTE_ID)
                 userName = intent.getStringExtra(EXTRA_USER_NAME)
+                driverName = intent.getStringExtra(EXTRA_DRIVER_NAME)
+                driverId = intent.getStringExtra(EXTRA_DRIVER_ID)
+                tripId = intent.getStringExtra(EXTRA_TRIP_ID)
+                verificationToken = intent.getStringExtra(EXTRA_VERIFICATION_TOKEN)
+                source = parseLocationSource(intent.getStringExtra(EXTRA_SOURCE))
                 startForegroundService()
                 startLocationUpdates()
             }
             ACTION_STOP -> {
-                stopSelf()
+                stopBroadcasting()
             }
         }
         return START_NOT_STICKY
@@ -76,7 +94,7 @@ class BusTrackingService : Service() {
 
         val notification = NotificationCompat.Builder(this, CHANNEL_ID)
             .setContentTitle("Broadcasting Bus Location")
-            .setContentText("You are helping others track this bus. Thank you!")
+            .setContentText(notificationText())
             .setSmallIcon(android.R.drawable.ic_menu_mylocation)
             .setOngoing(true)
             .addAction(android.R.drawable.ic_menu_close_clear_cancel, "Stop Broadcasting", stopPendingIntent)
@@ -110,13 +128,76 @@ class BusTrackingService : Service() {
             lng = location.longitude,
             speed = location.speed,
             bearing = location.bearing,
+            accuracy = location.accuracy,
             timestamp = System.currentTimeMillis(),
-            reporterName = userName ?: "Anonymous"
+            reporterName = userName ?: driverName ?: "Anonymous",
+            driverName = driverName.orEmpty(),
+            driverId = driverId.orEmpty(),
+            isActive = true,
+            tripId = tripId.orEmpty(),
+            source = source
         )
         
         serviceScope.launch {
             firebaseRepository.updateLiveLocation(liveLocation)
+            publishTicketMachineSessionIfNeeded(location)
         }
+    }
+
+    private suspend fun publishTicketMachineSessionIfNeeded(location: Location) {
+        if (source != LocationSource.TICKET_MACHINE) return
+        val rid = routeId ?: return
+        val tid = tripId ?: return
+        val token = verificationToken ?: return
+        val machineId = driverId ?: driverName ?: "ticket-machine"
+        val now = System.currentTimeMillis()
+        firebaseRepository.publishTicketMachineSession(
+            TicketMachineSession(
+                routeId = rid,
+                tripId = tid,
+                machineId = machineId,
+                verificationToken = token,
+                qrPayload = buildQrPayload(rid, tid, machineId, token),
+                lat = location.latitude,
+                lng = location.longitude,
+                createdAt = now,
+                expiresAt = now + TICKET_MACHINE_TOKEN_TTL_MS,
+                isActive = true
+            )
+        )
+    }
+
+    private fun buildQrPayload(routeId: String, tripId: String, machineId: String, token: String): String {
+        return "gramayatri://driver-verify?routeId=$routeId&tripId=$tripId&machineId=$machineId&token=$token"
+    }
+
+    private fun stopBroadcasting() {
+        val rid = routeId
+        if (rid == null) {
+            stopSelf()
+            return
+        }
+
+        serviceScope.launch {
+            firebaseRepository.deactivateLiveLocation(rid, source)
+            withContext(Dispatchers.Main) {
+                stopSelf()
+            }
+        }
+    }
+
+    private fun notificationText(): String {
+        return when (source) {
+            LocationSource.DRIVER -> "Driver mode is sharing verified GPS for this bus."
+            LocationSource.TICKET_MACHINE -> "Ticket machine GPS is sharing verified live bus data."
+            LocationSource.PASSENGER -> "You are helping others track this bus. Thank you!"
+        }
+    }
+
+    private fun parseLocationSource(value: String?): LocationSource {
+        return runCatching {
+            LocationSource.valueOf(value ?: LocationSource.PASSENGER.name)
+        }.getOrDefault(LocationSource.PASSENGER)
     }
 
     private fun createNotificationChannel() {

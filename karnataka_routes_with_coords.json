@@ -7,13 +7,62 @@
       "destination": "Hunsur",
       "isActive": true,
       "stops": {
-        "stop_01": { "name": "Mysuru Bus Stand", "sequence": 1, "distanceFromOriginKm": 0, "avgTravelTimeFromPrevMinutes": 0, "lat": 12.3103, "lng": 76.6586 },
-        "stop_02": { "name": "Hebbal Circle", "sequence": 2, "distanceFromOriginKm": 4.2, "avgTravelTimeFromPrevMinutes": 8, "lat": 12.3551, "lng": 76.6262 },
-        "stop_03": { "name": "Hinkal", "sequence": 3, "distanceFromOriginKm": 7.8, "avgTravelTimeFromPrevMinutes": 7, "lat": 12.3387, "lng": 76.5921 },
-        "stop_04": { "name": "Belavadi", "sequence": 4, "distanceFromOriginKm": 13.5, "avgTravelTimeFromPrevMinutes": 11, "lat": 12.3275, "lng": 76.5412 },
-        "stop_05": { "name": "Varuna", "sequence": 5, "distanceFromOriginKm": 19.0, "avgTravelTimeFromPrevMinutes": 10, "lat": 12.3168, "lng": 76.4955 },
-        "stop_06": { "name": "Bidaragodu", "sequence": 6, "distanceFromOriginKm": 24.3, "avgTravelTimeFromPrevMinutes": 10, "lat": 12.2981, "lng": 76.4423 },
-        "stop_07": { "name": "Hunsur Town", "sequence": 7, "distanceFromOriginKm": 34.0, "avgTravelTimeFromPrevMinutes": 18, "lat": 12.3094, "lng": 76.2891 }
+        "stop_01": {
+          "name": "Mysuru Bus Stand",
+          "sequence": 1,
+          "distanceFromOriginKm": 0,
+          "avgTravelTimeFromPrevMinutes": 0,
+          "lat": 12.3103,
+          "lng": 76.6586
+        },
+        "stop_02": {
+          "name": "Hebbal Circle",
+          "sequence": 2,
+          "distanceFromOriginKm": 4.2,
+          "avgTravelTimeFromPrevMinutes": 8,
+          "lat": 12.3551,
+          "lng": 76.6262
+        },
+        "stop_03": {
+          "name": "Hinkal",
+          "sequence": 3,
+          "distanceFromOriginKm": 7.8,
+          "avgTravelTimeFromPrevMinutes": 7,
+          "lat": 12.3387,
+          "lng": 76.5921
+        },
+        "stop_04": {
+          "name": "Belavadi",
+          "sequence": 4,
+          "distanceFromOriginKm": 13.5,
+          "avgTravelTimeFromPrevMinutes": 11,
+          "lat": 12.3275,
+          "lng": 76.5412
+        },
+        "stop_05": {
+          "name": "Varuna",
+          "sequence": 5,
+          "distanceFromOriginKm": 19.0,
+          "avgTravelTimeFromPrevMinutes": 10,
+          "lat": 12.3168,
+          "lng": 76.4955
+        },
+        "stop_06": {
+          "name": "Bidaragodu",
+          "sequence": 6,
+          "distanceFromOriginKm": 24.3,
+          "avgTravelTimeFromPrevMinutes": 10,
+          "lat": 12.2981,
+          "lng": 76.4423
+        },
+        "stop_07": {
+          "name": "Hunsur Town",
+          "sequence": 7,
+          "distanceFromOriginKm": 34.0,
+          "avgTravelTimeFromPrevMinutes": 18,
+          "lat": 12.3094,
+          "lng": 76.2891
+        }
       }
     },
     "route_002": {
@@ -23,11 +72,46 @@
       "destination": "Nanjangud",
       "isActive": true,
       "stops": {
-        "stop_01": { "name": "Mysuru Bus Stand", "sequence": 1, "distanceFromOriginKm": 0, "avgTravelTimeFromPrevMinutes": 0, "lat": 12.3103, "lng": 76.6586 },
-        "stop_02": { "name": "Alanahalli", "sequence": 2, "distanceFromOriginKm": 5.1, "avgTravelTimeFromPrevMinutes": 10, "lat": 12.2854, "lng": 76.6912 },
-        "stop_03": { "name": "Metagalli", "sequence": 3, "distanceFromOriginKm": 9.4, "avgTravelTimeFromPrevMinutes": 9, "lat": 12.2421, "lng": 76.6784 },
-        "stop_04": { "name": "T Narasipur Cross", "sequence": 4, "distanceFromOriginKm": 16.2, "avgTravelTimeFromPrevMinutes": 14, "lat": 12.1852, "lng": 76.6853 },
-        "stop_05": { "name": "Nanjangud Town", "sequence": 5, "distanceFromOriginKm": 23.0, "avgTravelTimeFromPrevMinutes": 15, "lat": 12.1194, "lng": 76.6781 }
+        "stop_01": {
+          "name": "Mysuru Bus Stand",
+          "sequence": 1,
+          "distanceFromOriginKm": 0,
+          "avgTravelTimeFromPrevMinutes": 0,
+          "lat": 12.3103,
+          "lng": 76.6586
+        },
+        "stop_02": {
+          "name": "Alanahalli",
+          "sequence": 2,
+          "distanceFromOriginKm": 5.1,
+          "avgTravelTimeFromPrevMinutes": 10,
+          "lat": 12.2854,
+          "lng": 76.6912
+        },
+        "stop_03": {
+          "name": "Metagalli",
+          "sequence": 3,
+          "distanceFromOriginKm": 9.4,
+          "avgTravelTimeFromPrevMinutes": 9,
+          "lat": 12.2421,
+          "lng": 76.6784
+        },
+        "stop_04": {
+          "name": "T Narasipur Cross",
+          "sequence": 4,
+          "distanceFromOriginKm": 16.2,
+          "avgTravelTimeFromPrevMinutes": 14,
+          "lat": 12.1852,
+          "lng": 76.6853
+        },
+        "stop_05": {
+          "name": "Nanjangud Town",
+          "sequence": 5,
+          "distanceFromOriginKm": 23.0,
+          "avgTravelTimeFromPrevMinutes": 15,
+          "lat": 12.1194,
+          "lng": 76.6781
+        }
       }
     },
     "route_003": {
@@ -37,12 +121,54 @@
       "destination": "Chamrajnagar",
       "isActive": true,
       "stops": {
-        "stop_01": { "name": "Mysuru Bus Stand", "sequence": 1, "distanceFromOriginKm": 0, "avgTravelTimeFromPrevMinutes": 0, "lat": 12.3103, "lng": 76.6586 },
-        "stop_02": { "name": "Bannur Road", "sequence": 2, "distanceFromOriginKm": 8.0, "avgTravelTimeFromPrevMinutes": 15, "lat": 12.2543, "lng": 76.7021 },
-        "stop_03": { "name": "Bannur", "sequence": 3, "distanceFromOriginKm": 22.0, "avgTravelTimeFromPrevMinutes": 25, "lat": 12.1732, "lng": 76.7812 },
-        "stop_04": { "name": "T Narasipur", "sequence": 4, "distanceFromOriginKm": 38.0, "avgTravelTimeFromPrevMinutes": 30, "lat": 12.2121, "lng": 76.8934 },
-        "stop_05": { "name": "Yelandur", "sequence": 5, "distanceFromOriginKm": 52.0, "avgTravelTimeFromPrevMinutes": 22, "lat": 12.0634, "lng": 77.0321 },
-        "stop_06": { "name": "Chamrajnagar", "sequence": 6, "distanceFromOriginKm": 60.0, "avgTravelTimeFromPrevMinutes": 18, "lat": 11.9241, "lng": 76.9441 }
+        "stop_01": {
+          "name": "Mysuru Bus Stand",
+          "sequence": 1,
+          "distanceFromOriginKm": 0,
+          "avgTravelTimeFromPrevMinutes": 0,
+          "lat": 12.3103,
+          "lng": 76.6586
+        },
+        "stop_02": {
+          "name": "Bannur Road",
+          "sequence": 2,
+          "distanceFromOriginKm": 8.0,
+          "avgTravelTimeFromPrevMinutes": 15,
+          "lat": 12.2543,
+          "lng": 76.7021
+        },
+        "stop_03": {
+          "name": "Bannur",
+          "sequence": 3,
+          "distanceFromOriginKm": 22.0,
+          "avgTravelTimeFromPrevMinutes": 25,
+          "lat": 12.1732,
+          "lng": 76.7812
+        },
+        "stop_04": {
+          "name": "T Narasipur",
+          "sequence": 4,
+          "distanceFromOriginKm": 38.0,
+          "avgTravelTimeFromPrevMinutes": 30,
+          "lat": 12.2121,
+          "lng": 76.8934
+        },
+        "stop_05": {
+          "name": "Yelandur",
+          "sequence": 5,
+          "distanceFromOriginKm": 52.0,
+          "avgTravelTimeFromPrevMinutes": 22,
+          "lat": 12.0634,
+          "lng": 77.0321
+        },
+        "stop_06": {
+          "name": "Chamrajnagar",
+          "sequence": 6,
+          "distanceFromOriginKm": 60.0,
+          "avgTravelTimeFromPrevMinutes": 18,
+          "lat": 11.9241,
+          "lng": 76.9441
+        }
       }
     },
     "route_004": {
@@ -52,10 +178,38 @@
       "destination": "Mandya",
       "isActive": true,
       "stops": {
-        "stop_01": { "name": "Mysuru Bus Stand", "sequence": 1, "distanceFromOriginKm": 0, "avgTravelTimeFromPrevMinutes": 0, "lat": 12.3103, "lng": 76.6586 },
-        "stop_02": { "name": "Srirangapatna", "sequence": 2, "distanceFromOriginKm": 15.0, "avgTravelTimeFromPrevMinutes": 20, "lat": 12.4163, "lng": 76.6976 },
-        "stop_03": { "name": "Pandavapura", "sequence": 3, "distanceFromOriginKm": 28.0, "avgTravelTimeFromPrevMinutes": 22, "lat": 12.4862, "lng": 76.6782 },
-        "stop_04": { "name": "Mandya Bus Stand", "sequence": 4, "distanceFromOriginKm": 40.0, "avgTravelTimeFromPrevMinutes": 22, "lat": 12.5218, "lng": 76.8956 }
+        "stop_01": {
+          "name": "Mysuru Bus Stand",
+          "sequence": 1,
+          "distanceFromOriginKm": 0,
+          "avgTravelTimeFromPrevMinutes": 0,
+          "lat": 12.3103,
+          "lng": 76.6586
+        },
+        "stop_02": {
+          "name": "Srirangapatna",
+          "sequence": 2,
+          "distanceFromOriginKm": 15.0,
+          "avgTravelTimeFromPrevMinutes": 20,
+          "lat": 12.4163,
+          "lng": 76.6976
+        },
+        "stop_03": {
+          "name": "Pandavapura",
+          "sequence": 3,
+          "distanceFromOriginKm": 28.0,
+          "avgTravelTimeFromPrevMinutes": 22,
+          "lat": 12.4862,
+          "lng": 76.6782
+        },
+        "stop_04": {
+          "name": "Mandya Bus Stand",
+          "sequence": 4,
+          "distanceFromOriginKm": 40.0,
+          "avgTravelTimeFromPrevMinutes": 22,
+          "lat": 12.5218,
+          "lng": 76.8956
+        }
       }
     },
     "route_005": {
@@ -65,10 +219,38 @@
       "destination": "Hassan",
       "isActive": true,
       "stops": {
-        "stop_01": { "name": "Mysuru Bus Stand", "sequence": 1, "distanceFromOriginKm": 0, "avgTravelTimeFromPrevMinutes": 0, "lat": 12.3103, "lng": 76.6586 },
-        "stop_02": { "name": "Krishnarajanagara", "sequence": 2, "distanceFromOriginKm": 30.0, "avgTravelTimeFromPrevMinutes": 45, "lat": 12.4012, "lng": 76.3842 },
-        "stop_03": { "name": "Holenarasipura", "sequence": 3, "distanceFromOriginKm": 70.0, "avgTravelTimeFromPrevMinutes": 60, "lat": 12.7838, "lng": 76.2412 },
-        "stop_04": { "name": "Hassan Bus Stand", "sequence": 4, "distanceFromOriginKm": 118.0, "avgTravelTimeFromPrevMinutes": 70, "lat": 13.0068, "lng": 76.1003 }
+        "stop_01": {
+          "name": "Mysuru Bus Stand",
+          "sequence": 1,
+          "distanceFromOriginKm": 0,
+          "avgTravelTimeFromPrevMinutes": 0,
+          "lat": 12.3103,
+          "lng": 76.6586
+        },
+        "stop_02": {
+          "name": "Krishnarajanagara",
+          "sequence": 2,
+          "distanceFromOriginKm": 30.0,
+          "avgTravelTimeFromPrevMinutes": 45,
+          "lat": 12.4012,
+          "lng": 76.3842
+        },
+        "stop_03": {
+          "name": "Holenarasipura",
+          "sequence": 3,
+          "distanceFromOriginKm": 70.0,
+          "avgTravelTimeFromPrevMinutes": 60,
+          "lat": 12.7838,
+          "lng": 76.2412
+        },
+        "stop_04": {
+          "name": "Hassan Bus Stand",
+          "sequence": 4,
+          "distanceFromOriginKm": 118.0,
+          "avgTravelTimeFromPrevMinutes": 70,
+          "lat": 13.0068,
+          "lng": 76.1003
+        }
       }
     },
     "route_006": {
@@ -78,13 +260,62 @@
       "destination": "Mysuru",
       "isActive": true,
       "stops": {
-        "stop_01": { "name": "Majestic Bus Stand", "sequence": 1, "distanceFromOriginKm": 0, "avgTravelTimeFromPrevMinutes": 0, "lat": 12.9767, "lng": 77.5713 },
-        "stop_02": { "name": "Ramanagara", "sequence": 2, "distanceFromOriginKm": 50.0, "avgTravelTimeFromPrevMinutes": 60, "lat": 12.7152, "lng": 77.2799 },
-        "stop_03": { "name": "Channapatna", "sequence": 3, "distanceFromOriginKm": 60.0, "avgTravelTimeFromPrevMinutes": 15, "lat": 12.6506, "lng": 77.2078 },
-        "stop_04": { "name": "Maddur", "sequence": 4, "distanceFromOriginKm": 80.0, "avgTravelTimeFromPrevMinutes": 25, "lat": 12.5838, "lng": 77.0440 },
-        "stop_05": { "name": "Mandya", "sequence": 5, "distanceFromOriginKm": 100.0, "avgTravelTimeFromPrevMinutes": 25, "lat": 12.5218, "lng": 76.8956 },
-        "stop_06": { "name": "Srirangapatna", "sequence": 6, "distanceFromOriginKm": 125.0, "avgTravelTimeFromPrevMinutes": 30, "lat": 12.4163, "lng": 76.6976 },
-        "stop_07": { "name": "Mysuru Bus Stand", "sequence": 7, "distanceFromOriginKm": 140.0, "avgTravelTimeFromPrevMinutes": 20, "lat": 12.3103, "lng": 76.6586 }
+        "stop_01": {
+          "name": "Majestic Bus Stand",
+          "sequence": 1,
+          "distanceFromOriginKm": 0,
+          "avgTravelTimeFromPrevMinutes": 0,
+          "lat": 12.9767,
+          "lng": 77.5713
+        },
+        "stop_02": {
+          "name": "Ramanagara",
+          "sequence": 2,
+          "distanceFromOriginKm": 50.0,
+          "avgTravelTimeFromPrevMinutes": 60,
+          "lat": 12.7152,
+          "lng": 77.2799
+        },
+        "stop_03": {
+          "name": "Channapatna",
+          "sequence": 3,
+          "distanceFromOriginKm": 60.0,
+          "avgTravelTimeFromPrevMinutes": 15,
+          "lat": 12.6506,
+          "lng": 77.2078
+        },
+        "stop_04": {
+          "name": "Maddur",
+          "sequence": 4,
+          "distanceFromOriginKm": 80.0,
+          "avgTravelTimeFromPrevMinutes": 25,
+          "lat": 12.5838,
+          "lng": 77.044
+        },
+        "stop_05": {
+          "name": "Mandya",
+          "sequence": 5,
+          "distanceFromOriginKm": 100.0,
+          "avgTravelTimeFromPrevMinutes": 25,
+          "lat": 12.5218,
+          "lng": 76.8956
+        },
+        "stop_06": {
+          "name": "Srirangapatna",
+          "sequence": 6,
+          "distanceFromOriginKm": 125.0,
+          "avgTravelTimeFromPrevMinutes": 30,
+          "lat": 12.4163,
+          "lng": 76.6976
+        },
+        "stop_07": {
+          "name": "Mysuru Bus Stand",
+          "sequence": 7,
+          "distanceFromOriginKm": 140.0,
+          "avgTravelTimeFromPrevMinutes": 20,
+          "lat": 12.3103,
+          "lng": 76.6586
+        }
       }
     },
     "route_007": {
@@ -94,11 +325,46 @@
       "destination": "Tumkur",
       "isActive": true,
       "stops": {
-        "stop_01": { "name": "Majestic Bus Stand", "sequence": 1, "distanceFromOriginKm": 0, "avgTravelTimeFromPrevMinutes": 0, "lat": 12.9767, "lng": 77.5713 },
-        "stop_02": { "name": "Yeshwanthpur", "sequence": 2, "distanceFromOriginKm": 8.0, "avgTravelTimeFromPrevMinutes": 20, "lat": 13.0265, "lng": 77.5521 },
-        "stop_03": { "name": "Nelamangala", "sequence": 3, "distanceFromOriginKm": 28.0, "avgTravelTimeFromPrevMinutes": 35, "lat": 13.1021, "lng": 77.3912 },
-        "stop_04": { "name": "Kunigal", "sequence": 4, "distanceFromOriginKm": 55.0, "avgTravelTimeFromPrevMinutes": 40, "lat": 13.0214, "lng": 77.0274 },
-        "stop_05": { "name": "Tumkur Bus Stand", "sequence": 5, "distanceFromOriginKm": 72.0, "avgTravelTimeFromPrevMinutes": 25, "lat": 13.3379, "lng": 77.1031 }
+        "stop_01": {
+          "name": "Majestic Bus Stand",
+          "sequence": 1,
+          "distanceFromOriginKm": 0,
+          "avgTravelTimeFromPrevMinutes": 0,
+          "lat": 12.9767,
+          "lng": 77.5713
+        },
+        "stop_02": {
+          "name": "Yeshwanthpur",
+          "sequence": 2,
+          "distanceFromOriginKm": 8.0,
+          "avgTravelTimeFromPrevMinutes": 20,
+          "lat": 13.0265,
+          "lng": 77.5521
+        },
+        "stop_03": {
+          "name": "Nelamangala",
+          "sequence": 3,
+          "distanceFromOriginKm": 28.0,
+          "avgTravelTimeFromPrevMinutes": 35,
+          "lat": 13.1021,
+          "lng": 77.3912
+        },
+        "stop_04": {
+          "name": "Kunigal",
+          "sequence": 4,
+          "distanceFromOriginKm": 55.0,
+          "avgTravelTimeFromPrevMinutes": 40,
+          "lat": 13.0214,
+          "lng": 77.0274
+        },
+        "stop_05": {
+          "name": "Tumkur Bus Stand",
+          "sequence": 5,
+          "distanceFromOriginKm": 72.0,
+          "avgTravelTimeFromPrevMinutes": 25,
+          "lat": 13.3379,
+          "lng": 77.1031
+        }
       }
     },
     "route_008": {
@@ -108,11 +374,46 @@
       "destination": "Kolar",
       "isActive": true,
       "stops": {
-        "stop_01": { "name": "Majestic Bus Stand", "sequence": 1, "distanceFromOriginKm": 0, "avgTravelTimeFromPrevMinutes": 0, "lat": 12.9767, "lng": 77.5713 },
-        "stop_02": { "name": "KR Puram", "sequence": 2, "distanceFromOriginKm": 15.0, "avgTravelTimeFromPrevMinutes": 30, "lat": 13.0068, "lng": 77.6954 },
-        "stop_03": { "name": "Hoskote", "sequence": 3, "distanceFromOriginKm": 35.0, "avgTravelTimeFromPrevMinutes": 35, "lat": 13.0721, "lng": 77.7981 },
-        "stop_04": { "name": "Malur", "sequence": 4, "distanceFromOriginKm": 55.0, "avgTravelTimeFromPrevMinutes": 30, "lat": 13.0034, "lng": 77.9432 },
-        "stop_05": { "name": "Kolar Bus Stand", "sequence": 5, "distanceFromOriginKm": 70.0, "avgTravelTimeFromPrevMinutes": 25, "lat": 13.1354, "lng": 78.1298 }
+        "stop_01": {
+          "name": "Majestic Bus Stand",
+          "sequence": 1,
+          "distanceFromOriginKm": 0,
+          "avgTravelTimeFromPrevMinutes": 0,
+          "lat": 12.9767,
+          "lng": 77.5713
+        },
+        "stop_02": {
+          "name": "KR Puram",
+          "sequence": 2,
+          "distanceFromOriginKm": 15.0,
+          "avgTravelTimeFromPrevMinutes": 30,
+          "lat": 13.0068,
+          "lng": 77.6954
+        },
+        "stop_03": {
+          "name": "Hoskote",
+          "sequence": 3,
+          "distanceFromOriginKm": 35.0,
+          "avgTravelTimeFromPrevMinutes": 35,
+          "lat": 13.0721,
+          "lng": 77.7981
+        },
+        "stop_04": {
+          "name": "Malur",
+          "sequence": 4,
+          "distanceFromOriginKm": 55.0,
+          "avgTravelTimeFromPrevMinutes": 30,
+          "lat": 13.0034,
+          "lng": 77.9432
+        },
+        "stop_05": {
+          "name": "Kolar Bus Stand",
+          "sequence": 5,
+          "distanceFromOriginKm": 70.0,
+          "avgTravelTimeFromPrevMinutes": 25,
+          "lat": 13.1354,
+          "lng": 78.1298
+        }
       }
     },
     "route_009": {
@@ -122,11 +423,46 @@
       "destination": "Udupi",
       "isActive": true,
       "stops": {
-        "stop_01": { "name": "Mangaluru Bus Stand", "sequence": 1, "distanceFromOriginKm": 0, "avgTravelTimeFromPrevMinutes": 0, "lat": 12.8698, "lng": 74.8431 },
-        "stop_02": { "name": "Surathkal", "sequence": 2, "distanceFromOriginKm": 18.0, "avgTravelTimeFromPrevMinutes": 30, "lat": 13.0124, "lng": 74.7921 },
-        "stop_03": { "name": "Mulki", "sequence": 3, "distanceFromOriginKm": 28.0, "avgTravelTimeFromPrevMinutes": 20, "lat": 13.0943, "lng": 74.7852 },
-        "stop_04": { "name": "Padubidri", "sequence": 4, "distanceFromOriginKm": 42.0, "avgTravelTimeFromPrevMinutes": 22, "lat": 13.1843, "lng": 74.7621 },
-        "stop_05": { "name": "Udupi Bus Stand", "sequence": 5, "distanceFromOriginKm": 58.0, "avgTravelTimeFromPrevMinutes": 25, "lat": 13.3409, "lng": 74.7421 }
+        "stop_01": {
+          "name": "Mangaluru Bus Stand",
+          "sequence": 1,
+          "distanceFromOriginKm": 0,
+          "avgTravelTimeFromPrevMinutes": 0,
+          "lat": 12.8698,
+          "lng": 74.8431
+        },
+        "stop_02": {
+          "name": "Surathkal",
+          "sequence": 2,
+          "distanceFromOriginKm": 18.0,
+          "avgTravelTimeFromPrevMinutes": 30,
+          "lat": 13.0124,
+          "lng": 74.7921
+        },
+        "stop_03": {
+          "name": "Mulki",
+          "sequence": 3,
+          "distanceFromOriginKm": 28.0,
+          "avgTravelTimeFromPrevMinutes": 20,
+          "lat": 13.0943,
+          "lng": 74.7852
+        },
+        "stop_04": {
+          "name": "Padubidri",
+          "sequence": 4,
+          "distanceFromOriginKm": 42.0,
+          "avgTravelTimeFromPrevMinutes": 22,
+          "lat": 13.1843,
+          "lng": 74.7621
+        },
+        "stop_05": {
+          "name": "Udupi Bus Stand",
+          "sequence": 5,
+          "distanceFromOriginKm": 58.0,
+          "avgTravelTimeFromPrevMinutes": 25,
+          "lat": 13.3409,
+          "lng": 74.7421
+        }
       }
     },
     "route_010": {
@@ -136,10 +472,38 @@
       "destination": "Dharwad",
       "isActive": true,
       "stops": {
-        "stop_01": { "name": "Hubli Bus Stand", "sequence": 1, "distanceFromOriginKm": 0, "avgTravelTimeFromPrevMinutes": 0, "lat": 15.3647, "lng": 75.1239 },
-        "stop_02": { "name": "Unkal", "sequence": 2, "distanceFromOriginKm": 5.0, "avgTravelTimeFromPrevMinutes": 10, "lat": 15.3821, "lng": 75.0912 },
-        "stop_03": { "name": "Tarihal", "sequence": 3, "distanceFromOriginKm": 10.0, "avgTravelTimeFromPrevMinutes": 10, "lat": 15.3982, "lng": 75.0621 },
-        "stop_04": { "name": "Dharwad Bus Stand", "sequence": 4, "distanceFromOriginKm": 20.0, "avgTravelTimeFromPrevMinutes": 18, "lat": 15.4589, "lng": 75.0078 }
+        "stop_01": {
+          "name": "Hubli Bus Stand",
+          "sequence": 1,
+          "distanceFromOriginKm": 0,
+          "avgTravelTimeFromPrevMinutes": 0,
+          "lat": 15.3647,
+          "lng": 75.1239
+        },
+        "stop_02": {
+          "name": "Unkal",
+          "sequence": 2,
+          "distanceFromOriginKm": 5.0,
+          "avgTravelTimeFromPrevMinutes": 10,
+          "lat": 15.3821,
+          "lng": 75.0912
+        },
+        "stop_03": {
+          "name": "Tarihal",
+          "sequence": 3,
+          "distanceFromOriginKm": 10.0,
+          "avgTravelTimeFromPrevMinutes": 10,
+          "lat": 15.3982,
+          "lng": 75.0621
+        },
+        "stop_04": {
+          "name": "Dharwad Bus Stand",
+          "sequence": 4,
+          "distanceFromOriginKm": 20.0,
+          "avgTravelTimeFromPrevMinutes": 18,
+          "lat": 15.4589,
+          "lng": 75.0078
+        }
       }
     },
     "route_011": {
@@ -149,10 +513,38 @@
       "destination": "Dharwad",
       "isActive": true,
       "stops": {
-        "stop_01": { "name": "Belagavi Bus Stand", "sequence": 1, "distanceFromOriginKm": 0, "avgTravelTimeFromPrevMinutes": 0, "lat": 15.8497, "lng": 74.4977 },
-        "stop_02": { "name": "Laxmeshwar", "sequence": 2, "distanceFromOriginKm": 40.0, "avgTravelTimeFromPrevMinutes": 55, "lat": 15.1282, "lng": 75.4712 },
-        "stop_03": { "name": "Shirhatti", "sequence": 3, "distanceFromOriginKm": 75.0, "avgTravelTimeFromPrevMinutes": 50, "lat": 15.2341, "lng": 75.5821 },
-        "stop_04": { "name": "Dharwad Bus Stand", "sequence": 4, "distanceFromOriginKm": 110.0, "avgTravelTimeFromPrevMinutes": 50, "lat": 15.4589, "lng": 75.0078 }
+        "stop_01": {
+          "name": "Belagavi Bus Stand",
+          "sequence": 1,
+          "distanceFromOriginKm": 0,
+          "avgTravelTimeFromPrevMinutes": 0,
+          "lat": 15.8497,
+          "lng": 74.4977
+        },
+        "stop_02": {
+          "name": "Laxmeshwar",
+          "sequence": 2,
+          "distanceFromOriginKm": 40.0,
+          "avgTravelTimeFromPrevMinutes": 55,
+          "lat": 15.1282,
+          "lng": 75.4712
+        },
+        "stop_03": {
+          "name": "Shirhatti",
+          "sequence": 3,
+          "distanceFromOriginKm": 75.0,
+          "avgTravelTimeFromPrevMinutes": 50,
+          "lat": 15.2341,
+          "lng": 75.5821
+        },
+        "stop_04": {
+          "name": "Dharwad Bus Stand",
+          "sequence": 4,
+          "distanceFromOriginKm": 110.0,
+          "avgTravelTimeFromPrevMinutes": 50,
+          "lat": 15.4589,
+          "lng": 75.0078
+        }
       }
     },
     "route_012": {
@@ -162,10 +554,38 @@
       "destination": "Madikeri",
       "isActive": true,
       "stops": {
-        "stop_01": { "name": "Mysuru Bus Stand", "sequence": 1, "distanceFromOriginKm": 0, "avgTravelTimeFromPrevMinutes": 0, "lat": 12.3103, "lng": 76.6586 },
-        "stop_02": { "name": "Kushalnagar", "sequence": 2, "distanceFromOriginKm": 80.0, "avgTravelTimeFromPrevMinutes": 100, "lat": 12.4582, "lng": 75.9612 },
-        "stop_03": { "name": "Suntikoppa", "sequence": 3, "distanceFromOriginKm": 100.0, "avgTravelTimeFromPrevMinutes": 30, "lat": 12.4021, "lng": 75.8341 },
-        "stop_04": { "name": "Madikeri Bus Stand", "sequence": 4, "distanceFromOriginKm": 120.0, "avgTravelTimeFromPrevMinutes": 40, "lat": 12.4244, "lng": 75.7382 }
+        "stop_01": {
+          "name": "Mysuru Bus Stand",
+          "sequence": 1,
+          "distanceFromOriginKm": 0,
+          "avgTravelTimeFromPrevMinutes": 0,
+          "lat": 12.3103,
+          "lng": 76.6586
+        },
+        "stop_02": {
+          "name": "Kushalnagar",
+          "sequence": 2,
+          "distanceFromOriginKm": 80.0,
+          "avgTravelTimeFromPrevMinutes": 100,
+          "lat": 12.4582,
+          "lng": 75.9612
+        },
+        "stop_03": {
+          "name": "Suntikoppa",
+          "sequence": 3,
+          "distanceFromOriginKm": 100.0,
+          "avgTravelTimeFromPrevMinutes": 30,
+          "lat": 12.4021,
+          "lng": 75.8341
+        },
+        "stop_04": {
+          "name": "Madikeri Bus Stand",
+          "sequence": 4,
+          "distanceFromOriginKm": 120.0,
+          "avgTravelTimeFromPrevMinutes": 40,
+          "lat": 12.4244,
+          "lng": 75.7382
+        }
       }
     },
     "route_013": {
@@ -175,10 +595,38 @@
       "destination": "Ramanagara",
       "isActive": true,
       "stops": {
-        "stop_01": { "name": "Majestic Bus Stand", "sequence": 1, "distanceFromOriginKm": 0, "avgTravelTimeFromPrevMinutes": 0, "lat": 12.9767, "lng": 77.5713 },
-        "stop_02": { "name": "Kengeri", "sequence": 2, "distanceFromOriginKm": 12.0, "avgTravelTimeFromPrevMinutes": 25, "lat": 12.9063, "lng": 77.4821 },
-        "stop_03": { "name": "Bidadi", "sequence": 3, "distanceFromOriginKm": 30.0, "avgTravelTimeFromPrevMinutes": 30, "lat": 12.8012, "lng": 77.3921 },
-        "stop_04": { "name": "Ramanagara Bus Stand", "sequence": 4, "distanceFromOriginKm": 50.0, "avgTravelTimeFromPrevMinutes": 30, "lat": 12.7152, "lng": 77.2799 }
+        "stop_01": {
+          "name": "Majestic Bus Stand",
+          "sequence": 1,
+          "distanceFromOriginKm": 0,
+          "avgTravelTimeFromPrevMinutes": 0,
+          "lat": 12.9767,
+          "lng": 77.5713
+        },
+        "stop_02": {
+          "name": "Kengeri",
+          "sequence": 2,
+          "distanceFromOriginKm": 12.0,
+          "avgTravelTimeFromPrevMinutes": 25,
+          "lat": 12.9063,
+          "lng": 77.4821
+        },
+        "stop_03": {
+          "name": "Bidadi",
+          "sequence": 3,
+          "distanceFromOriginKm": 30.0,
+          "avgTravelTimeFromPrevMinutes": 30,
+          "lat": 12.8012,
+          "lng": 77.3921
+        },
+        "stop_04": {
+          "name": "Ramanagara Bus Stand",
+          "sequence": 4,
+          "distanceFromOriginKm": 50.0,
+          "avgTravelTimeFromPrevMinutes": 30,
+          "lat": 12.7152,
+          "lng": 77.2799
+        }
       }
     },
     "route_014": {
@@ -188,11 +636,46 @@
       "destination": "Hassan",
       "isActive": true,
       "stops": {
-        "stop_01": { "name": "Majestic Bus Stand", "sequence": 1, "distanceFromOriginKm": 0, "avgTravelTimeFromPrevMinutes": 0, "lat": 12.9767, "lng": 77.5713 },
-        "stop_02": { "name": "Nelamangala", "sequence": 2, "distanceFromOriginKm": 28.0, "avgTravelTimeFromPrevMinutes": 40, "lat": 13.1021, "lng": 77.3912 },
-        "stop_03": { "name": "Kunigal", "sequence": 3, "distanceFromOriginKm": 65.0, "avgTravelTimeFromPrevMinutes": 55, "lat": 13.0214, "lng": 77.0274 },
-        "stop_04": { "name": "Channarayapatna", "sequence": 4, "distanceFromOriginKm": 140.0, "avgTravelTimeFromPrevMinutes": 100, "lat": 12.9023, "lng": 76.3871 },
-        "stop_05": { "name": "Hassan Bus Stand", "sequence": 5, "distanceFromOriginKm": 187.0, "avgTravelTimeFromPrevMinutes": 60, "lat": 13.0068, "lng": 76.1003 }
+        "stop_01": {
+          "name": "Majestic Bus Stand",
+          "sequence": 1,
+          "distanceFromOriginKm": 0,
+          "avgTravelTimeFromPrevMinutes": 0,
+          "lat": 12.9767,
+          "lng": 77.5713
+        },
+        "stop_02": {
+          "name": "Nelamangala",
+          "sequence": 2,
+          "distanceFromOriginKm": 28.0,
+          "avgTravelTimeFromPrevMinutes": 40,
+          "lat": 13.1021,
+          "lng": 77.3912
+        },
+        "stop_03": {
+          "name": "Kunigal",
+          "sequence": 3,
+          "distanceFromOriginKm": 65.0,
+          "avgTravelTimeFromPrevMinutes": 55,
+          "lat": 13.0214,
+          "lng": 77.0274
+        },
+        "stop_04": {
+          "name": "Channarayapatna",
+          "sequence": 4,
+          "distanceFromOriginKm": 140.0,
+          "avgTravelTimeFromPrevMinutes": 100,
+          "lat": 12.9023,
+          "lng": 76.3871
+        },
+        "stop_05": {
+          "name": "Hassan Bus Stand",
+          "sequence": 5,
+          "distanceFromOriginKm": 187.0,
+          "avgTravelTimeFromPrevMinutes": 60,
+          "lat": 13.0068,
+          "lng": 76.1003
+        }
       }
     },
     "route_015": {
@@ -202,11 +685,46 @@
       "destination": "Shivamogga",
       "isActive": true,
       "stops": {
-        "stop_01": { "name": "Majestic Bus Stand", "sequence": 1, "distanceFromOriginKm": 0, "avgTravelTimeFromPrevMinutes": 0, "lat": 12.9767, "lng": 77.5713 },
-        "stop_02": { "name": "Tumkur", "sequence": 2, "distanceFromOriginKm": 72.0, "avgTravelTimeFromPrevMinutes": 90, "lat": 13.3379, "lng": 77.1031 },
-        "stop_03": { "name": "Tiptur", "sequence": 3, "distanceFromOriginKm": 120.0, "avgTravelTimeFromPrevMinutes": 60, "lat": 13.2634, "lng": 76.4762 },
-        "stop_04": { "name": "Arsikere", "sequence": 4, "distanceFromOriginKm": 160.0, "avgTravelTimeFromPrevMinutes": 50, "lat": 13.3141, "lng": 76.2582 },
-        "stop_05": { "name": "Shivamogga Bus Stand", "sequence": 5, "distanceFromOriginKm": 270.0, "avgTravelTimeFromPrevMinutes": 120, "lat": 13.9299, "lng": 75.5681 }
+        "stop_01": {
+          "name": "Majestic Bus Stand",
+          "sequence": 1,
+          "distanceFromOriginKm": 0,
+          "avgTravelTimeFromPrevMinutes": 0,
+          "lat": 12.9767,
+          "lng": 77.5713
+        },
+        "stop_02": {
+          "name": "Tumkur",
+          "sequence": 2,
+          "distanceFromOriginKm": 72.0,
+          "avgTravelTimeFromPrevMinutes": 90,
+          "lat": 13.3379,
+          "lng": 77.1031
+        },
+        "stop_03": {
+          "name": "Tiptur",
+          "sequence": 3,
+          "distanceFromOriginKm": 120.0,
+          "avgTravelTimeFromPrevMinutes": 60,
+          "lat": 13.2634,
+          "lng": 76.4762
+        },
+        "stop_04": {
+          "name": "Arsikere",
+          "sequence": 4,
+          "distanceFromOriginKm": 160.0,
+          "avgTravelTimeFromPrevMinutes": 50,
+          "lat": 13.3141,
+          "lng": 76.2582
+        },
+        "stop_05": {
+          "name": "Shivamogga Bus Stand",
+          "sequence": 5,
+          "distanceFromOriginKm": 270.0,
+          "avgTravelTimeFromPrevMinutes": 120,
+          "lat": 13.9299,
+          "lng": 75.5681
+        }
       }
     },
     "route_016": {
@@ -216,11 +734,46 @@
       "destination": "Davanagere",
       "isActive": true,
       "stops": {
-        "stop_01": { "name": "Majestic Bus Stand", "sequence": 1, "distanceFromOriginKm": 0, "avgTravelTimeFromPrevMinutes": 0, "lat": 12.9767, "lng": 77.5713 },
-        "stop_02": { "name": "Tumkur", "sequence": 2, "distanceFromOriginKm": 72.0, "avgTravelTimeFromPrevMinutes": 90, "lat": 13.3379, "lng": 77.1031 },
-        "stop_03": { "name": "Sira", "sequence": 3, "distanceFromOriginKm": 120.0, "avgTravelTimeFromPrevMinutes": 60, "lat": 13.7421, "lng": 76.9021 },
-        "stop_04": { "name": "Hiriyur", "sequence": 4, "distanceFromOriginKm": 160.0, "avgTravelTimeFromPrevMinutes": 50, "lat": 13.9451, "lng": 76.6182 },
-        "stop_05": { "name": "Davanagere Bus Stand", "sequence": 5, "distanceFromOriginKm": 215.0, "avgTravelTimeFromPrevMinutes": 70, "lat": 14.4644, "lng": 75.9218 }
+        "stop_01": {
+          "name": "Majestic Bus Stand",
+          "sequence": 1,
+          "distanceFromOriginKm": 0,
+          "avgTravelTimeFromPrevMinutes": 0,
+          "lat": 12.9767,
+          "lng": 77.5713
+        },
+        "stop_02": {
+          "name": "Tumkur",
+          "sequence": 2,
+          "distanceFromOriginKm": 72.0,
+          "avgTravelTimeFromPrevMinutes": 90,
+          "lat": 13.3379,
+          "lng": 77.1031
+        },
+        "stop_03": {
+          "name": "Sira",
+          "sequence": 3,
+          "distanceFromOriginKm": 120.0,
+          "avgTravelTimeFromPrevMinutes": 60,
+          "lat": 13.7421,
+          "lng": 76.9021
+        },
+        "stop_04": {
+          "name": "Hiriyur",
+          "sequence": 4,
+          "distanceFromOriginKm": 160.0,
+          "avgTravelTimeFromPrevMinutes": 50,
+          "lat": 13.9451,
+          "lng": 76.6182
+        },
+        "stop_05": {
+          "name": "Davanagere Bus Stand",
+          "sequence": 5,
+          "distanceFromOriginKm": 215.0,
+          "avgTravelTimeFromPrevMinutes": 70,
+          "lat": 14.4644,
+          "lng": 75.9218
+        }
       }
     },
     "route_017": {
@@ -230,11 +783,46 @@
       "destination": "Ballari",
       "isActive": true,
       "stops": {
-        "stop_01": { "name": "Majestic Bus Stand", "sequence": 1, "distanceFromOriginKm": 0, "avgTravelTimeFromPrevMinutes": 0, "lat": 12.9767, "lng": 77.5713 },
-        "stop_02": { "name": "Koratagere", "sequence": 2, "distanceFromOriginKm": 80.0, "avgTravelTimeFromPrevMinutes": 100, "lat": 13.5231, "lng": 77.2341 },
-        "stop_03": { "name": "Madhugiri", "sequence": 3, "distanceFromOriginKm": 110.0, "avgTravelTimeFromPrevMinutes": 40, "lat": 13.6631, "lng": 77.2021 },
-        "stop_04": { "name": "Pavagada", "sequence": 4, "distanceFromOriginKm": 160.0, "avgTravelTimeFromPrevMinutes": 60, "lat": 14.0981, "lng": 77.2741 },
-        "stop_05": { "name": "Ballari Bus Stand", "sequence": 5, "distanceFromOriginKm": 300.0, "avgTravelTimeFromPrevMinutes": 150, "lat": 15.1394, "lng": 76.9214 }
+        "stop_01": {
+          "name": "Majestic Bus Stand",
+          "sequence": 1,
+          "distanceFromOriginKm": 0,
+          "avgTravelTimeFromPrevMinutes": 0,
+          "lat": 12.9767,
+          "lng": 77.5713
+        },
+        "stop_02": {
+          "name": "Koratagere",
+          "sequence": 2,
+          "distanceFromOriginKm": 80.0,
+          "avgTravelTimeFromPrevMinutes": 100,
+          "lat": 13.5231,
+          "lng": 77.2341
+        },
+        "stop_03": {
+          "name": "Madhugiri",
+          "sequence": 3,
+          "distanceFromOriginKm": 110.0,
+          "avgTravelTimeFromPrevMinutes": 40,
+          "lat": 13.6631,
+          "lng": 77.2021
+        },
+        "stop_04": {
+          "name": "Pavagada",
+          "sequence": 4,
+          "distanceFromOriginKm": 160.0,
+          "avgTravelTimeFromPrevMinutes": 60,
+          "lat": 14.0981,
+          "lng": 77.2741
+        },
+        "stop_05": {
+          "name": "Ballari Bus Stand",
+          "sequence": 5,
+          "distanceFromOriginKm": 300.0,
+          "avgTravelTimeFromPrevMinutes": 150,
+          "lat": 15.1394,
+          "lng": 76.9214
+        }
       }
     },
     "route_018": {
@@ -244,10 +832,38 @@
       "destination": "Vijayapura",
       "isActive": true,
       "stops": {
-        "stop_01": { "name": "Majestic Bus Stand", "sequence": 1, "distanceFromOriginKm": 0, "avgTravelTimeFromPrevMinutes": 0, "lat": 12.9767, "lng": 77.5713 },
-        "stop_02": { "name": "Raichur", "sequence": 2, "distanceFromOriginKm": 230.0, "avgTravelTimeFromPrevMinutes": 240, "lat": 16.2120, "lng": 77.3439 },
-        "stop_03": { "name": "Sindagi", "sequence": 3, "distanceFromOriginKm": 300.0, "avgTravelTimeFromPrevMinutes": 80, "lat": 16.9171, "lng": 76.2351 },
-        "stop_04": { "name": "Vijayapura Bus Stand", "sequence": 4, "distanceFromOriginKm": 530.0, "avgTravelTimeFromPrevMinutes": 180, "lat": 16.8302, "lng": 75.7100 }
+        "stop_01": {
+          "name": "Majestic Bus Stand",
+          "sequence": 1,
+          "distanceFromOriginKm": 0,
+          "avgTravelTimeFromPrevMinutes": 0,
+          "lat": 12.9767,
+          "lng": 77.5713
+        },
+        "stop_02": {
+          "name": "Raichur",
+          "sequence": 2,
+          "distanceFromOriginKm": 230.0,
+          "avgTravelTimeFromPrevMinutes": 240,
+          "lat": 16.212,
+          "lng": 77.3439
+        },
+        "stop_03": {
+          "name": "Sindagi",
+          "sequence": 3,
+          "distanceFromOriginKm": 300.0,
+          "avgTravelTimeFromPrevMinutes": 80,
+          "lat": 16.9171,
+          "lng": 76.2351
+        },
+        "stop_04": {
+          "name": "Vijayapura Bus Stand",
+          "sequence": 4,
+          "distanceFromOriginKm": 530.0,
+          "avgTravelTimeFromPrevMinutes": 180,
+          "lat": 16.8302,
+          "lng": 75.71
+        }
       }
     },
     "route_019": {
@@ -257,11 +873,46 @@
       "destination": "Bengaluru",
       "isActive": true,
       "stops": {
-        "stop_01": { "name": "Mangaluru Bus Stand", "sequence": 1, "distanceFromOriginKm": 0, "avgTravelTimeFromPrevMinutes": 0, "lat": 12.8698, "lng": 74.8431 },
-        "stop_02": { "name": "Sakleshpur", "sequence": 2, "distanceFromOriginKm": 100.0, "avgTravelTimeFromPrevMinutes": 120, "lat": 12.9441, "lng": 75.7891 },
-        "stop_03": { "name": "Hassan", "sequence": 3, "distanceFromOriginKm": 175.0, "avgTravelTimeFromPrevMinutes": 90, "lat": 13.0068, "lng": 76.1003 },
-        "stop_04": { "name": "Channarayapatna", "sequence": 4, "distanceFromOriginKm": 215.0, "avgTravelTimeFromPrevMinutes": 50, "lat": 12.9023, "lng": 76.3871 },
-        "stop_05": { "name": "Majestic Bus Stand", "sequence": 5, "distanceFromOriginKm": 350.0, "avgTravelTimeFromPrevMinutes": 160, "lat": 12.9767, "lng": 77.5713 }
+        "stop_01": {
+          "name": "Mangaluru Bus Stand",
+          "sequence": 1,
+          "distanceFromOriginKm": 0,
+          "avgTravelTimeFromPrevMinutes": 0,
+          "lat": 12.8698,
+          "lng": 74.8431
+        },
+        "stop_02": {
+          "name": "Sakleshpur",
+          "sequence": 2,
+          "distanceFromOriginKm": 100.0,
+          "avgTravelTimeFromPrevMinutes": 120,
+          "lat": 12.9441,
+          "lng": 75.7891
+        },
+        "stop_03": {
+          "name": "Hassan",
+          "sequence": 3,
+          "distanceFromOriginKm": 175.0,
+          "avgTravelTimeFromPrevMinutes": 90,
+          "lat": 13.0068,
+          "lng": 76.1003
+        },
+        "stop_04": {
+          "name": "Channarayapatna",
+          "sequence": 4,
+          "distanceFromOriginKm": 215.0,
+          "avgTravelTimeFromPrevMinutes": 50,
+          "lat": 12.9023,
+          "lng": 76.3871
+        },
+        "stop_05": {
+          "name": "Majestic Bus Stand",
+          "sequence": 5,
+          "distanceFromOriginKm": 350.0,
+          "avgTravelTimeFromPrevMinutes": 160,
+          "lat": 12.9767,
+          "lng": 77.5713
+        }
       }
     },
     "route_020": {
@@ -271,12 +922,54 @@
       "destination": "Bengaluru",
       "isActive": true,
       "stops": {
-        "stop_01": { "name": "Mysuru Bus Stand", "sequence": 1, "distanceFromOriginKm": 0, "avgTravelTimeFromPrevMinutes": 0, "lat": 12.3103, "lng": 76.6586 },
-        "stop_02": { "name": "Mandya", "sequence": 2, "distanceFromOriginKm": 40.0, "avgTravelTimeFromPrevMinutes": 45, "lat": 12.5218, "lng": 76.8956 },
-        "stop_03": { "name": "Maddur", "sequence": 3, "distanceFromOriginKm": 60.0, "avgTravelTimeFromPrevMinutes": 25, "lat": 12.5838, "lng": 77.0440 },
-        "stop_04": { "name": "Channapatna", "sequence": 4, "distanceFromOriginKm": 80.0, "avgTravelTimeFromPrevMinutes": 25, "lat": 12.6506, "lng": 77.2078 },
-        "stop_05": { "name": "Ramanagara", "sequence": 5, "distanceFromOriginKm": 95.0, "avgTravelTimeFromPrevMinutes": 20, "lat": 12.7152, "lng": 77.2799 },
-        "stop_06": { "name": "Majestic Bus Stand", "sequence": 6, "distanceFromOriginKm": 140.0, "avgTravelTimeFromPrevMinutes": 55, "lat": 12.9767, "lng": 77.5713 }
+        "stop_01": {
+          "name": "Mysuru Bus Stand",
+          "sequence": 1,
+          "distanceFromOriginKm": 0,
+          "avgTravelTimeFromPrevMinutes": 0,
+          "lat": 12.3103,
+          "lng": 76.6586
+        },
+        "stop_02": {
+          "name": "Mandya",
+          "sequence": 2,
+          "distanceFromOriginKm": 40.0,
+          "avgTravelTimeFromPrevMinutes": 45,
+          "lat": 12.5218,
+          "lng": 76.8956
+        },
+        "stop_03": {
+          "name": "Maddur",
+          "sequence": 3,
+          "distanceFromOriginKm": 60.0,
+          "avgTravelTimeFromPrevMinutes": 25,
+          "lat": 12.5838,
+          "lng": 77.044
+        },
+        "stop_04": {
+          "name": "Channapatna",
+          "sequence": 4,
+          "distanceFromOriginKm": 80.0,
+          "avgTravelTimeFromPrevMinutes": 25,
+          "lat": 12.6506,
+          "lng": 77.2078
+        },
+        "stop_05": {
+          "name": "Ramanagara",
+          "sequence": 5,
+          "distanceFromOriginKm": 95.0,
+          "avgTravelTimeFromPrevMinutes": 20,
+          "lat": 12.7152,
+          "lng": 77.2799
+        },
+        "stop_06": {
+          "name": "Majestic Bus Stand",
+          "sequence": 6,
+          "distanceFromOriginKm": 140.0,
+          "avgTravelTimeFromPrevMinutes": 55,
+          "lat": 12.9767,
+          "lng": 77.5713
+        }
       }
     },
     "route_021": {
@@ -286,12 +979,54 @@
       "destination": "Bengaluru",
       "isActive": true,
       "stops": {
-        "stop_01": { "name": "Hubli Bus Stand", "sequence": 1, "distanceFromOriginKm": 0, "avgTravelTimeFromPrevMinutes": 0, "lat": 15.3647, "lng": 75.1239 },
-        "stop_02": { "name": "Haveri", "sequence": 2, "distanceFromOriginKm": 60.0, "avgTravelTimeFromPrevMinutes": 75, "lat": 14.7939, "lng": 75.4041 },
-        "stop_03": { "name": "Davanagere", "sequence": 3, "distanceFromOriginKm": 100.0, "avgTravelTimeFromPrevMinutes": 55, "lat": 14.4644, "lng": 75.9218 },
-        "stop_04": { "name": "Chitradurga", "sequence": 4, "distanceFromOriginKm": 160.0, "avgTravelTimeFromPrevMinutes": 70, "lat": 14.2251, "lng": 76.3987 },
-        "stop_05": { "name": "Tumkur", "sequence": 5, "distanceFromOriginKm": 250.0, "avgTravelTimeFromPrevMinutes": 100, "lat": 13.3379, "lng": 77.1031 },
-        "stop_06": { "name": "Majestic Bus Stand", "sequence": 6, "distanceFromOriginKm": 420.0, "avgTravelTimeFromPrevMinutes": 120, "lat": 12.9767, "lng": 77.5713 }
+        "stop_01": {
+          "name": "Hubli Bus Stand",
+          "sequence": 1,
+          "distanceFromOriginKm": 0,
+          "avgTravelTimeFromPrevMinutes": 0,
+          "lat": 15.3647,
+          "lng": 75.1239
+        },
+        "stop_02": {
+          "name": "Haveri",
+          "sequence": 2,
+          "distanceFromOriginKm": 60.0,
+          "avgTravelTimeFromPrevMinutes": 75,
+          "lat": 14.7939,
+          "lng": 75.4041
+        },
+        "stop_03": {
+          "name": "Davanagere",
+          "sequence": 3,
+          "distanceFromOriginKm": 100.0,
+          "avgTravelTimeFromPrevMinutes": 55,
+          "lat": 14.4644,
+          "lng": 75.9218
+        },
+        "stop_04": {
+          "name": "Chitradurga",
+          "sequence": 4,
+          "distanceFromOriginKm": 160.0,
+          "avgTravelTimeFromPrevMinutes": 70,
+          "lat": 14.2251,
+          "lng": 76.3987
+        },
+        "stop_05": {
+          "name": "Tumkur",
+          "sequence": 5,
+          "distanceFromOriginKm": 250.0,
+          "avgTravelTimeFromPrevMinutes": 100,
+          "lat": 13.3379,
+          "lng": 77.1031
+        },
+        "stop_06": {
+          "name": "Majestic Bus Stand",
+          "sequence": 6,
+          "distanceFromOriginKm": 420.0,
+          "avgTravelTimeFromPrevMinutes": 120,
+          "lat": 12.9767,
+          "lng": 77.5713
+        }
       }
     },
     "route_022": {
@@ -301,11 +1036,46 @@
       "destination": "Mysuru",
       "isActive": true,
       "stops": {
-        "stop_01": { "name": "Mangaluru Bus Stand", "sequence": 1, "distanceFromOriginKm": 0, "avgTravelTimeFromPrevMinutes": 0, "lat": 12.8698, "lng": 74.8431 },
-        "stop_02": { "name": "Uppinangady", "sequence": 2, "distanceFromOriginKm": 60.0, "avgTravelTimeFromPrevMinutes": 80, "lat": 12.8421, "lng": 75.4821 },
-        "stop_03": { "name": "Madikeri", "sequence": 3, "distanceFromOriginKm": 135.0, "avgTravelTimeFromPrevMinutes": 100, "lat": 12.4244, "lng": 75.7382 },
-        "stop_04": { "name": "Kushalnagar", "sequence": 4, "distanceFromOriginKm": 160.0, "avgTravelTimeFromPrevMinutes": 40, "lat": 12.4582, "lng": 75.9612 },
-        "stop_05": { "name": "Mysuru Bus Stand", "sequence": 5, "distanceFromOriginKm": 240.0, "avgTravelTimeFromPrevMinutes": 100, "lat": 12.3103, "lng": 76.6586 }
+        "stop_01": {
+          "name": "Mangaluru Bus Stand",
+          "sequence": 1,
+          "distanceFromOriginKm": 0,
+          "avgTravelTimeFromPrevMinutes": 0,
+          "lat": 12.8698,
+          "lng": 74.8431
+        },
+        "stop_02": {
+          "name": "Uppinangady",
+          "sequence": 2,
+          "distanceFromOriginKm": 60.0,
+          "avgTravelTimeFromPrevMinutes": 80,
+          "lat": 12.8421,
+          "lng": 75.4821
+        },
+        "stop_03": {
+          "name": "Madikeri",
+          "sequence": 3,
+          "distanceFromOriginKm": 135.0,
+          "avgTravelTimeFromPrevMinutes": 100,
+          "lat": 12.4244,
+          "lng": 75.7382
+        },
+        "stop_04": {
+          "name": "Kushalnagar",
+          "sequence": 4,
+          "distanceFromOriginKm": 160.0,
+          "avgTravelTimeFromPrevMinutes": 40,
+          "lat": 12.4582,
+          "lng": 75.9612
+        },
+        "stop_05": {
+          "name": "Mysuru Bus Stand",
+          "sequence": 5,
+          "distanceFromOriginKm": 240.0,
+          "avgTravelTimeFromPrevMinutes": 100,
+          "lat": 12.3103,
+          "lng": 76.6586
+        }
       }
     },
     "route_023": {
@@ -315,10 +1085,38 @@
       "destination": "Chitradurga",
       "isActive": true,
       "stops": {
-        "stop_01": { "name": "Majestic Bus Stand", "sequence": 1, "distanceFromOriginKm": 0, "avgTravelTimeFromPrevMinutes": 0, "lat": 12.9767, "lng": 77.5713 },
-        "stop_02": { "name": "Tumkur", "sequence": 2, "distanceFromOriginKm": 72.0, "avgTravelTimeFromPrevMinutes": 90, "lat": 13.3379, "lng": 77.1031 },
-        "stop_03": { "name": "Gubbi", "sequence": 3, "distanceFromOriginKm": 100.0, "avgTravelTimeFromPrevMinutes": 40, "lat": 13.3121, "lng": 76.9421 },
-        "stop_04": { "name": "Chitradurga Bus Stand", "sequence": 4, "distanceFromOriginKm": 201.0, "avgTravelTimeFromPrevMinutes": 110, "lat": 14.2251, "lng": 76.3987 }
+        "stop_01": {
+          "name": "Majestic Bus Stand",
+          "sequence": 1,
+          "distanceFromOriginKm": 0,
+          "avgTravelTimeFromPrevMinutes": 0,
+          "lat": 12.9767,
+          "lng": 77.5713
+        },
+        "stop_02": {
+          "name": "Tumkur",
+          "sequence": 2,
+          "distanceFromOriginKm": 72.0,
+          "avgTravelTimeFromPrevMinutes": 90,
+          "lat": 13.3379,
+          "lng": 77.1031
+        },
+        "stop_03": {
+          "name": "Gubbi",
+          "sequence": 3,
+          "distanceFromOriginKm": 100.0,
+          "avgTravelTimeFromPrevMinutes": 40,
+          "lat": 13.3121,
+          "lng": 76.9421
+        },
+        "stop_04": {
+          "name": "Chitradurga Bus Stand",
+          "sequence": 4,
+          "distanceFromOriginKm": 201.0,
+          "avgTravelTimeFromPrevMinutes": 110,
+          "lat": 14.2251,
+          "lng": 76.3987
+        }
       }
     },
     "route_024": {
@@ -328,11 +1126,46 @@
       "destination": "Raichur",
       "isActive": true,
       "stops": {
-        "stop_01": { "name": "Majestic Bus Stand", "sequence": 1, "distanceFromOriginKm": 0, "avgTravelTimeFromPrevMinutes": 0, "lat": 12.9767, "lng": 77.5713 },
-        "stop_02": { "name": "Yelahanka", "sequence": 2, "distanceFromOriginKm": 15.0, "avgTravelTimeFromPrevMinutes": 30, "lat": 13.1007, "lng": 77.5963 },
-        "stop_03": { "name": "Doddaballapur", "sequence": 3, "distanceFromOriginKm": 40.0, "avgTravelTimeFromPrevMinutes": 40, "lat": 13.2951, "lng": 77.5373 },
-        "stop_04": { "name": "Gauribidanur", "sequence": 4, "distanceFromOriginKm": 90.0, "avgTravelTimeFromPrevMinutes": 60, "lat": 13.6131, "lng": 77.5173 },
-        "stop_05": { "name": "Raichur Bus Stand", "sequence": 5, "distanceFromOriginKm": 410.0, "avgTravelTimeFromPrevMinutes": 240, "lat": 16.2120, "lng": 77.3439 }
+        "stop_01": {
+          "name": "Majestic Bus Stand",
+          "sequence": 1,
+          "distanceFromOriginKm": 0,
+          "avgTravelTimeFromPrevMinutes": 0,
+          "lat": 12.9767,
+          "lng": 77.5713
+        },
+        "stop_02": {
+          "name": "Yelahanka",
+          "sequence": 2,
+          "distanceFromOriginKm": 15.0,
+          "avgTravelTimeFromPrevMinutes": 30,
+          "lat": 13.1007,
+          "lng": 77.5963
+        },
+        "stop_03": {
+          "name": "Doddaballapur",
+          "sequence": 3,
+          "distanceFromOriginKm": 40.0,
+          "avgTravelTimeFromPrevMinutes": 40,
+          "lat": 13.2951,
+          "lng": 77.5373
+        },
+        "stop_04": {
+          "name": "Gauribidanur",
+          "sequence": 4,
+          "distanceFromOriginKm": 90.0,
+          "avgTravelTimeFromPrevMinutes": 60,
+          "lat": 13.6131,
+          "lng": 77.5173
+        },
+        "stop_05": {
+          "name": "Raichur Bus Stand",
+          "sequence": 5,
+          "distanceFromOriginKm": 410.0,
+          "avgTravelTimeFromPrevMinutes": 240,
+          "lat": 16.212,
+          "lng": 77.3439
+        }
       }
     },
     "route_025": {
@@ -342,11 +1175,46 @@
       "destination": "Belagavi",
       "isActive": true,
       "stops": {
-        "stop_01": { "name": "Majestic Bus Stand", "sequence": 1, "distanceFromOriginKm": 0, "avgTravelTimeFromPrevMinutes": 0, "lat": 12.9767, "lng": 77.5713 },
-        "stop_02": { "name": "Tumkur", "sequence": 2, "distanceFromOriginKm": 72.0, "avgTravelTimeFromPrevMinutes": 90, "lat": 13.3379, "lng": 77.1031 },
-        "stop_03": { "name": "Hubli", "sequence": 3, "distanceFromOriginKm": 290.0, "avgTravelTimeFromPrevMinutes": 240, "lat": 15.3647, "lng": 75.1239 },
-        "stop_04": { "name": "Dharwad", "sequence": 4, "distanceFromOriginKm": 310.0, "avgTravelTimeFromPrevMinutes": 25, "lat": 15.4589, "lng": 75.0078 },
-        "stop_05": { "name": "Belagavi Bus Stand", "sequence": 5, "distanceFromOriginKm": 500.0, "avgTravelTimeFromPrevMinutes": 180, "lat": 15.8497, "lng": 74.4977 }
+        "stop_01": {
+          "name": "Majestic Bus Stand",
+          "sequence": 1,
+          "distanceFromOriginKm": 0,
+          "avgTravelTimeFromPrevMinutes": 0,
+          "lat": 12.9767,
+          "lng": 77.5713
+        },
+        "stop_02": {
+          "name": "Tumkur",
+          "sequence": 2,
+          "distanceFromOriginKm": 72.0,
+          "avgTravelTimeFromPrevMinutes": 90,
+          "lat": 13.3379,
+          "lng": 77.1031
+        },
+        "stop_03": {
+          "name": "Hubli",
+          "sequence": 3,
+          "distanceFromOriginKm": 290.0,
+          "avgTravelTimeFromPrevMinutes": 240,
+          "lat": 15.3647,
+          "lng": 75.1239
+        },
+        "stop_04": {
+          "name": "Dharwad",
+          "sequence": 4,
+          "distanceFromOriginKm": 310.0,
+          "avgTravelTimeFromPrevMinutes": 25,
+          "lat": 15.4589,
+          "lng": 75.0078
+        },
+        "stop_05": {
+          "name": "Belagavi Bus Stand",
+          "sequence": 5,
+          "distanceFromOriginKm": 500.0,
+          "avgTravelTimeFromPrevMinutes": 180,
+          "lat": 15.8497,
+          "lng": 74.4977
+        }
       }
     },
     "route_026": {
@@ -356,11 +1224,46 @@
       "destination": "Mangaluru",
       "isActive": true,
       "stops": {
-        "stop_01": { "name": "Shivamogga Bus Stand", "sequence": 1, "distanceFromOriginKm": 0, "avgTravelTimeFromPrevMinutes": 0, "lat": 13.9299, "lng": 75.5681 },
-        "stop_02": { "name": "Thirthahalli", "sequence": 2, "distanceFromOriginKm": 50.0, "avgTravelTimeFromPrevMinutes": 70, "lat": 13.6871, "lng": 75.2421 },
-        "stop_03": { "name": "Agumbe", "sequence": 3, "distanceFromOriginKm": 80.0, "avgTravelTimeFromPrevMinutes": 50, "lat": 13.5021, "lng": 75.0921 },
-        "stop_04": { "name": "Udupi", "sequence": 4, "distanceFromOriginKm": 130.0, "avgTravelTimeFromPrevMinutes": 70, "lat": 13.3409, "lng": 74.7421 },
-        "stop_05": { "name": "Mangaluru Bus Stand", "sequence": 5, "distanceFromOriginKm": 190.0, "avgTravelTimeFromPrevMinutes": 75, "lat": 12.8698, "lng": 74.8431 }
+        "stop_01": {
+          "name": "Shivamogga Bus Stand",
+          "sequence": 1,
+          "distanceFromOriginKm": 0,
+          "avgTravelTimeFromPrevMinutes": 0,
+          "lat": 13.9299,
+          "lng": 75.5681
+        },
+        "stop_02": {
+          "name": "Thirthahalli",
+          "sequence": 2,
+          "distanceFromOriginKm": 50.0,
+          "avgTravelTimeFromPrevMinutes": 70,
+          "lat": 13.6871,
+          "lng": 75.2421
+        },
+        "stop_03": {
+          "name": "Agumbe",
+          "sequence": 3,
+          "distanceFromOriginKm": 80.0,
+          "avgTravelTimeFromPrevMinutes": 50,
+          "lat": 13.5021,
+          "lng": 75.0921
+        },
+        "stop_04": {
+          "name": "Udupi",
+          "sequence": 4,
+          "distanceFromOriginKm": 130.0,
+          "avgTravelTimeFromPrevMinutes": 70,
+          "lat": 13.3409,
+          "lng": 74.7421
+        },
+        "stop_05": {
+          "name": "Mangaluru Bus Stand",
+          "sequence": 5,
+          "distanceFromOriginKm": 190.0,
+          "avgTravelTimeFromPrevMinutes": 75,
+          "lat": 12.8698,
+          "lng": 74.8431
+        }
       }
     },
     "route_027": {
@@ -370,9 +1273,30 @@
       "destination": "Gundlupet",
       "isActive": true,
       "stops": {
-        "stop_01": { "name": "Mysuru Bus Stand", "sequence": 1, "distanceFromOriginKm": 0, "avgTravelTimeFromPrevMinutes": 0, "lat": 12.3103, "lng": 76.6586 },
-        "stop_02": { "name": "Nanjangud", "sequence": 2, "distanceFromOriginKm": 23.0, "avgTravelTimeFromPrevMinutes": 30, "lat": 12.1194, "lng": 76.6781 },
-        "stop_03": { "name": "Gundlupet", "sequence": 3, "distanceFromOriginKm": 55.0, "avgTravelTimeFromPrevMinutes": 50, "lat": 11.8094, "lng": 76.6871 }
+        "stop_01": {
+          "name": "Mysuru Bus Stand",
+          "sequence": 1,
+          "distanceFromOriginKm": 0,
+          "avgTravelTimeFromPrevMinutes": 0,
+          "lat": 12.3103,
+          "lng": 76.6586
+        },
+        "stop_02": {
+          "name": "Nanjangud",
+          "sequence": 2,
+          "distanceFromOriginKm": 23.0,
+          "avgTravelTimeFromPrevMinutes": 30,
+          "lat": 12.1194,
+          "lng": 76.6781
+        },
+        "stop_03": {
+          "name": "Gundlupet",
+          "sequence": 3,
+          "distanceFromOriginKm": 55.0,
+          "avgTravelTimeFromPrevMinutes": 50,
+          "lat": 11.8094,
+          "lng": 76.6871
+        }
       }
     },
     "route_028": {
@@ -382,11 +1306,46 @@
       "destination": "Mangaluru",
       "isActive": true,
       "stops": {
-        "stop_01": { "name": "Majestic Bus Stand", "sequence": 1, "distanceFromOriginKm": 0, "avgTravelTimeFromPrevMinutes": 0, "lat": 12.9767, "lng": 77.5713 },
-        "stop_02": { "name": "Nelamangala", "sequence": 2, "distanceFromOriginKm": 28.0, "avgTravelTimeFromPrevMinutes": 40, "lat": 13.1021, "lng": 77.3912 },
-        "stop_03": { "name": "Hassan", "sequence": 3, "distanceFromOriginKm": 187.0, "avgTravelTimeFromPrevMinutes": 180, "lat": 13.0068, "lng": 76.1003 },
-        "stop_04": { "name": "Sakleshpur", "sequence": 4, "distanceFromOriginKm": 230.0, "avgTravelTimeFromPrevMinutes": 60, "lat": 12.9441, "lng": 75.7891 },
-        "stop_05": { "name": "Mangaluru Bus Stand", "sequence": 5, "distanceFromOriginKm": 352.0, "avgTravelTimeFromPrevMinutes": 150, "lat": 12.8698, "lng": 74.8431 }
+        "stop_01": {
+          "name": "Majestic Bus Stand",
+          "sequence": 1,
+          "distanceFromOriginKm": 0,
+          "avgTravelTimeFromPrevMinutes": 0,
+          "lat": 12.9767,
+          "lng": 77.5713
+        },
+        "stop_02": {
+          "name": "Nelamangala",
+          "sequence": 2,
+          "distanceFromOriginKm": 28.0,
+          "avgTravelTimeFromPrevMinutes": 40,
+          "lat": 13.1021,
+          "lng": 77.3912
+        },
+        "stop_03": {
+          "name": "Hassan",
+          "sequence": 3,
+          "distanceFromOriginKm": 187.0,
+          "avgTravelTimeFromPrevMinutes": 180,
+          "lat": 13.0068,
+          "lng": 76.1003
+        },
+        "stop_04": {
+          "name": "Sakleshpur",
+          "sequence": 4,
+          "distanceFromOriginKm": 230.0,
+          "avgTravelTimeFromPrevMinutes": 60,
+          "lat": 12.9441,
+          "lng": 75.7891
+        },
+        "stop_05": {
+          "name": "Mangaluru Bus Stand",
+          "sequence": 5,
+          "distanceFromOriginKm": 352.0,
+          "avgTravelTimeFromPrevMinutes": 150,
+          "lat": 12.8698,
+          "lng": 74.8431
+        }
       }
     },
     "route_029": {
@@ -396,10 +1355,38 @@
       "destination": "Udupi",
       "isActive": true,
       "stops": {
-        "stop_01": { "name": "Majestic Bus Stand", "sequence": 1, "distanceFromOriginKm": 0, "avgTravelTimeFromPrevMinutes": 0, "lat": 12.9767, "lng": 77.5713 },
-        "stop_02": { "name": "Hassan", "sequence": 2, "distanceFromOriginKm": 187.0, "avgTravelTimeFromPrevMinutes": 200, "lat": 13.0068, "lng": 76.1003 },
-        "stop_03": { "name": "Sakleshpur", "sequence": 3, "distanceFromOriginKm": 230.0, "avgTravelTimeFromPrevMinutes": 60, "lat": 12.9441, "lng": 75.7891 },
-        "stop_04": { "name": "Udupi Bus Stand", "sequence": 4, "distanceFromOriginKm": 400.0, "avgTravelTimeFromPrevMinutes": 150, "lat": 13.3409, "lng": 74.7421 }
+        "stop_01": {
+          "name": "Majestic Bus Stand",
+          "sequence": 1,
+          "distanceFromOriginKm": 0,
+          "avgTravelTimeFromPrevMinutes": 0,
+          "lat": 12.9767,
+          "lng": 77.5713
+        },
+        "stop_02": {
+          "name": "Hassan",
+          "sequence": 2,
+          "distanceFromOriginKm": 187.0,
+          "avgTravelTimeFromPrevMinutes": 200,
+          "lat": 13.0068,
+          "lng": 76.1003
+        },
+        "stop_03": {
+          "name": "Sakleshpur",
+          "sequence": 3,
+          "distanceFromOriginKm": 230.0,
+          "avgTravelTimeFromPrevMinutes": 60,
+          "lat": 12.9441,
+          "lng": 75.7891
+        },
+        "stop_04": {
+          "name": "Udupi Bus Stand",
+          "sequence": 4,
+          "distanceFromOriginKm": 400.0,
+          "avgTravelTimeFromPrevMinutes": 150,
+          "lat": 13.3409,
+          "lng": 74.7421
+        }
       }
     },
     "route_030": {
@@ -409,10 +1396,38 @@
       "destination": "Madikeri",
       "isActive": true,
       "stops": {
-        "stop_01": { "name": "Majestic Bus Stand", "sequence": 1, "distanceFromOriginKm": 0, "avgTravelTimeFromPrevMinutes": 0, "lat": 12.9767, "lng": 77.5713 },
-        "stop_02": { "name": "Mysuru", "sequence": 2, "distanceFromOriginKm": 140.0, "avgTravelTimeFromPrevMinutes": 150, "lat": 12.3103, "lng": 76.6586 },
-        "stop_03": { "name": "Kushalnagar", "sequence": 3, "distanceFromOriginKm": 220.0, "avgTravelTimeFromPrevMinutes": 100, "lat": 12.4582, "lng": 75.9612 },
-        "stop_04": { "name": "Madikeri Bus Stand", "sequence": 4, "distanceFromOriginKm": 260.0, "avgTravelTimeFromPrevMinutes": 60, "lat": 12.4244, "lng": 75.7382 }
+        "stop_01": {
+          "name": "Majestic Bus Stand",
+          "sequence": 1,
+          "distanceFromOriginKm": 0,
+          "avgTravelTimeFromPrevMinutes": 0,
+          "lat": 12.9767,
+          "lng": 77.5713
+        },
+        "stop_02": {
+          "name": "Mysuru",
+          "sequence": 2,
+          "distanceFromOriginKm": 140.0,
+          "avgTravelTimeFromPrevMinutes": 150,
+          "lat": 12.3103,
+          "lng": 76.6586
+        },
+        "stop_03": {
+          "name": "Kushalnagar",
+          "sequence": 3,
+          "distanceFromOriginKm": 220.0,
+          "avgTravelTimeFromPrevMinutes": 100,
+          "lat": 12.4582,
+          "lng": 75.9612
+        },
+        "stop_04": {
+          "name": "Madikeri Bus Stand",
+          "sequence": 4,
+          "distanceFromOriginKm": 260.0,
+          "avgTravelTimeFromPrevMinutes": 60,
+          "lat": 12.4244,
+          "lng": 75.7382
+        }
       }
     },
     "route_031": {
@@ -422,10 +1437,38 @@
       "destination": "Chitradurga",
       "isActive": true,
       "stops": {
-        "stop_01": { "name": "Tumkur Bus Stand", "sequence": 1, "distanceFromOriginKm": 0, "avgTravelTimeFromPrevMinutes": 0, "lat": 13.3379, "lng": 77.1031 },
-        "stop_02": { "name": "Gubbi", "sequence": 2, "distanceFromOriginKm": 28.0, "avgTravelTimeFromPrevMinutes": 40, "lat": 13.3121, "lng": 76.9421 },
-        "stop_03": { "name": "Tiptur", "sequence": 3, "distanceFromOriginKm": 48.0, "avgTravelTimeFromPrevMinutes": 30, "lat": 13.2634, "lng": 76.4762 },
-        "stop_04": { "name": "Chitradurga Bus Stand", "sequence": 4, "distanceFromOriginKm": 130.0, "avgTravelTimeFromPrevMinutes": 100, "lat": 14.2251, "lng": 76.3987 }
+        "stop_01": {
+          "name": "Tumkur Bus Stand",
+          "sequence": 1,
+          "distanceFromOriginKm": 0,
+          "avgTravelTimeFromPrevMinutes": 0,
+          "lat": 13.3379,
+          "lng": 77.1031
+        },
+        "stop_02": {
+          "name": "Gubbi",
+          "sequence": 2,
+          "distanceFromOriginKm": 28.0,
+          "avgTravelTimeFromPrevMinutes": 40,
+          "lat": 13.3121,
+          "lng": 76.9421
+        },
+        "stop_03": {
+          "name": "Tiptur",
+          "sequence": 3,
+          "distanceFromOriginKm": 48.0,
+          "avgTravelTimeFromPrevMinutes": 30,
+          "lat": 13.2634,
+          "lng": 76.4762
+        },
+        "stop_04": {
+          "name": "Chitradurga Bus Stand",
+          "sequence": 4,
+          "distanceFromOriginKm": 130.0,
+          "avgTravelTimeFromPrevMinutes": 100,
+          "lat": 14.2251,
+          "lng": 76.3987
+        }
       }
     },
     "route_032": {
@@ -435,10 +1478,38 @@
       "destination": "Shivamogga",
       "isActive": true,
       "stops": {
-        "stop_01": { "name": "Davanagere Bus Stand", "sequence": 1, "distanceFromOriginKm": 0, "avgTravelTimeFromPrevMinutes": 0, "lat": 14.4644, "lng": 75.9218 },
-        "stop_02": { "name": "Harihar", "sequence": 2, "distanceFromOriginKm": 20.0, "avgTravelTimeFromPrevMinutes": 30, "lat": 14.5212, "lng": 75.7241 },
-        "stop_03": { "name": "Ranebennur", "sequence": 3, "distanceFromOriginKm": 55.0, "avgTravelTimeFromPrevMinutes": 50, "lat": 14.6221, "lng": 75.6341 },
-        "stop_04": { "name": "Shivamogga Bus Stand", "sequence": 4, "distanceFromOriginKm": 85.0, "avgTravelTimeFromPrevMinutes": 45, "lat": 13.9299, "lng": 75.5681 }
+        "stop_01": {
+          "name": "Davanagere Bus Stand",
+          "sequence": 1,
+          "distanceFromOriginKm": 0,
+          "avgTravelTimeFromPrevMinutes": 0,
+          "lat": 14.4644,
+          "lng": 75.9218
+        },
+        "stop_02": {
+          "name": "Harihar",
+          "sequence": 2,
+          "distanceFromOriginKm": 20.0,
+          "avgTravelTimeFromPrevMinutes": 30,
+          "lat": 14.5212,
+          "lng": 75.7241
+        },
+        "stop_03": {
+          "name": "Ranebennur",
+          "sequence": 3,
+          "distanceFromOriginKm": 55.0,
+          "avgTravelTimeFromPrevMinutes": 50,
+          "lat": 14.6221,
+          "lng": 75.6341
+        },
+        "stop_04": {
+          "name": "Shivamogga Bus Stand",
+          "sequence": 4,
+          "distanceFromOriginKm": 85.0,
+          "avgTravelTimeFromPrevMinutes": 45,
+          "lat": 13.9299,
+          "lng": 75.5681
+        }
       }
     },
     "route_033": {
@@ -448,10 +1519,38 @@
       "destination": "Chikkamagaluru",
       "isActive": true,
       "stops": {
-        "stop_01": { "name": "Majestic Bus Stand", "sequence": 1, "distanceFromOriginKm": 0, "avgTravelTimeFromPrevMinutes": 0, "lat": 12.9767, "lng": 77.5713 },
-        "stop_02": { "name": "Hassan", "sequence": 2, "distanceFromOriginKm": 187.0, "avgTravelTimeFromPrevMinutes": 200, "lat": 13.0068, "lng": 76.1003 },
-        "stop_03": { "name": "Belur", "sequence": 3, "distanceFromOriginKm": 210.0, "avgTravelTimeFromPrevMinutes": 30, "lat": 13.1641, "lng": 75.8641 },
-        "stop_04": { "name": "Chikkamagaluru Bus Stand", "sequence": 4, "distanceFromOriginKm": 245.0, "avgTravelTimeFromPrevMinutes": 50, "lat": 13.3161, "lng": 75.7720 }
+        "stop_01": {
+          "name": "Majestic Bus Stand",
+          "sequence": 1,
+          "distanceFromOriginKm": 0,
+          "avgTravelTimeFromPrevMinutes": 0,
+          "lat": 12.9767,
+          "lng": 77.5713
+        },
+        "stop_02": {
+          "name": "Hassan",
+          "sequence": 2,
+          "distanceFromOriginKm": 187.0,
+          "avgTravelTimeFromPrevMinutes": 200,
+          "lat": 13.0068,
+          "lng": 76.1003
+        },
+        "stop_03": {
+          "name": "Belur",
+          "sequence": 3,
+          "distanceFromOriginKm": 210.0,
+          "avgTravelTimeFromPrevMinutes": 30,
+          "lat": 13.1641,
+          "lng": 75.8641
+        },
+        "stop_04": {
+          "name": "Chikkamagaluru Bus Stand",
+          "sequence": 4,
+          "distanceFromOriginKm": 245.0,
+          "avgTravelTimeFromPrevMinutes": 50,
+          "lat": 13.3161,
+          "lng": 75.772
+        }
       }
     },
     "route_034": {
@@ -461,10 +1560,38 @@
       "destination": "Chamarajanagar",
       "isActive": true,
       "stops": {
-        "stop_01": { "name": "Mysuru Bus Stand", "sequence": 1, "distanceFromOriginKm": 0, "avgTravelTimeFromPrevMinutes": 0, "lat": 12.3103, "lng": 76.6586 },
-        "stop_02": { "name": "Nanjangud", "sequence": 2, "distanceFromOriginKm": 23.0, "avgTravelTimeFromPrevMinutes": 30, "lat": 12.1194, "lng": 76.6781 },
-        "stop_03": { "name": "Gundlupet", "sequence": 3, "distanceFromOriginKm": 55.0, "avgTravelTimeFromPrevMinutes": 50, "lat": 11.8094, "lng": 76.6871 },
-        "stop_04": { "name": "Chamarajanagar", "sequence": 4, "distanceFromOriginKm": 75.0, "avgTravelTimeFromPrevMinutes": 30, "lat": 11.9241, "lng": 76.9441 }
+        "stop_01": {
+          "name": "Mysuru Bus Stand",
+          "sequence": 1,
+          "distanceFromOriginKm": 0,
+          "avgTravelTimeFromPrevMinutes": 0,
+          "lat": 12.3103,
+          "lng": 76.6586
+        },
+        "stop_02": {
+          "name": "Nanjangud",
+          "sequence": 2,
+          "distanceFromOriginKm": 23.0,
+          "avgTravelTimeFromPrevMinutes": 30,
+          "lat": 12.1194,
+          "lng": 76.6781
+        },
+        "stop_03": {
+          "name": "Gundlupet",
+          "sequence": 3,
+          "distanceFromOriginKm": 55.0,
+          "avgTravelTimeFromPrevMinutes": 50,
+          "lat": 11.8094,
+          "lng": 76.6871
+        },
+        "stop_04": {
+          "name": "Chamarajanagar",
+          "sequence": 4,
+          "distanceFromOriginKm": 75.0,
+          "avgTravelTimeFromPrevMinutes": 30,
+          "lat": 11.9241,
+          "lng": 76.9441
+        }
       }
     },
     "route_035": {
@@ -474,10 +1601,38 @@
       "destination": "Hosur",
       "isActive": true,
       "stops": {
-        "stop_01": { "name": "Majestic Bus Stand", "sequence": 1, "distanceFromOriginKm": 0, "avgTravelTimeFromPrevMinutes": 0, "lat": 12.9767, "lng": 77.5713 },
-        "stop_02": { "name": "Electronic City", "sequence": 2, "distanceFromOriginKm": 18.0, "avgTravelTimeFromPrevMinutes": 35, "lat": 12.8452, "lng": 77.6602 },
-        "stop_03": { "name": "Attibele", "sequence": 3, "distanceFromOriginKm": 30.0, "avgTravelTimeFromPrevMinutes": 25, "lat": 12.7787, "lng": 77.7627 },
-        "stop_04": { "name": "Hosur Bus Stand", "sequence": 4, "distanceFromOriginKm": 40.0, "avgTravelTimeFromPrevMinutes": 20, "lat": 12.7409, "lng": 77.8253 }
+        "stop_01": {
+          "name": "Majestic Bus Stand",
+          "sequence": 1,
+          "distanceFromOriginKm": 0,
+          "avgTravelTimeFromPrevMinutes": 0,
+          "lat": 12.9767,
+          "lng": 77.5713
+        },
+        "stop_02": {
+          "name": "Electronic City",
+          "sequence": 2,
+          "distanceFromOriginKm": 18.0,
+          "avgTravelTimeFromPrevMinutes": 35,
+          "lat": 12.8452,
+          "lng": 77.6602
+        },
+        "stop_03": {
+          "name": "Attibele",
+          "sequence": 3,
+          "distanceFromOriginKm": 30.0,
+          "avgTravelTimeFromPrevMinutes": 25,
+          "lat": 12.7787,
+          "lng": 77.7627
+        },
+        "stop_04": {
+          "name": "Hosur Bus Stand",
+          "sequence": 4,
+          "distanceFromOriginKm": 40.0,
+          "avgTravelTimeFromPrevMinutes": 20,
+          "lat": 12.7409,
+          "lng": 77.8253
+        }
       }
     },
     "route_036": {
@@ -487,10 +1642,38 @@
       "destination": "Chikballapur",
       "isActive": true,
       "stops": {
-        "stop_01": { "name": "Majestic Bus Stand", "sequence": 1, "distanceFromOriginKm": 0, "avgTravelTimeFromPrevMinutes": 0, "lat": 12.9767, "lng": 77.5713 },
-        "stop_02": { "name": "Yelahanka", "sequence": 2, "distanceFromOriginKm": 15.0, "avgTravelTimeFromPrevMinutes": 30, "lat": 13.1007, "lng": 77.5963 },
-        "stop_03": { "name": "Devanahalli", "sequence": 3, "distanceFromOriginKm": 35.0, "avgTravelTimeFromPrevMinutes": 35, "lat": 13.2473, "lng": 77.7126 },
-        "stop_04": { "name": "Chikballapur Bus Stand", "sequence": 4, "distanceFromOriginKm": 60.0, "avgTravelTimeFromPrevMinutes": 40, "lat": 13.4357, "lng": 77.7270 }
+        "stop_01": {
+          "name": "Majestic Bus Stand",
+          "sequence": 1,
+          "distanceFromOriginKm": 0,
+          "avgTravelTimeFromPrevMinutes": 0,
+          "lat": 12.9767,
+          "lng": 77.5713
+        },
+        "stop_02": {
+          "name": "Yelahanka",
+          "sequence": 2,
+          "distanceFromOriginKm": 15.0,
+          "avgTravelTimeFromPrevMinutes": 30,
+          "lat": 13.1007,
+          "lng": 77.5963
+        },
+        "stop_03": {
+          "name": "Devanahalli",
+          "sequence": 3,
+          "distanceFromOriginKm": 35.0,
+          "avgTravelTimeFromPrevMinutes": 35,
+          "lat": 13.2473,
+          "lng": 77.7126
+        },
+        "stop_04": {
+          "name": "Chikballapur Bus Stand",
+          "sequence": 4,
+          "distanceFromOriginKm": 60.0,
+          "avgTravelTimeFromPrevMinutes": 40,
+          "lat": 13.4357,
+          "lng": 77.727
+        }
       }
     },
     "route_037": {
@@ -500,9 +1683,30 @@
       "destination": "Doddaballapur",
       "isActive": true,
       "stops": {
-        "stop_01": { "name": "Majestic Bus Stand", "sequence": 1, "distanceFromOriginKm": 0, "avgTravelTimeFromPrevMinutes": 0, "lat": 12.9767, "lng": 77.5713 },
-        "stop_02": { "name": "Yelahanka", "sequence": 2, "distanceFromOriginKm": 15.0, "avgTravelTimeFromPrevMinutes": 30, "lat": 13.1007, "lng": 77.5963 },
-        "stop_03": { "name": "Doddaballapur Bus Stand", "sequence": 3, "distanceFromOriginKm": 40.0, "avgTravelTimeFromPrevMinutes": 40, "lat": 13.2951, "lng": 77.5373 }
+        "stop_01": {
+          "name": "Majestic Bus Stand",
+          "sequence": 1,
+          "distanceFromOriginKm": 0,
+          "avgTravelTimeFromPrevMinutes": 0,
+          "lat": 12.9767,
+          "lng": 77.5713
+        },
+        "stop_02": {
+          "name": "Yelahanka",
+          "sequence": 2,
+          "distanceFromOriginKm": 15.0,
+          "avgTravelTimeFromPrevMinutes": 30,
+          "lat": 13.1007,
+          "lng": 77.5963
+        },
+        "stop_03": {
+          "name": "Doddaballapur Bus Stand",
+          "sequence": 3,
+          "distanceFromOriginKm": 40.0,
+          "avgTravelTimeFromPrevMinutes": 40,
+          "lat": 13.2951,
+          "lng": 77.5373
+        }
       }
     },
     "route_038": {
@@ -512,9 +1716,30 @@
       "destination": "Magadi",
       "isActive": true,
       "stops": {
-        "stop_01": { "name": "Majestic Bus Stand", "sequence": 1, "distanceFromOriginKm": 0, "avgTravelTimeFromPrevMinutes": 0, "lat": 12.9767, "lng": 77.5713 },
-        "stop_02": { "name": "Kengeri", "sequence": 2, "distanceFromOriginKm": 12.0, "avgTravelTimeFromPrevMinutes": 25, "lat": 12.9063, "lng": 77.4821 },
-        "stop_03": { "name": "Magadi Bus Stand", "sequence": 3, "distanceFromOriginKm": 50.0, "avgTravelTimeFromPrevMinutes": 60, "lat": 12.9578, "lng": 77.2271 }
+        "stop_01": {
+          "name": "Majestic Bus Stand",
+          "sequence": 1,
+          "distanceFromOriginKm": 0,
+          "avgTravelTimeFromPrevMinutes": 0,
+          "lat": 12.9767,
+          "lng": 77.5713
+        },
+        "stop_02": {
+          "name": "Kengeri",
+          "sequence": 2,
+          "distanceFromOriginKm": 12.0,
+          "avgTravelTimeFromPrevMinutes": 25,
+          "lat": 12.9063,
+          "lng": 77.4821
+        },
+        "stop_03": {
+          "name": "Magadi Bus Stand",
+          "sequence": 3,
+          "distanceFromOriginKm": 50.0,
+          "avgTravelTimeFromPrevMinutes": 60,
+          "lat": 12.9578,
+          "lng": 77.2271
+        }
       }
     },
     "route_039": {
@@ -524,10 +1749,38 @@
       "destination": "Kundapura",
       "isActive": true,
       "stops": {
-        "stop_01": { "name": "Udupi Bus Stand", "sequence": 1, "distanceFromOriginKm": 0, "avgTravelTimeFromPrevMinutes": 0, "lat": 13.3409, "lng": 74.7421 },
-        "stop_02": { "name": "Brahmavar", "sequence": 2, "distanceFromOriginKm": 15.0, "avgTravelTimeFromPrevMinutes": 25, "lat": 13.4321, "lng": 74.7521 },
-        "stop_03": { "name": "Byndoor", "sequence": 3, "distanceFromOriginKm": 40.0, "avgTravelTimeFromPrevMinutes": 40, "lat": 13.6121, "lng": 74.6821 },
-        "stop_04": { "name": "Kundapura Bus Stand", "sequence": 4, "distanceFromOriginKm": 55.0, "avgTravelTimeFromPrevMinutes": 25, "lat": 13.6302, "lng": 74.6921 }
+        "stop_01": {
+          "name": "Udupi Bus Stand",
+          "sequence": 1,
+          "distanceFromOriginKm": 0,
+          "avgTravelTimeFromPrevMinutes": 0,
+          "lat": 13.3409,
+          "lng": 74.7421
+        },
+        "stop_02": {
+          "name": "Brahmavar",
+          "sequence": 2,
+          "distanceFromOriginKm": 15.0,
+          "avgTravelTimeFromPrevMinutes": 25,
+          "lat": 13.4321,
+          "lng": 74.7521
+        },
+        "stop_03": {
+          "name": "Byndoor",
+          "sequence": 3,
+          "distanceFromOriginKm": 40.0,
+          "avgTravelTimeFromPrevMinutes": 40,
+          "lat": 13.6121,
+          "lng": 74.6821
+        },
+        "stop_04": {
+          "name": "Kundapura Bus Stand",
+          "sequence": 4,
+          "distanceFromOriginKm": 55.0,
+          "avgTravelTimeFromPrevMinutes": 25,
+          "lat": 13.6302,
+          "lng": 74.6921
+        }
       }
     },
     "route_040": {
@@ -537,10 +1790,38 @@
       "destination": "Kasaragod",
       "isActive": true,
       "stops": {
-        "stop_01": { "name": "Mangaluru Bus Stand", "sequence": 1, "distanceFromOriginKm": 0, "avgTravelTimeFromPrevMinutes": 0, "lat": 12.8698, "lng": 74.8431 },
-        "stop_02": { "name": "Ullal", "sequence": 2, "distanceFromOriginKm": 12.0, "avgTravelTimeFromPrevMinutes": 20, "lat": 12.8034, "lng": 74.8624 },
-        "stop_03": { "name": "Thalangara", "sequence": 3, "distanceFromOriginKm": 40.0, "avgTravelTimeFromPrevMinutes": 45, "lat": 12.5012, "lng": 74.9312 },
-        "stop_04": { "name": "Kasaragod Bus Stand", "sequence": 4, "distanceFromOriginKm": 65.0, "avgTravelTimeFromPrevMinutes": 40, "lat": 12.4996, "lng": 74.9869 }
+        "stop_01": {
+          "name": "Mangaluru Bus Stand",
+          "sequence": 1,
+          "distanceFromOriginKm": 0,
+          "avgTravelTimeFromPrevMinutes": 0,
+          "lat": 12.8698,
+          "lng": 74.8431
+        },
+        "stop_02": {
+          "name": "Ullal",
+          "sequence": 2,
+          "distanceFromOriginKm": 12.0,
+          "avgTravelTimeFromPrevMinutes": 20,
+          "lat": 12.8034,
+          "lng": 74.8624
+        },
+        "stop_03": {
+          "name": "Thalangara",
+          "sequence": 3,
+          "distanceFromOriginKm": 40.0,
+          "avgTravelTimeFromPrevMinutes": 45,
+          "lat": 12.5012,
+          "lng": 74.9312
+        },
+        "stop_04": {
+          "name": "Kasaragod Bus Stand",
+          "sequence": 4,
+          "distanceFromOriginKm": 65.0,
+          "avgTravelTimeFromPrevMinutes": 40,
+          "lat": 12.4996,
+          "lng": 74.9869
+        }
       }
     },
     "route_041": {
@@ -550,9 +1831,30 @@
       "destination": "Anekal",
       "isActive": true,
       "stops": {
-        "stop_01": { "name": "Majestic Bus Stand", "sequence": 1, "distanceFromOriginKm": 0, "avgTravelTimeFromPrevMinutes": 0, "lat": 12.9767, "lng": 77.5713 },
-        "stop_02": { "name": "Electronic City", "sequence": 2, "distanceFromOriginKm": 18.0, "avgTravelTimeFromPrevMinutes": 35, "lat": 12.8452, "lng": 77.6602 },
-        "stop_03": { "name": "Anekal Bus Stand", "sequence": 3, "distanceFromOriginKm": 35.0, "avgTravelTimeFromPrevMinutes": 30, "lat": 12.7102, "lng": 77.6962 }
+        "stop_01": {
+          "name": "Majestic Bus Stand",
+          "sequence": 1,
+          "distanceFromOriginKm": 0,
+          "avgTravelTimeFromPrevMinutes": 0,
+          "lat": 12.9767,
+          "lng": 77.5713
+        },
+        "stop_02": {
+          "name": "Electronic City",
+          "sequence": 2,
+          "distanceFromOriginKm": 18.0,
+          "avgTravelTimeFromPrevMinutes": 35,
+          "lat": 12.8452,
+          "lng": 77.6602
+        },
+        "stop_03": {
+          "name": "Anekal Bus Stand",
+          "sequence": 3,
+          "distanceFromOriginKm": 35.0,
+          "avgTravelTimeFromPrevMinutes": 30,
+          "lat": 12.7102,
+          "lng": 77.6962
+        }
       }
     },
     "route_042": {
@@ -562,10 +1864,38 @@
       "destination": "Hassan",
       "isActive": true,
       "stops": {
-        "stop_01": { "name": "Mandya Bus Stand", "sequence": 1, "distanceFromOriginKm": 0, "avgTravelTimeFromPrevMinutes": 0, "lat": 12.5218, "lng": 76.8956 },
-        "stop_02": { "name": "Krishnarajanagara", "sequence": 2, "distanceFromOriginKm": 20.0, "avgTravelTimeFromPrevMinutes": 30, "lat": 12.4012, "lng": 76.3842 },
-        "stop_03": { "name": "Holenarasipura", "sequence": 3, "distanceFromOriginKm": 55.0, "avgTravelTimeFromPrevMinutes": 55, "lat": 12.7838, "lng": 76.2412 },
-        "stop_04": { "name": "Hassan Bus Stand", "sequence": 4, "distanceFromOriginKm": 80.0, "avgTravelTimeFromPrevMinutes": 40, "lat": 13.0068, "lng": 76.1003 }
+        "stop_01": {
+          "name": "Mandya Bus Stand",
+          "sequence": 1,
+          "distanceFromOriginKm": 0,
+          "avgTravelTimeFromPrevMinutes": 0,
+          "lat": 12.5218,
+          "lng": 76.8956
+        },
+        "stop_02": {
+          "name": "Krishnarajanagara",
+          "sequence": 2,
+          "distanceFromOriginKm": 20.0,
+          "avgTravelTimeFromPrevMinutes": 30,
+          "lat": 12.4012,
+          "lng": 76.3842
+        },
+        "stop_03": {
+          "name": "Holenarasipura",
+          "sequence": 3,
+          "distanceFromOriginKm": 55.0,
+          "avgTravelTimeFromPrevMinutes": 55,
+          "lat": 12.7838,
+          "lng": 76.2412
+        },
+        "stop_04": {
+          "name": "Hassan Bus Stand",
+          "sequence": 4,
+          "distanceFromOriginKm": 80.0,
+          "avgTravelTimeFromPrevMinutes": 40,
+          "lat": 13.0068,
+          "lng": 76.1003
+        }
       }
     },
     "route_043": {
@@ -575,10 +1905,38 @@
       "destination": "Gauribidanur",
       "isActive": true,
       "stops": {
-        "stop_01": { "name": "Majestic Bus Stand", "sequence": 1, "distanceFromOriginKm": 0, "avgTravelTimeFromPrevMinutes": 0, "lat": 12.9767, "lng": 77.5713 },
-        "stop_02": { "name": "Yelahanka", "sequence": 2, "distanceFromOriginKm": 15.0, "avgTravelTimeFromPrevMinutes": 30, "lat": 13.1007, "lng": 77.5963 },
-        "stop_03": { "name": "Doddaballapur", "sequence": 3, "distanceFromOriginKm": 40.0, "avgTravelTimeFromPrevMinutes": 40, "lat": 13.2951, "lng": 77.5373 },
-        "stop_04": { "name": "Gauribidanur Bus Stand", "sequence": 4, "distanceFromOriginKm": 90.0, "avgTravelTimeFromPrevMinutes": 65, "lat": 13.6131, "lng": 77.5173 }
+        "stop_01": {
+          "name": "Majestic Bus Stand",
+          "sequence": 1,
+          "distanceFromOriginKm": 0,
+          "avgTravelTimeFromPrevMinutes": 0,
+          "lat": 12.9767,
+          "lng": 77.5713
+        },
+        "stop_02": {
+          "name": "Yelahanka",
+          "sequence": 2,
+          "distanceFromOriginKm": 15.0,
+          "avgTravelTimeFromPrevMinutes": 30,
+          "lat": 13.1007,
+          "lng": 77.5963
+        },
+        "stop_03": {
+          "name": "Doddaballapur",
+          "sequence": 3,
+          "distanceFromOriginKm": 40.0,
+          "avgTravelTimeFromPrevMinutes": 40,
+          "lat": 13.2951,
+          "lng": 77.5373
+        },
+        "stop_04": {
+          "name": "Gauribidanur Bus Stand",
+          "sequence": 4,
+          "distanceFromOriginKm": 90.0,
+          "avgTravelTimeFromPrevMinutes": 65,
+          "lat": 13.6131,
+          "lng": 77.5173
+        }
       }
     },
     "route_044": {
@@ -588,10 +1946,38 @@
       "destination": "Mangaluru",
       "isActive": true,
       "stops": {
-        "stop_01": { "name": "Hassan Bus Stand", "sequence": 1, "distanceFromOriginKm": 0, "avgTravelTimeFromPrevMinutes": 0, "lat": 13.0068, "lng": 76.1003 },
-        "stop_02": { "name": "Sakleshpur", "sequence": 2, "distanceFromOriginKm": 45.0, "avgTravelTimeFromPrevMinutes": 70, "lat": 12.9441, "lng": 75.7891 },
-        "stop_03": { "name": "Kukke Subramanya", "sequence": 3, "distanceFromOriginKm": 90.0, "avgTravelTimeFromPrevMinutes": 70, "lat": 12.8592, "lng": 75.5321 },
-        "stop_04": { "name": "Mangaluru Bus Stand", "sequence": 4, "distanceFromOriginKm": 175.0, "avgTravelTimeFromPrevMinutes": 110, "lat": 12.8698, "lng": 74.8431 }
+        "stop_01": {
+          "name": "Hassan Bus Stand",
+          "sequence": 1,
+          "distanceFromOriginKm": 0,
+          "avgTravelTimeFromPrevMinutes": 0,
+          "lat": 13.0068,
+          "lng": 76.1003
+        },
+        "stop_02": {
+          "name": "Sakleshpur",
+          "sequence": 2,
+          "distanceFromOriginKm": 45.0,
+          "avgTravelTimeFromPrevMinutes": 70,
+          "lat": 12.9441,
+          "lng": 75.7891
+        },
+        "stop_03": {
+          "name": "Kukke Subramanya",
+          "sequence": 3,
+          "distanceFromOriginKm": 90.0,
+          "avgTravelTimeFromPrevMinutes": 70,
+          "lat": 12.8592,
+          "lng": 75.5321
+        },
+        "stop_04": {
+          "name": "Mangaluru Bus Stand",
+          "sequence": 4,
+          "distanceFromOriginKm": 175.0,
+          "avgTravelTimeFromPrevMinutes": 110,
+          "lat": 12.8698,
+          "lng": 74.8431
+        }
       }
     },
     "route_045": {
@@ -601,9 +1987,30 @@
       "destination": "Gadag",
       "isActive": true,
       "stops": {
-        "stop_01": { "name": "Hubli Bus Stand", "sequence": 1, "distanceFromOriginKm": 0, "avgTravelTimeFromPrevMinutes": 0, "lat": 15.3647, "lng": 75.1239 },
-        "stop_02": { "name": "Annigeri", "sequence": 2, "distanceFromOriginKm": 25.0, "avgTravelTimeFromPrevMinutes": 35, "lat": 15.4231, "lng": 75.4212 },
-        "stop_03": { "name": "Gadag Bus Stand", "sequence": 3, "distanceFromOriginKm": 55.0, "avgTravelTimeFromPrevMinutes": 45, "lat": 15.4298, "lng": 75.6261 }
+        "stop_01": {
+          "name": "Hubli Bus Stand",
+          "sequence": 1,
+          "distanceFromOriginKm": 0,
+          "avgTravelTimeFromPrevMinutes": 0,
+          "lat": 15.3647,
+          "lng": 75.1239
+        },
+        "stop_02": {
+          "name": "Annigeri",
+          "sequence": 2,
+          "distanceFromOriginKm": 25.0,
+          "avgTravelTimeFromPrevMinutes": 35,
+          "lat": 15.4231,
+          "lng": 75.4212
+        },
+        "stop_03": {
+          "name": "Gadag Bus Stand",
+          "sequence": 3,
+          "distanceFromOriginKm": 55.0,
+          "avgTravelTimeFromPrevMinutes": 45,
+          "lat": 15.4298,
+          "lng": 75.6261
+        }
       }
     },
     "route_046": {
@@ -613,9 +2020,30 @@
       "destination": "Hubli",
       "isActive": true,
       "stops": {
-        "stop_01": { "name": "Belagavi Bus Stand", "sequence": 1, "distanceFromOriginKm": 0, "avgTravelTimeFromPrevMinutes": 0, "lat": 15.8497, "lng": 74.4977 },
-        "stop_02": { "name": "Dharwad", "sequence": 2, "distanceFromOriginKm": 70.0, "avgTravelTimeFromPrevMinutes": 90, "lat": 15.4589, "lng": 75.0078 },
-        "stop_03": { "name": "Hubli Bus Stand", "sequence": 3, "distanceFromOriginKm": 90.0, "avgTravelTimeFromPrevMinutes": 30, "lat": 15.3647, "lng": 75.1239 }
+        "stop_01": {
+          "name": "Belagavi Bus Stand",
+          "sequence": 1,
+          "distanceFromOriginKm": 0,
+          "avgTravelTimeFromPrevMinutes": 0,
+          "lat": 15.8497,
+          "lng": 74.4977
+        },
+        "stop_02": {
+          "name": "Dharwad",
+          "sequence": 2,
+          "distanceFromOriginKm": 70.0,
+          "avgTravelTimeFromPrevMinutes": 90,
+          "lat": 15.4589,
+          "lng": 75.0078
+        },
+        "stop_03": {
+          "name": "Hubli Bus Stand",
+          "sequence": 3,
+          "distanceFromOriginKm": 90.0,
+          "avgTravelTimeFromPrevMinutes": 30,
+          "lat": 15.3647,
+          "lng": 75.1239
+        }
       }
     },
     "route_047": {
@@ -625,9 +2053,30 @@
       "destination": "Chikballapur",
       "isActive": true,
       "stops": {
-        "stop_01": { "name": "Kolar Bus Stand", "sequence": 1, "distanceFromOriginKm": 0, "avgTravelTimeFromPrevMinutes": 0, "lat": 13.1354, "lng": 78.1298 },
-        "stop_02": { "name": "Mulbagal", "sequence": 2, "distanceFromOriginKm": 30.0, "avgTravelTimeFromPrevMinutes": 40, "lat": 13.1632, "lng": 78.3921 },
-        "stop_03": { "name": "Chikballapur Bus Stand", "sequence": 3, "distanceFromOriginKm": 60.0, "avgTravelTimeFromPrevMinutes": 45, "lat": 13.4357, "lng": 77.7270 }
+        "stop_01": {
+          "name": "Kolar Bus Stand",
+          "sequence": 1,
+          "distanceFromOriginKm": 0,
+          "avgTravelTimeFromPrevMinutes": 0,
+          "lat": 13.1354,
+          "lng": 78.1298
+        },
+        "stop_02": {
+          "name": "Mulbagal",
+          "sequence": 2,
+          "distanceFromOriginKm": 30.0,
+          "avgTravelTimeFromPrevMinutes": 40,
+          "lat": 13.1632,
+          "lng": 78.3921
+        },
+        "stop_03": {
+          "name": "Chikballapur Bus Stand",
+          "sequence": 3,
+          "distanceFromOriginKm": 60.0,
+          "avgTravelTimeFromPrevMinutes": 45,
+          "lat": 13.4357,
+          "lng": 77.727
+        }
       }
     },
     "route_048": {
@@ -637,10 +2086,38 @@
       "destination": "Davanagere",
       "isActive": true,
       "stops": {
-        "stop_01": { "name": "Ballari Bus Stand", "sequence": 1, "distanceFromOriginKm": 0, "avgTravelTimeFromPrevMinutes": 0, "lat": 15.1394, "lng": 76.9214 },
-        "stop_02": { "name": "Harpanahalli", "sequence": 2, "distanceFromOriginKm": 55.0, "avgTravelTimeFromPrevMinutes": 70, "lat": 14.7891, "lng": 76.0321 },
-        "stop_03": { "name": "Harapanahalli", "sequence": 3, "distanceFromOriginKm": 90.0, "avgTravelTimeFromPrevMinutes": 55, "lat": 14.7912, "lng": 75.9841 },
-        "stop_04": { "name": "Davanagere Bus Stand", "sequence": 4, "distanceFromOriginKm": 130.0, "avgTravelTimeFromPrevMinutes": 60, "lat": 14.4644, "lng": 75.9218 }
+        "stop_01": {
+          "name": "Ballari Bus Stand",
+          "sequence": 1,
+          "distanceFromOriginKm": 0,
+          "avgTravelTimeFromPrevMinutes": 0,
+          "lat": 15.1394,
+          "lng": 76.9214
+        },
+        "stop_02": {
+          "name": "Harpanahalli",
+          "sequence": 2,
+          "distanceFromOriginKm": 55.0,
+          "avgTravelTimeFromPrevMinutes": 70,
+          "lat": 14.7891,
+          "lng": 76.0321
+        },
+        "stop_03": {
+          "name": "Harapanahalli",
+          "sequence": 3,
+          "distanceFromOriginKm": 90.0,
+          "avgTravelTimeFromPrevMinutes": 55,
+          "lat": 14.7912,
+          "lng": 75.9841
+        },
+        "stop_04": {
+          "name": "Davanagere Bus Stand",
+          "sequence": 4,
+          "distanceFromOriginKm": 130.0,
+          "avgTravelTimeFromPrevMinutes": 60,
+          "lat": 14.4644,
+          "lng": 75.9218
+        }
       }
     },
     "route_049": {
@@ -650,9 +2127,30 @@
       "destination": "Saligrama",
       "isActive": true,
       "stops": {
-        "stop_01": { "name": "Mysuru Bus Stand", "sequence": 1, "distanceFromOriginKm": 0, "avgTravelTimeFromPrevMinutes": 0, "lat": 12.3103, "lng": 76.6586 },
-        "stop_02": { "name": "Krishnarajanagara", "sequence": 2, "distanceFromOriginKm": 30.0, "avgTravelTimeFromPrevMinutes": 45, "lat": 12.4012, "lng": 76.3842 },
-        "stop_03": { "name": "Saligrama", "sequence": 3, "distanceFromOriginKm": 55.0, "avgTravelTimeFromPrevMinutes": 40, "lat": 12.6021, "lng": 76.2421 }
+        "stop_01": {
+          "name": "Mysuru Bus Stand",
+          "sequence": 1,
+          "distanceFromOriginKm": 0,
+          "avgTravelTimeFromPrevMinutes": 0,
+          "lat": 12.3103,
+          "lng": 76.6586
+        },
+        "stop_02": {
+          "name": "Krishnarajanagara",
+          "sequence": 2,
+          "distanceFromOriginKm": 30.0,
+          "avgTravelTimeFromPrevMinutes": 45,
+          "lat": 12.4012,
+          "lng": 76.3842
+        },
+        "stop_03": {
+          "name": "Saligrama",
+          "sequence": 3,
+          "distanceFromOriginKm": 55.0,
+          "avgTravelTimeFromPrevMinutes": 40,
+          "lat": 12.6021,
+          "lng": 76.2421
+        }
       }
     },
     "route_050": {
@@ -662,10 +2160,38 @@
       "destination": "Tiptur",
       "isActive": true,
       "stops": {
-        "stop_01": { "name": "Majestic Bus Stand", "sequence": 1, "distanceFromOriginKm": 0, "avgTravelTimeFromPrevMinutes": 0, "lat": 12.9767, "lng": 77.5713 },
-        "stop_02": { "name": "Tumkur", "sequence": 2, "distanceFromOriginKm": 72.0, "avgTravelTimeFromPrevMinutes": 90, "lat": 13.3379, "lng": 77.1031 },
-        "stop_03": { "name": "Gubbi", "sequence": 3, "distanceFromOriginKm": 100.0, "avgTravelTimeFromPrevMinutes": 40, "lat": 13.3121, "lng": 76.9421 },
-        "stop_04": { "name": "Tiptur Bus Stand", "sequence": 4, "distanceFromOriginKm": 120.0, "avgTravelTimeFromPrevMinutes": 30, "lat": 13.2634, "lng": 76.4762 }
+        "stop_01": {
+          "name": "Majestic Bus Stand",
+          "sequence": 1,
+          "distanceFromOriginKm": 0,
+          "avgTravelTimeFromPrevMinutes": 0,
+          "lat": 12.9767,
+          "lng": 77.5713
+        },
+        "stop_02": {
+          "name": "Tumkur",
+          "sequence": 2,
+          "distanceFromOriginKm": 72.0,
+          "avgTravelTimeFromPrevMinutes": 90,
+          "lat": 13.3379,
+          "lng": 77.1031
+        },
+        "stop_03": {
+          "name": "Gubbi",
+          "sequence": 3,
+          "distanceFromOriginKm": 100.0,
+          "avgTravelTimeFromPrevMinutes": 40,
+          "lat": 13.3121,
+          "lng": 76.9421
+        },
+        "stop_04": {
+          "name": "Tiptur Bus Stand",
+          "sequence": 4,
+          "distanceFromOriginKm": 120.0,
+          "avgTravelTimeFromPrevMinutes": 30,
+          "lat": 13.2634,
+          "lng": 76.4762
+        }
       }
     },
     "route_051": {
@@ -675,10 +2201,38 @@
       "destination": "Kanakapura",
       "isActive": true,
       "stops": {
-        "stop_01": { "name": "Majestic Bus Stand", "sequence": 1, "distanceFromOriginKm": 0, "avgTravelTimeFromPrevMinutes": 0, "lat": 12.9767, "lng": 77.5713 },
-        "stop_02": { "name": "Kengeri", "sequence": 2, "distanceFromOriginKm": 12.0, "avgTravelTimeFromPrevMinutes": 25, "lat": 12.9063, "lng": 77.4821 },
-        "stop_03": { "name": "Harohalli", "sequence": 3, "distanceFromOriginKm": 40.0, "avgTravelTimeFromPrevMinutes": 45, "lat": 12.5921, "lng": 77.5121 },
-        "stop_04": { "name": "Kanakapura Bus Stand", "sequence": 4, "distanceFromOriginKm": 60.0, "avgTravelTimeFromPrevMinutes": 30, "lat": 12.5470, "lng": 77.4182 }
+        "stop_01": {
+          "name": "Majestic Bus Stand",
+          "sequence": 1,
+          "distanceFromOriginKm": 0,
+          "avgTravelTimeFromPrevMinutes": 0,
+          "lat": 12.9767,
+          "lng": 77.5713
+        },
+        "stop_02": {
+          "name": "Kengeri",
+          "sequence": 2,
+          "distanceFromOriginKm": 12.0,
+          "avgTravelTimeFromPrevMinutes": 25,
+          "lat": 12.9063,
+          "lng": 77.4821
+        },
+        "stop_03": {
+          "name": "Harohalli",
+          "sequence": 3,
+          "distanceFromOriginKm": 40.0,
+          "avgTravelTimeFromPrevMinutes": 45,
+          "lat": 12.5921,
+          "lng": 77.5121
+        },
+        "stop_04": {
+          "name": "Kanakapura Bus Stand",
+          "sequence": 4,
+          "distanceFromOriginKm": 60.0,
+          "avgTravelTimeFromPrevMinutes": 30,
+          "lat": 12.547,
+          "lng": 77.4182
+        }
       }
     },
     "route_052": {
@@ -688,10 +2242,38 @@
       "destination": "Puttur",
       "isActive": true,
       "stops": {
-        "stop_01": { "name": "Mangaluru Bus Stand", "sequence": 1, "distanceFromOriginKm": 0, "avgTravelTimeFromPrevMinutes": 0, "lat": 12.8698, "lng": 74.8431 },
-        "stop_02": { "name": "Bantwal", "sequence": 2, "distanceFromOriginKm": 20.0, "avgTravelTimeFromPrevMinutes": 30, "lat": 12.8921, "lng": 75.0341 },
-        "stop_03": { "name": "Uppinangady", "sequence": 3, "distanceFromOriginKm": 45.0, "avgTravelTimeFromPrevMinutes": 40, "lat": 12.8421, "lng": 75.4821 },
-        "stop_04": { "name": "Puttur Bus Stand", "sequence": 4, "distanceFromOriginKm": 65.0, "avgTravelTimeFromPrevMinutes": 35, "lat": 12.7661, "lng": 75.2021 }
+        "stop_01": {
+          "name": "Mangaluru Bus Stand",
+          "sequence": 1,
+          "distanceFromOriginKm": 0,
+          "avgTravelTimeFromPrevMinutes": 0,
+          "lat": 12.8698,
+          "lng": 74.8431
+        },
+        "stop_02": {
+          "name": "Bantwal",
+          "sequence": 2,
+          "distanceFromOriginKm": 20.0,
+          "avgTravelTimeFromPrevMinutes": 30,
+          "lat": 12.8921,
+          "lng": 75.0341
+        },
+        "stop_03": {
+          "name": "Uppinangady",
+          "sequence": 3,
+          "distanceFromOriginKm": 45.0,
+          "avgTravelTimeFromPrevMinutes": 40,
+          "lat": 12.8421,
+          "lng": 75.4821
+        },
+        "stop_04": {
+          "name": "Puttur Bus Stand",
+          "sequence": 4,
+          "distanceFromOriginKm": 65.0,
+          "avgTravelTimeFromPrevMinutes": 35,
+          "lat": 12.7661,
+          "lng": 75.2021
+        }
       }
     },
     "route_053": {
@@ -701,10 +2283,1161 @@
       "destination": "Robertsonpet",
       "isActive": true,
       "stops": {
-        "stop_01": { "name": "Majestic Bus Stand", "sequence": 1, "distanceFromOriginKm": 0, "avgTravelTimeFromPrevMinutes": 0, "lat": 12.9767, "lng": 77.5713 },
-        "stop_02": { "name": "Hoskote", "sequence": 2, "distanceFromOriginKm": 35.0, "avgTravelTimeFromPrevMinutes": 45, "lat": 13.0721, "lng": 77.7981 },
-        "stop_03": { "name": "Kolar", "sequence": 3, "distanceFromOriginKm": 70.0, "avgTravelTimeFromPrevMinutes": 55, "lat": 13.1354, "lng": 78.1298 },
-        "stop_04": { "name": "Robertsonpet Bus Stand", "sequence": 4, "distanceFromOriginKm": 78.0, "avgTravelTimeFromPrevMinutes": 15, "lat": 12.9612, "lng": 78.2821 }
+        "stop_01": {
+          "name": "Majestic Bus Stand",
+          "sequence": 1,
+          "distanceFromOriginKm": 0,
+          "avgTravelTimeFromPrevMinutes": 0,
+          "lat": 12.9767,
+          "lng": 77.5713
+        },
+        "stop_02": {
+          "name": "Hoskote",
+          "sequence": 2,
+          "distanceFromOriginKm": 35.0,
+          "avgTravelTimeFromPrevMinutes": 45,
+          "lat": 13.0721,
+          "lng": 77.7981
+        },
+        "stop_03": {
+          "name": "Kolar",
+          "sequence": 3,
+          "distanceFromOriginKm": 70.0,
+          "avgTravelTimeFromPrevMinutes": 55,
+          "lat": 13.1354,
+          "lng": 78.1298
+        },
+        "stop_04": {
+          "name": "Robertsonpet Bus Stand",
+          "sequence": 4,
+          "distanceFromOriginKm": 78.0,
+          "avgTravelTimeFromPrevMinutes": 15,
+          "lat": 12.9612,
+          "lng": 78.2821
+        }
+      }
+    },
+    "route_054": {
+      "name": "Bengaluru - Kunigal",
+      "number": "BK-5401",
+      "origin": "Bengaluru",
+      "destination": "Kunigal",
+      "isActive": true,
+      "stops": {
+        "stop_01": {
+          "name": "Majestic Bus Stand",
+          "sequence": 1,
+          "distanceFromOriginKm": 0,
+          "avgTravelTimeFromPrevMinutes": 0,
+          "lat": 12.9767,
+          "lng": 77.5713
+        },
+        "stop_02": {
+          "name": "Nelamangala",
+          "sequence": 2,
+          "distanceFromOriginKm": 28.0,
+          "avgTravelTimeFromPrevMinutes": 35,
+          "lat": 13.1021,
+          "lng": 77.3912
+        },
+        "stop_03": {
+          "name": "Kunigal Bus Stand",
+          "sequence": 3,
+          "distanceFromOriginKm": 55.0,
+          "avgTravelTimeFromPrevMinutes": 40,
+          "lat": 13.0214,
+          "lng": 77.0274
+        }
+      }
+    },
+    "55": {
+      "name": "Shivamogga - Sagar",
+      "number": "SS-5501",
+      "origin": "Shivamogga",
+      "destination": "Sagar",
+      "isActive": true,
+      "stops": {
+        "stop_01": {
+          "name": "Shivamogga Bus Stand",
+          "sequence": 1,
+          "distanceFromOriginKm": 0,
+          "avgTravelTimeFromPrevMinutes": 0,
+          "lat": 13.9299,
+          "lng": 75.5681
+        },
+        "stop_02": {
+          "name": "Sorab",
+          "sequence": 2,
+          "distanceFromOriginKm": 40.0,
+          "avgTravelTimeFromPrevMinutes": 55,
+          "lat": 13.8921,
+          "lng": 75.2481
+        },
+        "stop_03": {
+          "name": "Siddapur",
+          "sequence": 3,
+          "distanceFromOriginKm": 60.0,
+          "avgTravelTimeFromPrevMinutes": 35,
+          "lat": 13.9821,
+          "lng": 75.1541
+        },
+        "stop_04": {
+          "name": "Sagar Bus Stand",
+          "sequence": 4,
+          "distanceFromOriginKm": 80.0,
+          "avgTravelTimeFromPrevMinutes": 30,
+          "lat": 14.1642,
+          "lng": 75.0312
+        }
+      }
+    },
+    "56": {
+      "name": "Mysuru - Kollegal",
+      "number": "MK-5601",
+      "origin": "Mysuru",
+      "destination": "Kollegal",
+      "isActive": true,
+      "stops": {
+        "stop_01": {
+          "name": "Mysuru Bus Stand",
+          "sequence": 1,
+          "distanceFromOriginKm": 0,
+          "avgTravelTimeFromPrevMinutes": 0,
+          "lat": 12.3103,
+          "lng": 76.6586
+        },
+        "stop_02": {
+          "name": "T Narasipur",
+          "sequence": 2,
+          "distanceFromOriginKm": 40.0,
+          "avgTravelTimeFromPrevMinutes": 55,
+          "lat": 12.2121,
+          "lng": 76.8934
+        },
+        "stop_03": {
+          "name": "Kollegal Bus Stand",
+          "sequence": 3,
+          "distanceFromOriginKm": 72.0,
+          "avgTravelTimeFromPrevMinutes": 45,
+          "lat": 12.1481,
+          "lng": 77.1021
+        }
+      }
+    },
+    "57": {
+      "name": "Bengaluru - Pavagada",
+      "number": "BP-5701",
+      "origin": "Bengaluru",
+      "destination": "Pavagada",
+      "isActive": true,
+      "stops": {
+        "stop_01": {
+          "name": "Majestic Bus Stand",
+          "sequence": 1,
+          "distanceFromOriginKm": 0,
+          "avgTravelTimeFromPrevMinutes": 0,
+          "lat": 12.9767,
+          "lng": 77.5713
+        },
+        "stop_02": {
+          "name": "Koratagere",
+          "sequence": 2,
+          "distanceFromOriginKm": 80.0,
+          "avgTravelTimeFromPrevMinutes": 100,
+          "lat": 13.5231,
+          "lng": 77.2341
+        },
+        "stop_03": {
+          "name": "Madhugiri",
+          "sequence": 3,
+          "distanceFromOriginKm": 110.0,
+          "avgTravelTimeFromPrevMinutes": 40,
+          "lat": 13.6631,
+          "lng": 77.2021
+        },
+        "stop_04": {
+          "name": "Pavagada Bus Stand",
+          "sequence": 4,
+          "distanceFromOriginKm": 160.0,
+          "avgTravelTimeFromPrevMinutes": 60,
+          "lat": 14.0981,
+          "lng": 77.2741
+        }
+      }
+    },
+    "58": {
+      "name": "Hassan - Arsikere",
+      "number": "HA-5801",
+      "origin": "Hassan",
+      "destination": "Arsikere",
+      "isActive": true,
+      "stops": {
+        "stop_01": {
+          "name": "Hassan Bus Stand",
+          "sequence": 1,
+          "distanceFromOriginKm": 0,
+          "avgTravelTimeFromPrevMinutes": 0,
+          "lat": 13.0068,
+          "lng": 76.1003
+        },
+        "stop_02": {
+          "name": "Arsikere Bus Stand",
+          "sequence": 2,
+          "distanceFromOriginKm": 40.0,
+          "avgTravelTimeFromPrevMinutes": 50,
+          "lat": 13.3141,
+          "lng": 76.2582
+        }
+      }
+    },
+    "59": {
+      "name": "Davanagere - Chitradurga",
+      "number": "DC-5901",
+      "origin": "Davanagere",
+      "destination": "Chitradurga",
+      "isActive": true,
+      "stops": {
+        "stop_01": {
+          "name": "Davanagere Bus Stand",
+          "sequence": 1,
+          "distanceFromOriginKm": 0,
+          "avgTravelTimeFromPrevMinutes": 0,
+          "lat": 14.4644,
+          "lng": 75.9218
+        },
+        "stop_02": {
+          "name": "Harihar",
+          "sequence": 2,
+          "distanceFromOriginKm": 20.0,
+          "avgTravelTimeFromPrevMinutes": 30,
+          "lat": 14.5212,
+          "lng": 75.7241
+        },
+        "stop_03": {
+          "name": "Chitradurga Bus Stand",
+          "sequence": 3,
+          "distanceFromOriginKm": 65.0,
+          "avgTravelTimeFromPrevMinutes": 55,
+          "lat": 14.2251,
+          "lng": 76.3987
+        }
+      }
+    },
+    "60": {
+      "name": "Ballari - Hosapete",
+      "number": "BH-6001",
+      "origin": "Ballari",
+      "destination": "Hosapete",
+      "isActive": true,
+      "stops": {
+        "stop_01": {
+          "name": "Ballari Bus Stand",
+          "sequence": 1,
+          "distanceFromOriginKm": 0,
+          "avgTravelTimeFromPrevMinutes": 0,
+          "lat": 15.1394,
+          "lng": 76.9214
+        },
+        "stop_02": {
+          "name": "Kampli",
+          "sequence": 2,
+          "distanceFromOriginKm": 30.0,
+          "avgTravelTimeFromPrevMinutes": 40,
+          "lat": 15.4012,
+          "lng": 76.6121
+        },
+        "stop_03": {
+          "name": "Hosapete Bus Stand",
+          "sequence": 3,
+          "distanceFromOriginKm": 60.0,
+          "avgTravelTimeFromPrevMinutes": 45,
+          "lat": 15.2712,
+          "lng": 76.3872
+        }
+      }
+    },
+    "61": {
+      "name": "Hubli - Kumta",
+      "number": "HK-6101",
+      "origin": "Hubli",
+      "destination": "Kumta",
+      "isActive": true,
+      "stops": {
+        "stop_01": {
+          "name": "Hubli Bus Stand",
+          "sequence": 1,
+          "distanceFromOriginKm": 0,
+          "avgTravelTimeFromPrevMinutes": 0,
+          "lat": 15.3647,
+          "lng": 75.1239
+        },
+        "stop_02": {
+          "name": "Yellapur",
+          "sequence": 2,
+          "distanceFromOriginKm": 50.0,
+          "avgTravelTimeFromPrevMinutes": 65,
+          "lat": 15.0212,
+          "lng": 74.7321
+        },
+        "stop_03": {
+          "name": "Siddapur",
+          "sequence": 3,
+          "distanceFromOriginKm": 80.0,
+          "avgTravelTimeFromPrevMinutes": 50,
+          "lat": 14.8231,
+          "lng": 74.5212
+        },
+        "stop_04": {
+          "name": "Kumta Bus Stand",
+          "sequence": 4,
+          "distanceFromOriginKm": 110.0,
+          "avgTravelTimeFromPrevMinutes": 50,
+          "lat": 14.4212,
+          "lng": 74.4121
+        }
+      }
+    },
+    "62": {
+      "name": "Udupi - Karwar",
+      "number": "UK-6201",
+      "origin": "Udupi",
+      "destination": "Karwar",
+      "isActive": true,
+      "stops": {
+        "stop_01": {
+          "name": "Udupi Bus Stand",
+          "sequence": 1,
+          "distanceFromOriginKm": 0,
+          "avgTravelTimeFromPrevMinutes": 0,
+          "lat": 13.3409,
+          "lng": 74.7421
+        },
+        "stop_02": {
+          "name": "Kundapura",
+          "sequence": 2,
+          "distanceFromOriginKm": 35.0,
+          "avgTravelTimeFromPrevMinutes": 45,
+          "lat": 13.6302,
+          "lng": 74.6921
+        },
+        "stop_03": {
+          "name": "Bhatkal",
+          "sequence": 3,
+          "distanceFromOriginKm": 80.0,
+          "avgTravelTimeFromPrevMinutes": 70,
+          "lat": 14.0012,
+          "lng": 74.5321
+        },
+        "stop_04": {
+          "name": "Honnavar",
+          "sequence": 4,
+          "distanceFromOriginKm": 110.0,
+          "avgTravelTimeFromPrevMinutes": 50,
+          "lat": 14.2812,
+          "lng": 74.4521
+        },
+        "stop_05": {
+          "name": "Karwar Bus Stand",
+          "sequence": 5,
+          "distanceFromOriginKm": 160.0,
+          "avgTravelTimeFromPrevMinutes": 75,
+          "lat": 14.8121,
+          "lng": 74.1298
+        }
+      }
+    },
+    "63": {
+      "name": "Mysuru - Periyapatna",
+      "number": "MP-6301",
+      "origin": "Mysuru",
+      "destination": "Periyapatna",
+      "isActive": true,
+      "stops": {
+        "stop_01": {
+          "name": "Mysuru Bus Stand",
+          "sequence": 1,
+          "distanceFromOriginKm": 0,
+          "avgTravelTimeFromPrevMinutes": 0,
+          "lat": 12.3103,
+          "lng": 76.6586
+        },
+        "stop_02": {
+          "name": "Hunsur",
+          "sequence": 2,
+          "distanceFromOriginKm": 34.0,
+          "avgTravelTimeFromPrevMinutes": 45,
+          "lat": 12.3094,
+          "lng": 76.2891
+        },
+        "stop_03": {
+          "name": "Periyapatna Bus Stand",
+          "sequence": 3,
+          "distanceFromOriginKm": 50.0,
+          "avgTravelTimeFromPrevMinutes": 30,
+          "lat": 12.3412,
+          "lng": 76.0841
+        }
+      }
+    },
+    "64": {
+      "name": "Hassan - Belur",
+      "number": "HB-6401",
+      "origin": "Hassan",
+      "destination": "Belur",
+      "isActive": true,
+      "stops": {
+        "stop_01": {
+          "name": "Hassan Bus Stand",
+          "sequence": 1,
+          "distanceFromOriginKm": 0,
+          "avgTravelTimeFromPrevMinutes": 0,
+          "lat": 13.0068,
+          "lng": 76.1003
+        },
+        "stop_02": {
+          "name": "Belur Bus Stand",
+          "sequence": 2,
+          "distanceFromOriginKm": 30.0,
+          "avgTravelTimeFromPrevMinutes": 40,
+          "lat": 13.1641,
+          "lng": 75.8641
+        }
+      }
+    },
+    "65": {
+      "name": "Bengaluru - Devanahalli (Airport)",
+      "number": "BD-6501",
+      "origin": "Bengaluru",
+      "destination": "Devanahalli",
+      "isActive": true,
+      "stops": {
+        "stop_01": {
+          "name": "Majestic Bus Stand",
+          "sequence": 1,
+          "distanceFromOriginKm": 0,
+          "avgTravelTimeFromPrevMinutes": 0,
+          "lat": 12.9767,
+          "lng": 77.5713
+        },
+        "stop_02": {
+          "name": "Yeshwanthpur",
+          "sequence": 2,
+          "distanceFromOriginKm": 8.0,
+          "avgTravelTimeFromPrevMinutes": 20,
+          "lat": 13.0265,
+          "lng": 77.5521
+        },
+        "stop_03": {
+          "name": "Yelahanka",
+          "sequence": 3,
+          "distanceFromOriginKm": 15.0,
+          "avgTravelTimeFromPrevMinutes": 15,
+          "lat": 13.1007,
+          "lng": 77.5963
+        },
+        "stop_04": {
+          "name": "Devanahalli Bus Stand",
+          "sequence": 4,
+          "distanceFromOriginKm": 35.0,
+          "avgTravelTimeFromPrevMinutes": 30,
+          "lat": 13.2473,
+          "lng": 77.7126
+        }
+      }
+    },
+    "66": {
+      "name": "Bengaluru - Nelamangala",
+      "number": "BN-6601",
+      "origin": "Bengaluru",
+      "destination": "Nelamangala",
+      "isActive": true,
+      "stops": {
+        "stop_01": {
+          "name": "Majestic Bus Stand",
+          "sequence": 1,
+          "distanceFromOriginKm": 0,
+          "avgTravelTimeFromPrevMinutes": 0,
+          "lat": 12.9767,
+          "lng": 77.5713
+        },
+        "stop_02": {
+          "name": "Yeshwanthpur",
+          "sequence": 2,
+          "distanceFromOriginKm": 8.0,
+          "avgTravelTimeFromPrevMinutes": 20,
+          "lat": 13.0265,
+          "lng": 77.5521
+        },
+        "stop_03": {
+          "name": "Nelamangala Bus Stand",
+          "sequence": 3,
+          "distanceFromOriginKm": 28.0,
+          "avgTravelTimeFromPrevMinutes": 30,
+          "lat": 13.1021,
+          "lng": 77.3912
+        }
+      }
+    },
+    "67": {
+      "name": "Gadag - Haveri",
+      "number": "GH-6701",
+      "origin": "Gadag",
+      "destination": "Haveri",
+      "isActive": true,
+      "stops": {
+        "stop_01": {
+          "name": "Gadag Bus Stand",
+          "sequence": 1,
+          "distanceFromOriginKm": 0,
+          "avgTravelTimeFromPrevMinutes": 0,
+          "lat": 15.4298,
+          "lng": 75.6261
+        },
+        "stop_02": {
+          "name": "Mundargi",
+          "sequence": 2,
+          "distanceFromOriginKm": 35.0,
+          "avgTravelTimeFromPrevMinutes": 45,
+          "lat": 15.2121,
+          "lng": 75.8921
+        },
+        "stop_03": {
+          "name": "Haveri Bus Stand",
+          "sequence": 3,
+          "distanceFromOriginKm": 70.0,
+          "avgTravelTimeFromPrevMinutes": 55,
+          "lat": 14.7939,
+          "lng": 75.4041
+        }
+      }
+    },
+    "68": {
+      "name": "Ballari - Koppal",
+      "number": "BK-6801",
+      "origin": "Ballari",
+      "destination": "Koppal",
+      "isActive": true,
+      "stops": {
+        "stop_01": {
+          "name": "Ballari Bus Stand",
+          "sequence": 1,
+          "distanceFromOriginKm": 0,
+          "avgTravelTimeFromPrevMinutes": 0,
+          "lat": 15.1394,
+          "lng": 76.9214
+        },
+        "stop_02": {
+          "name": "Kushtagi",
+          "sequence": 2,
+          "distanceFromOriginKm": 40.0,
+          "avgTravelTimeFromPrevMinutes": 55,
+          "lat": 15.5621,
+          "lng": 76.3121
+        },
+        "stop_03": {
+          "name": "Koppal Bus Stand",
+          "sequence": 3,
+          "distanceFromOriginKm": 90.0,
+          "avgTravelTimeFromPrevMinutes": 70,
+          "lat": 15.3512,
+          "lng": 76.1541
+        }
+      }
+    },
+    "69": {
+      "name": "Raichur - Sindhanur",
+      "number": "RS-6901",
+      "origin": "Raichur",
+      "destination": "Sindhanur",
+      "isActive": true,
+      "stops": {
+        "stop_01": {
+          "name": "Raichur Bus Stand",
+          "sequence": 1,
+          "distanceFromOriginKm": 0,
+          "avgTravelTimeFromPrevMinutes": 0,
+          "lat": 16.212,
+          "lng": 77.3439
+        },
+        "stop_02": {
+          "name": "Manvi",
+          "sequence": 2,
+          "distanceFromOriginKm": 35.0,
+          "avgTravelTimeFromPrevMinutes": 50,
+          "lat": 16.0121,
+          "lng": 77.0512
+        },
+        "stop_03": {
+          "name": "Sindhanur Bus Stand",
+          "sequence": 3,
+          "distanceFromOriginKm": 65.0,
+          "avgTravelTimeFromPrevMinutes": 45,
+          "lat": 15.7842,
+          "lng": 76.7512
+        }
+      }
+    },
+    "70": {
+      "name": "Belagavi - Khanapur",
+      "number": "BK-7001",
+      "origin": "Belagavi",
+      "destination": "Khanapur",
+      "isActive": true,
+      "stops": {
+        "stop_01": {
+          "name": "Belagavi Bus Stand",
+          "sequence": 1,
+          "distanceFromOriginKm": 0,
+          "avgTravelTimeFromPrevMinutes": 0,
+          "lat": 15.8497,
+          "lng": 74.4977
+        },
+        "stop_02": {
+          "name": "Khanapur Bus Stand",
+          "sequence": 2,
+          "distanceFromOriginKm": 25.0,
+          "avgTravelTimeFromPrevMinutes": 35,
+          "lat": 15.6312,
+          "lng": 74.5121
+        }
+      }
+    },
+    "71": {
+      "name": "Mangaluru - Sullia",
+      "number": "MS-7101",
+      "origin": "Mangaluru",
+      "destination": "Sullia",
+      "isActive": true,
+      "stops": {
+        "stop_01": {
+          "name": "Mangaluru Bus Stand",
+          "sequence": 1,
+          "distanceFromOriginKm": 0,
+          "avgTravelTimeFromPrevMinutes": 0,
+          "lat": 12.8698,
+          "lng": 74.8431
+        },
+        "stop_02": {
+          "name": "Bantwal",
+          "sequence": 2,
+          "distanceFromOriginKm": 20.0,
+          "avgTravelTimeFromPrevMinutes": 30,
+          "lat": 12.8921,
+          "lng": 75.0341
+        },
+        "stop_03": {
+          "name": "Puttur",
+          "sequence": 3,
+          "distanceFromOriginKm": 45.0,
+          "avgTravelTimeFromPrevMinutes": 40,
+          "lat": 12.7661,
+          "lng": 75.2021
+        },
+        "stop_04": {
+          "name": "Sullia Bus Stand",
+          "sequence": 4,
+          "distanceFromOriginKm": 80.0,
+          "avgTravelTimeFromPrevMinutes": 55,
+          "lat": 12.5612,
+          "lng": 75.3912
+        }
+      }
+    },
+    "72": {
+      "name": "Shivamogga - Bhadravathi",
+      "number": "SB-7201",
+      "origin": "Shivamogga",
+      "destination": "Bhadravathi",
+      "isActive": true,
+      "stops": {
+        "stop_01": {
+          "name": "Shivamogga Bus Stand",
+          "sequence": 1,
+          "distanceFromOriginKm": 0,
+          "avgTravelTimeFromPrevMinutes": 0,
+          "lat": 13.9299,
+          "lng": 75.5681
+        },
+        "stop_02": {
+          "name": "Bhadravathi Bus Stand",
+          "sequence": 2,
+          "distanceFromOriginKm": 20.0,
+          "avgTravelTimeFromPrevMinutes": 30,
+          "lat": 13.8321,
+          "lng": 75.7041
+        }
+      }
+    },
+    "73": {
+      "name": "Mysuru - K R Nagara",
+      "number": "MK-7301",
+      "origin": "Mysuru",
+      "destination": "K R Nagara",
+      "isActive": true,
+      "stops": {
+        "stop_01": {
+          "name": "Mysuru Bus Stand",
+          "sequence": 1,
+          "distanceFromOriginKm": 0,
+          "avgTravelTimeFromPrevMinutes": 0,
+          "lat": 12.3103,
+          "lng": 76.6586
+        },
+        "stop_02": {
+          "name": "K R Nagara Bus Stand",
+          "sequence": 2,
+          "distanceFromOriginKm": 25.0,
+          "avgTravelTimeFromPrevMinutes": 35,
+          "lat": 12.4251,
+          "lng": 76.3821
+        }
+      }
+    },
+    "74": {
+      "name": "Vijayapura - Bagalkote",
+      "number": "VB-7401",
+      "origin": "Vijayapura",
+      "destination": "Bagalkote",
+      "isActive": true,
+      "stops": {
+        "stop_01": {
+          "name": "Vijayapura Bus Stand",
+          "sequence": 1,
+          "distanceFromOriginKm": 0,
+          "avgTravelTimeFromPrevMinutes": 0,
+          "lat": 16.8302,
+          "lng": 75.71
+        },
+        "stop_02": {
+          "name": "Muddebihal",
+          "sequence": 2,
+          "distanceFromOriginKm": 40.0,
+          "avgTravelTimeFromPrevMinutes": 55,
+          "lat": 16.3312,
+          "lng": 76.1321
+        },
+        "stop_03": {
+          "name": "Bagalkote Bus Stand",
+          "sequence": 3,
+          "distanceFromOriginKm": 80.0,
+          "avgTravelTimeFromPrevMinutes": 60,
+          "lat": 16.1812,
+          "lng": 75.6912
+        }
+      }
+    },
+    "75": {
+      "name": "Kalaburagi - Vijayapura",
+      "number": "KV-7501",
+      "origin": "Kalaburagi",
+      "destination": "Vijayapura",
+      "isActive": true,
+      "stops": {
+        "stop_01": {
+          "name": "Kalaburagi Bus Stand",
+          "sequence": 1,
+          "distanceFromOriginKm": 0,
+          "avgTravelTimeFromPrevMinutes": 0,
+          "lat": 17.3321,
+          "lng": 76.8372
+        },
+        "stop_02": {
+          "name": "Basavana Bagewadi",
+          "sequence": 2,
+          "distanceFromOriginKm": 70.0,
+          "avgTravelTimeFromPrevMinutes": 90,
+          "lat": 16.5812,
+          "lng": 76.0121
+        },
+        "stop_03": {
+          "name": "Vijayapura Bus Stand",
+          "sequence": 3,
+          "distanceFromOriginKm": 140.0,
+          "avgTravelTimeFromPrevMinutes": 100,
+          "lat": 16.8302,
+          "lng": 75.71
+        }
+      }
+    },
+    "76": {
+      "name": "Kalaburagi - Bidar",
+      "number": "KB-7601",
+      "origin": "Kalaburagi",
+      "destination": "Bidar",
+      "isActive": true,
+      "stops": {
+        "stop_01": {
+          "name": "Kalaburagi Bus Stand",
+          "sequence": 1,
+          "distanceFromOriginKm": 0,
+          "avgTravelTimeFromPrevMinutes": 0,
+          "lat": 17.3321,
+          "lng": 76.8372
+        },
+        "stop_02": {
+          "name": "Chitguppa",
+          "sequence": 2,
+          "distanceFromOriginKm": 50.0,
+          "avgTravelTimeFromPrevMinutes": 65,
+          "lat": 17.6121,
+          "lng": 77.2321
+        },
+        "stop_03": {
+          "name": "Bidar Bus Stand",
+          "sequence": 3,
+          "distanceFromOriginKm": 110.0,
+          "avgTravelTimeFromPrevMinutes": 80,
+          "lat": 17.9212,
+          "lng": 77.5212
+        }
+      }
+    },
+    "77": {
+      "name": "Belagavi - Nippani",
+      "number": "BN-7701",
+      "origin": "Belagavi",
+      "destination": "Nippani",
+      "isActive": true,
+      "stops": {
+        "stop_01": {
+          "name": "Belagavi Bus Stand",
+          "sequence": 1,
+          "distanceFromOriginKm": 0,
+          "avgTravelTimeFromPrevMinutes": 0,
+          "lat": 15.8497,
+          "lng": 74.4977
+        },
+        "stop_02": {
+          "name": "Chikkodi",
+          "sequence": 2,
+          "distanceFromOriginKm": 35.0,
+          "avgTravelTimeFromPrevMinutes": 45,
+          "lat": 16.0321,
+          "lng": 74.5121
+        },
+        "stop_03": {
+          "name": "Nippani Bus Stand",
+          "sequence": 3,
+          "distanceFromOriginKm": 50.0,
+          "avgTravelTimeFromPrevMinutes": 25,
+          "lat": 16.4182,
+          "lng": 74.3821
+        }
+      }
+    },
+    "78": {
+      "name": "Tumkur - Sira",
+      "number": "TS-7801",
+      "origin": "Tumkur",
+      "destination": "Sira",
+      "isActive": true,
+      "stops": {
+        "stop_01": {
+          "name": "Tumkur Bus Stand",
+          "sequence": 1,
+          "distanceFromOriginKm": 0,
+          "avgTravelTimeFromPrevMinutes": 0,
+          "lat": 13.3379,
+          "lng": 77.1031
+        },
+        "stop_02": {
+          "name": "Sira Bus Stand",
+          "sequence": 2,
+          "distanceFromOriginKm": 45.0,
+          "avgTravelTimeFromPrevMinutes": 55,
+          "lat": 13.7421,
+          "lng": 76.9021
+        }
+      }
+    },
+    "79": {
+      "name": "Hassan - Chikkamagaluru",
+      "number": "HC-7901",
+      "origin": "Hassan",
+      "destination": "Chikkamagaluru",
+      "isActive": true,
+      "stops": {
+        "stop_01": {
+          "name": "Hassan Bus Stand",
+          "sequence": 1,
+          "distanceFromOriginKm": 0,
+          "avgTravelTimeFromPrevMinutes": 0,
+          "lat": 13.0068,
+          "lng": 76.1003
+        },
+        "stop_02": {
+          "name": "Belur",
+          "sequence": 2,
+          "distanceFromOriginKm": 30.0,
+          "avgTravelTimeFromPrevMinutes": 40,
+          "lat": 13.1641,
+          "lng": 75.8641
+        },
+        "stop_03": {
+          "name": "Chikkamagaluru Bus Stand",
+          "sequence": 3,
+          "distanceFromOriginKm": 65.0,
+          "avgTravelTimeFromPrevMinutes": 55,
+          "lat": 13.3161,
+          "lng": 75.772
+        }
+      }
+    },
+    "80": {
+      "name": "Mangaluru - Bhatkal",
+      "number": "MB-8001",
+      "origin": "Mangaluru",
+      "destination": "Bhatkal",
+      "isActive": true,
+      "stops": {
+        "stop_01": {
+          "name": "Mangaluru Bus Stand",
+          "sequence": 1,
+          "distanceFromOriginKm": 0,
+          "avgTravelTimeFromPrevMinutes": 0,
+          "lat": 12.8698,
+          "lng": 74.8431
+        },
+        "stop_02": {
+          "name": "Udupi",
+          "sequence": 2,
+          "distanceFromOriginKm": 58.0,
+          "avgTravelTimeFromPrevMinutes": 75,
+          "lat": 13.3409,
+          "lng": 74.7421
+        },
+        "stop_03": {
+          "name": "Kundapura",
+          "sequence": 3,
+          "distanceFromOriginKm": 93.0,
+          "avgTravelTimeFromPrevMinutes": 50,
+          "lat": 13.6302,
+          "lng": 74.6921
+        },
+        "stop_04": {
+          "name": "Bhatkal Bus Stand",
+          "sequence": 4,
+          "distanceFromOriginKm": 135.0,
+          "avgTravelTimeFromPrevMinutes": 60,
+          "lat": 14.0012,
+          "lng": 74.5321
+        }
+      }
+    },
+    "81": {
+      "name": "Raichur - Yadgir",
+      "number": "RY-8101",
+      "origin": "Raichur",
+      "destination": "Yadgir",
+      "isActive": true,
+      "stops": {
+        "stop_01": {
+          "name": "Raichur Bus Stand",
+          "sequence": 1,
+          "distanceFromOriginKm": 0,
+          "avgTravelTimeFromPrevMinutes": 0,
+          "lat": 16.212,
+          "lng": 77.3439
+        },
+        "stop_02": {
+          "name": "Shorapur",
+          "sequence": 2,
+          "distanceFromOriginKm": 55.0,
+          "avgTravelTimeFromPrevMinutes": 70,
+          "lat": 16.5212,
+          "lng": 76.7612
+        },
+        "stop_03": {
+          "name": "Yadgir Bus Stand",
+          "sequence": 3,
+          "distanceFromOriginKm": 90.0,
+          "avgTravelTimeFromPrevMinutes": 55,
+          "lat": 16.7712,
+          "lng": 77.1412
+        }
+      }
+    },
+    "82": {
+      "name": "Chikkamagaluru - Mudigere",
+      "number": "CM-8201",
+      "origin": "Chikkamagaluru",
+      "destination": "Mudigere",
+      "isActive": true,
+      "stops": {
+        "stop_01": {
+          "name": "Chikkamagaluru Bus Stand",
+          "sequence": 1,
+          "distanceFromOriginKm": 0,
+          "avgTravelTimeFromPrevMinutes": 0,
+          "lat": 13.3161,
+          "lng": 75.772
+        },
+        "stop_02": {
+          "name": "Mudigere Bus Stand",
+          "sequence": 2,
+          "distanceFromOriginKm": 30.0,
+          "avgTravelTimeFromPrevMinutes": 45,
+          "lat": 13.1321,
+          "lng": 75.6321
+        }
+      }
+    },
+    "83": {
+      "name": "Hassan - Sakleshpur",
+      "number": "HS-8301",
+      "origin": "Hassan",
+      "destination": "Sakleshpur",
+      "isActive": true,
+      "stops": {
+        "stop_01": {
+          "name": "Hassan Bus Stand",
+          "sequence": 1,
+          "distanceFromOriginKm": 0,
+          "avgTravelTimeFromPrevMinutes": 0,
+          "lat": 13.0068,
+          "lng": 76.1003
+        },
+        "stop_02": {
+          "name": "Sakleshpur Bus Stand",
+          "sequence": 2,
+          "distanceFromOriginKm": 45.0,
+          "avgTravelTimeFromPrevMinutes": 60,
+          "lat": 12.9441,
+          "lng": 75.7891
+        }
+      }
+    },
+    "84": {
+      "name": "Madikeri - Virajpet",
+      "number": "MV-8401",
+      "origin": "Madikeri",
+      "destination": "Virajpet",
+      "isActive": true,
+      "stops": {
+        "stop_01": {
+          "name": "Madikeri Bus Stand",
+          "sequence": 1,
+          "distanceFromOriginKm": 0,
+          "avgTravelTimeFromPrevMinutes": 0,
+          "lat": 12.4244,
+          "lng": 75.7382
+        },
+        "stop_02": {
+          "name": "Virajpet Bus Stand",
+          "sequence": 2,
+          "distanceFromOriginKm": 35.0,
+          "avgTravelTimeFromPrevMinutes": 50,
+          "lat": 12.1961,
+          "lng": 75.8041
+        }
+      }
+    },
+    "85": {
+      "name": "Udupi - Karkala",
+      "number": "UK-8501",
+      "origin": "Udupi",
+      "destination": "Karkala",
+      "isActive": true,
+      "stops": {
+        "stop_01": {
+          "name": "Udupi Bus Stand",
+          "sequence": 1,
+          "distanceFromOriginKm": 0,
+          "avgTravelTimeFromPrevMinutes": 0,
+          "lat": 13.3409,
+          "lng": 74.7421
+        },
+        "stop_02": {
+          "name": "Karkala Bus Stand",
+          "sequence": 2,
+          "distanceFromOriginKm": 40.0,
+          "avgTravelTimeFromPrevMinutes": 60,
+          "lat": 13.2021,
+          "lng": 74.9921
+        }
+      }
+    },
+    "86": {
+      "name": "Mysuru - HD Kote",
+      "number": "MH-8601",
+      "origin": "Mysuru",
+      "destination": "HD Kote",
+      "isActive": true,
+      "stops": {
+        "stop_01": {
+          "name": "Mysuru Bus Stand",
+          "sequence": 1,
+          "distanceFromOriginKm": 0,
+          "avgTravelTimeFromPrevMinutes": 0,
+          "lat": 12.3103,
+          "lng": 76.6586
+        },
+        "stop_02": {
+          "name": "Saraguru",
+          "sequence": 2,
+          "distanceFromOriginKm": 35.0,
+          "avgTravelTimeFromPrevMinutes": 50,
+          "lat": 12.1421,
+          "lng": 76.4521
+        },
+        "stop_03": {
+          "name": "HD Kote Town",
+          "sequence": 3,
+          "distanceFromOriginKm": 60.0,
+          "avgTravelTimeFromPrevMinutes": 40,
+          "lat": 12.1212,
+          "lng": 76.3321
+        }
+      }
+    },
+    "87": {
+      "name": "Ballari - Siruguppa",
+      "number": "BS-8701",
+      "origin": "Ballari",
+      "destination": "Siruguppa",
+      "isActive": true,
+      "stops": {
+        "stop_01": {
+          "name": "Ballari Bus Stand",
+          "sequence": 1,
+          "distanceFromOriginKm": 0,
+          "avgTravelTimeFromPrevMinutes": 0,
+          "lat": 15.1394,
+          "lng": 76.9214
+        },
+        "stop_02": {
+          "name": "Siruguppa Bus Stand",
+          "sequence": 2,
+          "distanceFromOriginKm": 45.0,
+          "avgTravelTimeFromPrevMinutes": 60,
+          "lat": 15.6312,
+          "lng": 77.0121
+        }
+      }
+    },
+    "88": {
+      "name": "Kolar - Srinivasapura",
+      "number": "KS-8801",
+      "origin": "Kolar",
+      "destination": "Srinivasapura",
+      "isActive": true,
+      "stops": {
+        "stop_01": {
+          "name": "Kolar Bus Stand",
+          "sequence": 1,
+          "distanceFromOriginKm": 0,
+          "avgTravelTimeFromPrevMinutes": 0,
+          "lat": 13.1354,
+          "lng": 78.1298
+        },
+        "stop_02": {
+          "name": "Srinivasapura Bus Stand",
+          "sequence": 2,
+          "distanceFromOriginKm": 20.0,
+          "avgTravelTimeFromPrevMinutes": 30,
+          "lat": 13.3321,
+          "lng": 78.2121
+        }
       }
     }
   },

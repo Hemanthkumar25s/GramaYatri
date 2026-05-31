@@ -1,3 +1,5 @@
+import java.util.Properties
+
 plugins {
     alias(libs.plugins.android.application)
     alias(libs.plugins.kotlin.android)
@@ -6,6 +8,14 @@ plugins {
     alias(libs.plugins.kotlin.serialization)
     alias(libs.plugins.compose.compiler)
     kotlin("kapt")
+}
+
+// Load keystore properties for release signing (gitignored — never commit passwords)
+val keystoreProperties = Properties().apply {
+    val keystoreFile = rootProject.file("keystore.properties")
+    if (keystoreFile.exists()) {
+        keystoreFile.inputStream().use { load(it) }
+    }
 }
 
 android {
@@ -19,10 +29,22 @@ android {
         versionName = "1.0.0"
         vectorDrawables { useSupportLibrary = true }
     }
+    if (keystoreProperties["storeFile"] != null) {
+        signingConfigs {
+            create("release") {
+                storeFile = file(keystoreProperties["storeFile"]!!.toString())
+                storePassword = keystoreProperties["storePassword"]?.toString()
+                keyAlias = keystoreProperties["keyAlias"]?.toString()
+                keyPassword = keystoreProperties["keyPassword"]?.toString()
+            }
+        }
+    }
+
     buildTypes {
         release {
             isMinifyEnabled = true
             isShrinkResources = true
+            signingConfig = signingConfigs.findByName("release")
             proguardFiles(getDefaultProguardFile("proguard-android-optimize.txt"),
                 "proguard-rules.pro")
         }
@@ -64,7 +86,6 @@ dependencies {
     implementation(libs.firebase.database)
     implementation(libs.firebase.auth)
     implementation(libs.firebase.messaging)
-    implementation(libs.firebase.analytics)
 
     // DI
     implementation(libs.hilt.android)
@@ -75,22 +96,11 @@ dependencies {
 
     // Database
     implementation(libs.androidx.datastore.preferences)
-    implementation("androidx.room:room-runtime:2.6.1")
-    implementation("androidx.room:room-ktx:2.6.1")
-    kapt("androidx.room:room-compiler:2.6.1")
 
     // Maps
     implementation(libs.osmdroid.android)
-    implementation("com.google.maps.android:maps-compose:4.3.3")
-    implementation("com.google.android.gms:play-services-maps:18.2.0")
     implementation(libs.play.services.location)
     implementation(libs.play.services.auth)
-
-    // Image loading (lazy loading)
-    implementation("io.coil-kt:coil-compose:2.5.0")
-
-    // Networking
-    implementation("io.ktor:ktor-client-android:2.3.7")
 
     // Serialization
     implementation(libs.kotlinx.serialization.json)
@@ -101,6 +111,14 @@ dependencies {
     implementation(libs.androidx.work.runtime.ktx)
 
     // Testing
-    testImplementation("junit:junit:4.13.2")
+    testImplementation(libs.junit)
     testImplementation("org.mockito.kotlin:mockito-kotlin:5.1.0")
+    androidTestImplementation(libs.androidx.test.ext)
+    androidTestImplementation(libs.androidx.test.runner)
+    androidTestImplementation(libs.androidx.test.rules)
+    androidTestImplementation(libs.espresso.core)
+    androidTestImplementation(libs.uiautomator)
+    androidTestImplementation(platform(libs.androidx.compose.bom))
+    androidTestImplementation(libs.androidx.ui.test.junit4)
+    debugImplementation(libs.androidx.ui.test.manifest)
 }

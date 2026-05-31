@@ -1,5 +1,6 @@
 package com.gramayatri
 
+import android.content.Context
 import androidx.compose.runtime.*
 import androidx.hilt.navigation.compose.hiltViewModel
 import androidx.lifecycle.ViewModel
@@ -13,25 +14,37 @@ import com.gramayatri.data.model.Route
 import com.gramayatri.data.model.UserPreferences
 import com.gramayatri.data.repository.FirebaseRepository
 import com.gramayatri.data.repository.LocalCacheRepository
+import com.gramayatri.data.worker.ProximityWorker
 import com.gramayatri.ui.screens.alerts.AlertsScreen
 import com.gramayatri.ui.screens.auth.AuthScreen
 import com.gramayatri.ui.screens.home.HomeScreen
+import com.gramayatri.ui.screens.intro.IntroScreen
+import com.gramayatri.ui.screens.language.LanguageScreen
 import com.gramayatri.ui.screens.onboarding.OnboardingScreen
 import com.gramayatri.ui.screens.ping.PingScreen
 import com.gramayatri.ui.screens.settings.SettingsScreen
 import com.gramayatri.ui.theme.GramaYatriTheme
 import dagger.hilt.android.lifecycle.HiltViewModel
+import dagger.hilt.android.qualifiers.ApplicationContext
 import kotlinx.coroutines.flow.*
+import kotlinx.coroutines.delay
 import kotlinx.coroutines.launch
 import javax.inject.Inject
 
+import com.gramayatri.ui.screens.search.RouteSearchScreen
+import com.gramayatri.ui.screens.splash.SplashScreen
+
 object NavRoutes {
+    const val SPLASH = "splash"
+    const val LANGUAGE = "language"
+    const val INTRO = "intro"
     const val AUTH = "auth"
     const val ONBOARDING = "onboarding"
     const val HOME = "home"
     const val PING = "ping/{routeId}"
     const val ALERTS = "alerts/{routeId}/{routeName}"
     const val SETTINGS = "settings"
+    const val ROUTE_SEARCH = "route_search"
 
     fun ping(routeId: String) = "ping/$routeId"
     fun alerts(routeId: String, routeName: String) =
@@ -41,9 +54,25 @@ object NavRoutes {
 @HiltViewModel
 class AppViewModel @Inject constructor(
     private val localCacheRepository: LocalCacheRepository,
-    private val firebaseRepository: FirebaseRepository,
-    private val firebaseAuth: FirebaseAuth
+    private val firebaseRepository: dagger.Lazy<FirebaseRepository>,
+    private val firebaseAuth: dagger.Lazy<FirebaseAuth>,
+    @ApplicationContext private val appContext: Context
 ) : ViewModel() {
+
+    private val _isReady = MutableStateFlow(false)
+    val isReady: StateFlow<Boolean> = _isReady.asStateFlow()
+
+    init {
+        viewModelScope.launch {
+            localCacheRepository.userPreferencesFlow.first()
+            _isReady.value = true
+        }
+
+        viewModelScope.launch {
+            delay(2_500)
+            ProximityWorker.schedule(appContext)
+        }
+    }
 
     val userPreferences: StateFlow<UserPreferences> =
         localCacheRepository.userPreferencesFlow
@@ -53,7 +82,9 @@ class AppViewModel @Inject constructor(
                 UserPreferences()
             )
 
-    val routes: StateFlow<List<Route>> = firebaseRepository.observeRoutes()
+    val routes: StateFlow<List<Route>> = flow {
+        emitAll(firebaseRepository.get().observeRoutes())
+    }
         .mapNotNull { result ->
             when (result) {
                 is NetworkResult.Success -> result.data
@@ -67,13 +98,13 @@ class AppViewModel @Inject constructor(
         )
 
     val isAuthenticated: Boolean
-        get() = firebaseAuth.currentUser != null
+        get() = firebaseAuth.get().currentUser != null
 
     val isGuest: Boolean
-        get() = firebaseAuth.currentUser?.isAnonymous == true
+        get() = firebaseAuth.get().currentUser?.isAnonymous == true
 
     val userName: String
-        get() = firebaseAuth.currentUser?.displayName ?: ""
+        get() = firebaseAuth.get().currentUser?.displayName ?: ""
 
     fun completeOnboarding(name: String, stopId: String, routeId: String) {
         viewModelScope.launch {
@@ -81,34 +112,83 @@ class AppViewModel @Inject constructor(
             localCacheRepository.completeOnboarding(finalName, stopId, routeId)
         }
     }
+
+    fun selectLanguage(language: com.gramayatri.data.model.AppLanguage) {
+        viewModelScope.launch {
+            localCacheRepository.updateLanguage(language)
+        }
+    }
+
+    fun markIntroSeen() {
+        viewModelScope.launch {
+            localCacheRepository.markIntroSeen()
+        }
+    }
+
+    fun dashboardRouteFor(prefs: UserPreferences): String {
+        return if (prefs.hasCompletedOnboarding) NavRoutes.HOME else NavRoutes.ONBOARDING
+    }
 }
 
 @Composable
 fun GramaYatriApp(viewModel: AppViewModel = hiltViewModel()) {
     val prefs by viewModel.userPreferences.collectAsStateWithLifecycle()
-    val routes by viewModel.routes.collectAsStateWithLifecycle()
+    val isReady by viewModel.isReady.collectAsStateWithLifecycle()
 
     GramaYatriTheme {
         val navController = rememberNavController()
 
-        val startDestination = when {
-            !viewModel.isAuthenticated -> NavRoutes.AUTH
-            !prefs.hasCompletedOnboarding -> NavRoutes.ONBOARDING
-            else -> NavRoutes.HOME
-        }
-
         NavHost(
             navController = navController,
-            startDestination = startDestination
+            startDestination = NavRoutes.SPLASH
         ) {
+            // ── Splash ──────────────────────────────────────────
+            composable(NavRoutes.SPLASH) {
+                SplashScreen(
+                    isReady = isReady,
+                    onReady = {
+                        if (isReady) {
+                            val dest = when {
+                                !prefs.hasSelectedLanguage -> NavRoutes.LANGUAGE
+                                !prefs.hasSeenIntro -> NavRoutes.INTRO
+                                else -> viewModel.dashboardRouteFor(prefs)
+                            }
+                            navController.navigate(dest) {
+                                popUpTo(NavRoutes.SPLASH) { inclusive = true }
+                            }
+                        }
+                    }
+                )
+            }
 
             // ── Auth ──────────────────────────────────────────────
+            composable(NavRoutes.LANGUAGE) {
+                LanguageScreen(
+                    onLanguageSelected = { language ->
+                        viewModel.selectLanguage(language)
+                        navController.navigate(NavRoutes.INTRO) {
+                            popUpTo(NavRoutes.LANGUAGE) { inclusive = true }
+                        }
+                    }
+                )
+            }
+
+            composable(NavRoutes.INTRO) {
+                IntroScreen(
+                    language = prefs.language,
+                    onContinue = {
+                        viewModel.markIntroSeen()
+                        navController.navigate(viewModel.dashboardRouteFor(prefs)) {
+                            popUpTo(NavRoutes.INTRO) { inclusive = true }
+                        }
+                    }
+                )
+            }
+
             composable(NavRoutes.AUTH) {
                 AuthScreen(
                     onAuthSuccess = {
-                        val dest = if (prefs.hasCompletedOnboarding)
-                            NavRoutes.HOME else NavRoutes.ONBOARDING
-                        navController.navigate(dest) {
+                        navController.navigate(viewModel.dashboardRouteFor(prefs)) {
                             popUpTo(NavRoutes.AUTH) { inclusive = true }
                         }
                     }
@@ -117,6 +197,7 @@ fun GramaYatriApp(viewModel: AppViewModel = hiltViewModel()) {
 
             // ── Onboarding ────────────────────────────────────────
             composable(NavRoutes.ONBOARDING) {
+                val routes by viewModel.routes.collectAsStateWithLifecycle()
                 OnboardingScreen(
                     routes = routes,
                     onComplete = { name, stopId, routeId ->
@@ -131,6 +212,7 @@ fun GramaYatriApp(viewModel: AppViewModel = hiltViewModel()) {
             // ── Home ──────────────────────────────────────────────
             composable(NavRoutes.HOME) {
                 HomeScreen(
+                    language = prefs.language,
                     onNavigateToPing = { routeId ->
                         navController.navigate(NavRoutes.ping(routeId))
                     },
@@ -139,6 +221,9 @@ fun GramaYatriApp(viewModel: AppViewModel = hiltViewModel()) {
                     },
                     onNavigateToSettings = {
                         navController.navigate(NavRoutes.SETTINGS)
+                    },
+                    onNavigateToSearch = {
+                        navController.navigate(NavRoutes.ROUTE_SEARCH)
                     }
                 )
             }
@@ -150,6 +235,7 @@ fun GramaYatriApp(viewModel: AppViewModel = hiltViewModel()) {
                     navArgument("routeId") { type = NavType.StringType }
                 )
             ) { backStackEntry ->
+                val routes by viewModel.routes.collectAsStateWithLifecycle()
                 val routeId = backStackEntry.arguments
                     ?.getString("routeId") ?: ""
                 val route = routes.find { it.id == routeId }
@@ -185,9 +271,30 @@ fun GramaYatriApp(viewModel: AppViewModel = hiltViewModel()) {
 
             // ── Settings ──────────────────────────────────────────
             composable(NavRoutes.SETTINGS) {
+                val routes by viewModel.routes.collectAsStateWithLifecycle()
                 SettingsScreen(
                     routes = routes,
                     onNavigateBack = { navController.popBackStack() }
+                )
+            }
+
+            // ── Route Search ────────────────────────────────────────
+            composable(NavRoutes.ROUTE_SEARCH) {
+                val routes by viewModel.routes.collectAsStateWithLifecycle()
+                RouteSearchScreen(
+                    language = prefs.language,
+                    routes = routes,
+                    onNavigateBack = { navController.popBackStack() },
+                    onRouteSelected = { route ->
+                        // Pass selected route ID back to HOME via savedStateHandle
+                        navController.previousBackStackEntry
+                            ?.savedStateHandle
+                            ?.set("selectedRouteId", route.id)
+                        navController.popBackStack()
+                    },
+                    onNavigateToAlerts = { routeId, routeName ->
+                        navController.navigate(NavRoutes.alerts(routeId, routeName))
+                    }
                 )
             }
         }

@@ -15,5 +15,12 @@ data class LiveBusLocation(
     val driverName: String = "",
     val driverId: String = "",
     val isActive: Boolean = false,
-    val tripId: String = ""
+    val tripId: String = "",
+    val source: LocationSource = LocationSource.PASSENGER
 )
+
+enum class LocationSource {
+    PASSENGER,
+    DRIVER,
+    TICKET_MACHINE
+}

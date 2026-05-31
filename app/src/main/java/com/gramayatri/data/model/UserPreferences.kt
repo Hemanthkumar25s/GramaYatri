@@ -9,5 +9,18 @@ data class UserPreferences(
     val preferredRouteId: String = "",
     val deviceId: String = "",
     val hasCompletedOnboarding: Boolean = false,
-    val notificationsEnabled: Boolean = true
+    val notificationsEnabled: Boolean = true,
+    val role: UserRole = UserRole.PASSENGER,
+    val language: AppLanguage = AppLanguage.ENGLISH,
+    val hasSelectedLanguage: Boolean = false,
+    val hasSeenIntro: Boolean = false
 )
+
+enum class UserRole {
+    PASSENGER
+}
+
+enum class AppLanguage {
+    ENGLISH,
+    KANNADA
+}
